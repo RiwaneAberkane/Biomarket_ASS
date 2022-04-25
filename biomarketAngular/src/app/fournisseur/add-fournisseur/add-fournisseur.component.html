@@ -1,0 +1,107 @@
+<div>
+    <h4 class="text-center">Ajouter un fournisseur</h4>
+    <hr>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="title">Nom:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nom"
+            required
+            [(ngModel)]="fournisseur.nom"
+            name="nom"
+            placeholder="Renseigner le nom du fournisseur"
+          />
+        </div>
+
+        <div class="form-group">
+            <label for="title">Téléphone:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="telephone"
+              required
+              [(ngModel)]="fournisseur.telephone"
+              name="telephone"
+              placeholder="Renseigner le numéro de téléphone du fournisseur"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Mail:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="mail"
+              required
+              [(ngModel)]="fournisseur.mail"
+              name="mail"
+              placeholder="Renseigner le mail du fournisseur"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Code Postal:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cp"
+              required
+              [(ngModel)]="fournisseur.cp"
+              name="cp"
+              placeholder="Renseigner le code postal du fournisseur"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Adresse:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="adresse"
+              required
+              [(ngModel)]="fournisseur.adresse"
+              name="adresse"
+              placeholder="Renseigner l'adresse du fournisseur"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Ville:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="ville"
+              required
+              [(ngModel)]="fournisseur.ville"
+              name="ville"
+              placeholder="Renseigner la ville du fournisseur"
+            />
+          </div>
+        <button (click)="saveFournisseur()" class="btn btn-success">Ajouter</button>
+      </div>
+
+      <div *ngIf="submitted === true">
+        <div class="alert alert-success" role="alert">
+          Le fournisseur a été crée avec succès !
+        </div>
+        <button class="btn btn-success" (click)="newFournisseur()">Ok</button>
+      </div> 
+    
+      <div *ngIf="fournisseurSubmitted === true">
+        <div class="alert alert-danger mt-3" role="alert">
+          Veuillez renseigner tout les champs !
+        </div>
+      </div> 
+
+    </div>
+  </div>
+
+
+
+  <!-- <footer></footer> -->
+
+
+

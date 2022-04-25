@@ -1,0 +1,129 @@
+<!-------------------------------- Détail de l'objet ----------------------------------->
+
+<div  id='div1' *ngIf="viewMode; else editable">
+    <div *ngIf="currentUtilisateur.utilisateur_id">
+      <h4>Détail de l'utilisateur</h4>
+      <div>
+        <label><strong>Login:</strong></label> {{ currentUtilisateur.login }}
+        <br>
+        <label><strong>Mdp:</strong></label> {{ currentUtilisateur.mdp }}
+        <br>
+        <label><strong>Nom:</strong></label> {{ currentUtilisateur.nom }}
+        <label><strong>Prenom:</strong></label> {{ currentUtilisateur.prenom }}
+        <br>
+        <label><strong>Téléphone:</strong></label> {{ currentUtilisateur.telephone }}
+        <br>
+        <label><strong>Rôle:</strong></label> {{currentUtilisateur.role.nom}}
+      </div>
+       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentUtilisateur.utilisateur_id }}">Edit</a> -->
+       <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentUtilisateur.utilisateur_id }}">Mettre à jour</button>
+       <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+      <button type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
+       <!-- <button type="button" class="btn btn-danger btn-sm mr-2" (click)="deleteUtilisateur()" routerLink="utilisateurs" >Supprimer</button> -->
+       <hr>
+  </div>
+  <div *ngIf="!currentUtilisateur.utilisateur_id">
+    <br />
+    <div class="alert alert-warning" role="alert">
+      Cliquez sur un utilisateur...
+    </div>
+    <!-- <p>Cliquez sur un utilisateur...</p> -->
+  </div>
+</div>
+
+<!----------------------------- Edit ------------------------------------->
+
+<ng-template #editable>
+  <div *ngIf="currentUtilisateur.utilisateur_id" class="edit-form">
+    <h4>Utilisateur</h4>
+    <hr>
+    <form>
+      <div class="form-group">
+        <label for="title">Login</label>
+        <input
+          type="text"
+          class="form-control"
+          id="login"
+          [(ngModel)]="currentUtilisateur.login"
+          name="login"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Mdp</label>
+        <input
+          type="text"
+          class="form-control"
+          id="mdp"
+          [(ngModel)]="currentUtilisateur.mdp"
+          name="mdp"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Nom</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nom"
+          [(ngModel)]="currentUtilisateur.nom"
+          name="nom"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Prenom</label>
+        <input
+          type="text"
+          class="form-control"
+          id="prenom"
+          [(ngModel)]="currentUtilisateur.prenom"
+          name="prenom"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Téléphone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="telephone"
+          [(ngModel)]="currentUtilisateur.telephone"
+          name="telephone"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Rôle</label>
+        <input
+          type="text"
+          class="form-control"
+          id="roleNom"
+          [(ngModel)]="currentUtilisateur.role.nom"
+          name="roleNom"
+        />
+      </div>
+
+<!----------------------------- Bouton update et delete  --------------------------->
+
+    </form>
+    <button class="btn btn-danger btn-sm mr-2" (click)="deleteUtilisateur()">
+      Supprimer
+    </button>
+    <button
+      type="submit"
+      class="btn btn-success btn-sm mr-2"
+      (click)="updateUtilisateur()"
+    >
+      Update
+    </button>
+
+
+    <div *ngIf="update">
+      <div class="alert alert-success mt-3" role="alert">
+        L'utilisateur a été mis à jour avec succès !
+    </div>
+    <!-- <p>{{ message }}</p> -->
+  </div>
+  <div *ngIf="!currentUtilisateur.utilisateur_id">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+
+
+

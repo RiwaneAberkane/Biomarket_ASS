@@ -1,0 +1,83 @@
+<!-------------------------------- Détail de l'objet ----------------------------------->
+
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentCommande.commande_id">
+      <h4>Commande détail</h4>
+      <div>
+        <label><strong>Numéro de Commande:</strong></label> {{ currentCommande.commande_id }}
+        <br>
+        <label><strong>Date de Commande:</strong></label> {{ currentCommande.date }}
+        <br>
+        <label><strong>Fait par:</strong></label> {{ currentCommande.utilisateur.login }}
+        <br>
+        <label><strong>A:</strong></label> {{ currentCommande.fournisseur.nom }} | <strong>Tel:</strong> {{currentCommande.fournisseur.telephone}}
+      </div>
+       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentCommande.commande_id }}">Edit</a> -->
+       <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentCommande.commande_id }}">Edit</button>
+       <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="commandes" >Delete</button>
+  </div>
+  <div *ngIf="!currentCommande.commande_id">
+    <br />
+    <p>Please click on a Commande...</p>
+  </div>
+</div>
+
+<!----------------------------- Edit ------------------------------------->
+
+<ng-template #editable>
+  <div *ngIf="currentCommande.commande_id" class="edit-form">
+    <h4>Commandes</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Date:</label>
+        <input
+          type="date"
+          class="form-control"
+          id="date"
+          [(ngModel)]="currentCommande.date"
+          name="date"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Passé par:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="utilisateurLogin"
+          [(ngModel)]="currentCommande.utilisateur.login"
+          name="utilisateurLogin"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">A:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fournisseurNom"
+          [(ngModel)]="currentCommande.fournisseur.nom"
+          name="fournisseurNom"
+        />
+      </div>
+<!----------------------------- Bouton update et delete  --------------------------->
+
+    </form>
+    <button class="badge badge-danger mr-2" (click)="delete()">
+      Delete
+    </button>
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="uodate()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+  <div *ngIf="!currentCommande.commande_id">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+</ng-template>
+
+
+

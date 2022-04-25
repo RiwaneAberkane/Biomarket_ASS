@@ -1,0 +1,128 @@
+<!-------------------------------- Détail de l'objet ----------------------------------->
+
+<div  id='div1' *ngIf="viewMode; else editable">
+    <div *ngIf="currentProduit.produit_id">
+      <h4>Détail du produit</h4>
+      <div>
+        <label><strong>Nom:</strong></label> {{ currentProduit.nom }}
+        <br>
+        <label><strong>Type:</strong></label> {{ currentProduit.type }}
+        <br>
+        <label><strong>Plafond prix achat au Kg:</strong></label> {{ currentProduit.pachatkg }} €
+        <br>
+        <label><strong>Prix Vente au Kg:</strong></label> {{ currentProduit.pventekg }} €
+        <br>
+        <label><strong>Quantité (Kg):</strong></label> {{ currentProduit.quantitekg }} Kg
+        <br>
+        <p [ngStyle]="
+        {'color': currentProduit.quantitekg < 1 ? 'red'
+        : currentProduit.quantitekg >= 1 && currentProduit.quantitekg < 20 ? 'orange' 
+        : 'green'
+        }">{{
+          currentProduit.quantitekg < 1 ? 'HORS STOCK' 
+        :currentProduit.quantitekg >= 1 && currentProduit.quantitekg < 20 ? 'PEU DE STOCK' 
+        : 'EN STOCK'
+        }}
+    </p>
+      </div>
+       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentProduit.produit_id }}">Edit</a> -->
+       <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentProduit.produit_id }}">Mettre à jour</button>
+       <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+       <button type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
+       <!-- <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="utilisateurs" >Supprimer</button> -->
+       <hr>
+  </div>
+  <div *ngIf="!currentProduit.produit_id">
+    <br />
+    <div class="alert alert-warning" role="alert">
+      Cliquez sur un produit...
+    </div>
+    <!-- <p>Cliquez sur un produit...</p> -->
+  </div>
+</div>
+
+<!----------------------------- Edit ------------------------------------->
+
+<ng-template #editable>
+  <div *ngIf="currentProduit.produit_id" class="edit-form">
+    <h4>Produit</h4>
+    <hr>
+    <form>
+      <div class="form-group">
+        <label for="title">Nom</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nom"
+          [(ngModel)]="currentProduit.nom"
+          name="nom"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Type</label>
+        <input
+          type="text"
+          class="form-control"
+          id="type"
+          [(ngModel)]="currentProduit.type"
+          name="type"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Quantité (Kg)</label>
+        <input
+          type="number"
+          class="form-control"
+          id="quantitekg"
+          [(ngModel)]="currentProduit.quantitekg"
+          name="quantitekg"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Prix achat au Kg</label>
+        <input
+          type="number"
+          class="form-control"
+          id="pachatkg"
+          [(ngModel)]="currentProduit.pachatkg"
+          name="pachatkg"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Prix vente au Kg</label>
+        <input
+          type="number"
+          class="form-control"
+          id="pventekg"
+          [(ngModel)]="currentProduit.pventekg"
+          name="pventekg"
+        />
+      </div>
+
+<!----------------------------- Bouton update et delete  --------------------------->
+
+    </form>
+    <button class="btn btn-danger btn-sm mr-2" (click)="delete()">
+      Supprimer
+    </button>
+    <button
+      type="submit"
+      class="btn btn-success btn-sm mr-2"
+      (click)="update()"
+    >
+      Update
+    </button>
+
+    <div *ngIf="updateProduit">
+      <div class="alert alert-success mt-3" role="alert">
+        Le produit a été mis à jour avec succès !
+    </div>
+    <!-- <p>{{ message }}</p> -->
+  </div>
+  <div *ngIf="!currentProduit.produit_id">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+
+
+

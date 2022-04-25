@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a href="#" class="navbar-brand">Bio<b>Market</b></a>     
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collection of nav links, forms, and other content for toggling -->
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+      <div class="navbar-nav">
+        <a href="#" class="nav-item nav-link">Accueil</a>
+        <a href="#" class="nav-item nav-link">A propos</a>     
+        <div class="nav-item dropdown">
+          <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle">Utilisation</a>
+          <div class="dropdown-menu">         
+            <a href="#" class="dropdown-item">Les listes</a>
+            <a href="#" class="dropdown-item">Stock</a>
+            <a href="#" class="dropdown-item">Ajout</a>
+                  </div>
+              </div>
+        <!-- <a href="#" class="nav-item nav-link active">Pricing</a> -->
+        <a href="#" class="nav-item nav-link">Blog</a>
+        <a href="#" class="nav-item nav-link">Contact</a>
+          </div>
+      <form class="navbar-form form-inline">
+        <div class="input-group search-box">                
+          <input type="text" id="search" class="form-control" placeholder="Rechercher ici...">
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="material-icons">&#xE8B6;</i></span>
+          </div>
+        </div>
+      </form>
+      <div class="navbar-nav action-buttons ml-auto">
+        <a href="#" data-toggle="dropdown" class="btn btn-primary nav-item nav-link dropdown-toggle mr-3">Login</a>
+        <div class="dropdown-menu login-form">
+          <form action="/examples/actions/confirmation.php" method="post">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" class="form-control" required="required">
+            </div>
+            <div class="form-group">
+              <div class="clearfix">
+                <label>Password</label>
+                <a href="#" class="float-right text-muted"><small>Oublie?</small></a>
+              </div>                            
+              <input type="password" class="form-control" required="required">
+            </div>
+            <input type="submit" class="btn btn-primary btn-block" value="Login">
+          </form>         
+        </div>      
+        <!-- <a href="#" class="btn btn-primary">Get Started</a> -->
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,88 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          list="datalistOptions"
+          placeholder="Recherche par nom"
+          [(ngModel)]="nom"
+        />
+
+        <fieldset>
+          <datalist id="datalistOptions">
+             <option *ngFor="let produit of tab" [value]="produit.nom"></option>
+          </datalist>    
+         </fieldset>
+
+
+
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="search()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        [responsive]="true"
+        (pageChange)="handlePageChange($event)"
+      ></pagination-controls>
+    </div>
+
+    <div class="col-md-6">
+      <h4>Liste des produits</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="
+            let produit of tab | paginate : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          "
+          [class.active]="i == currentIndex"
+          (click)="setActiveRole(produit, i)"
+          [value]="produit.nom"   
+        >
+         <strong>Produit:</strong> {{ produit.nom }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <app-produit-details
+        [viewMode]="true"
+        [currentProduit]="currentProduit"
+      ></app-produit-details>
+    </div>
+
+    <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAll()">
+      Remove All
+    </button> -->
+
+    <button  routerLink="addProduits" class="m-3 btn btn-sm btn-success" (click)="addProduit()">
+      Ajouter
+    </button>
+
+    <div class="mt-3">
+      ...
+      Produits par Page:
+      <select (change)="handlePageSizeChange($event)">
+        <option *ngFor="let size of pageSizes" [ngValue]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+  </div>
+

@@ -1,0 +1,81 @@
+<!-------------------------------- Détail de l'objet ----------------------------------->
+
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentVente.vente_id">
+      <h4>Ventes détail</h4>
+      <div>
+        <label><strong>Date de vente:</strong></label> {{ currentVente.date }}
+        <br>
+        <label><strong>Fait par:</strong></label> {{ currentVente.utilisateur.login }}
+        <br>
+        <label><strong>A:</strong></label> {{ currentVente.client.mail }} | <strong>Numéro de tel:</strong> {{currentVente.client.telephone}}
+      </div>
+       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentVente.vente_id }}">Edit</a> -->
+       <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentVente.vente_id }}">Edit</button>
+       <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="utilisateurs" >Delete</button>
+  </div>
+  <div *ngIf="!currentVente.vente_id">
+    <br />
+    <p>Please click on a Vente...</p>
+  </div>
+</div>
+
+<!----------------------------- Edit ------------------------------------->
+
+<ng-template #editable>
+  <div *ngIf="currentVente.vente_id" class="edit-form">
+    <h4>Ventes</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Date:</label>
+        <input
+          type="date"
+          class="form-control"
+          id="date"
+          [(ngModel)]="currentVente.date"
+          name="date"
+        />
+      </div>
+      
+      <div class="form-group">
+        <label for="description">Fait par:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="utilisateurLogin"
+          [(ngModel)]="currentVente.utilisateur.login"
+          name="utilisateurLogin"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">A:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="clientMail"
+          [(ngModel)]="currentVente.client.mail"
+          name="clientMail"
+        />
+      </div>
+<!----------------------------- Bouton update et delete  --------------------------->
+
+    </form>
+    <button class="badge badge-danger mr-2" (click)="delete()">
+      Delete
+    </button>
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="uodate()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+  <div *ngIf="!currentVente.vente_id">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+</ng-template>
+
+

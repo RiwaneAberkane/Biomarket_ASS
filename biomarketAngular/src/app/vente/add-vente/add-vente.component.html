@@ -1,0 +1,49 @@
+<div>
+    <h4>Add Vente</h4>
+    <hr>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="title">Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="date"
+            required
+            [(ngModel)]="vente.date"
+            name="date"
+          />
+        </div>
+
+
+          <div class="form-group">
+            <label for="title">Fait par</label>
+            <input
+              type="text"
+              class="form-control"
+              id="utilisateurLogin"
+              required
+              [(ngModel)]="vente.utilisateurLogin"
+              name="utilisateurLogin"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">A</label>
+            <input
+              type="text"
+              class="form-control"
+              id="clientMail"
+              required
+              [(ngModel)]="vente.clientMail"
+              name="clientMail"
+            />
+          </div>
+        <button (click)="save()" class="btn btn-success">Submit</button>
+      </div>
+      <div *ngIf="submitted">
+        <h4>Vente was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newVente()">Ok</button>
+      </div>
+    </div>
+  </div>

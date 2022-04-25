@@ -1,0 +1,22 @@
+.submit-form {
+  max-width: 360px;
+  margin: auto;
+}
+
+footer{
+  margin-top: 360px;
+}
+
+@media (max-width: 500px) {
+.submit-form{
+  max-width: 320px;
+  // margin-right: 50px;
+}
+}
+
+@media (max-width: 414px ){
+.submit-form{
+  max-width: 220px;
+  margin-right: 70px;
+}
+}

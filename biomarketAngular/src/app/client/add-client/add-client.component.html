@@ -1,0 +1,138 @@
+<div>
+    <h4 class="text-center">Ajouter un client</h4>
+    <hr>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="title">Nom:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nom"
+            required
+            [(ngModel)]="client.nom"
+            name="nom"
+            placeholder="Renseigner le nom du client"
+          />
+        </div>
+
+        <div class="form-group">
+            <label for="title">Prenom:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="prenom"
+              required
+              [(ngModel)]="client.prenom"
+              name="prenom"
+              placeholder="Renseigner le prénom du client"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Code Postal:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cp"
+              required
+              [(ngModel)]="client.cp"
+              name="cp"
+              placeholder="Renseigner le code postal du client"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Adresse:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="adresse"
+              required
+              [(ngModel)]="client.adresse"
+              name="adresse"
+              placeholder="Renseigner l'adresse du client"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Ville:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="ville"
+              required
+              [(ngModel)]="client.ville"
+              name="ville"
+              placeholder="Renseigner la ville du client"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Mail:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="mail"
+              required
+              [(ngModel)]="client.mail"
+              name="mail"
+              placeholder="Renseigner le mail du client"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Téléphone:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="telephone"
+              required
+              [(ngModel)]="client.telephone"
+              name="telephone"
+              placeholder="Renseigner le téléphone du client"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title"> Statut:</label>
+            <input
+              type="text"
+              class="form-control"
+              list="statutListe"
+              id="statut"
+              required
+              [(ngModel)]="client.statut"
+              name="statut"
+              placeholder="Renseigner le statut du client"
+            />
+
+            <datalist id="statutListe">
+              <option value="Restaurateur"></option>
+              <option value="Particulier"></option>
+            </datalist>
+          </div>
+
+        <button (click)="save()" class="btn btn-success">Ajouter</button>
+      </div>
+  
+      <div *ngIf="submitted === true">
+        <div class="alert alert-success" role="alert">
+          Le client a été crée avec succès !
+        </div>
+        <button class="btn btn-success" (click)="newClient()">Ok</button>
+      </div> 
+
+      <div *ngIf="clientSubmitted === true">
+        <div class="alert alert-danger mt-3" role="alert">
+          Veuillez renseigner tout les champs !
+        </div>
+      </div> 
+
+
+
+
+    </div>
+  </div>
+
+

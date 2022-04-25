@@ -1,0 +1,102 @@
+<div>
+    <h4 class="text-center">Ajouter un produit</h4>
+    <hr>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="title">Nom:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nom"
+            required
+            [(ngModel)]="produit.nom"
+            name="nom"
+            placeholder="Renseigner le nom du produit"
+          />
+        </div>
+
+        <div class="form-group">
+            <label for="title">Type:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="type"
+              required
+              [(ngModel)]="produit.type"
+              name="type"
+              placeholder="Renseigner le type du produit"
+              list="listType"
+            />
+          </div>
+
+
+          <datalist id="listType">
+            <option value="Fruit"></option>
+              <option value="Légume"></option>
+         </datalist>  
+
+          <div class="form-group">
+            <label for="title">Quantité (Kg):</label>
+            <input
+              type="number"
+              class="form-control"
+              id="quantitekg"
+              required
+              [(ngModel)]="produit.quantitekg"
+              name="quantitekg"
+              placeholder="Renseigner la qunatité du produit au Kg"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Prix achat au Kg:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="pachatkg"
+              required
+              [(ngModel)]="produit.pachatkg"
+              name="pachatkg"
+              placeholder="Renseigner le prix d'achat du produit au Kg"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Prix vente au Kg:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="pventekg"
+              required
+              [(ngModel)]="produit.pventekg"
+              name="pventekg"
+              placeholder="Renseigner le prix de vente du produit au Kg"
+            />
+          </div>
+
+        <button (click)="saveProduit()" class="btn btn-success">Ajouter</button>
+      </div>
+
+
+      <div *ngIf="submitted === true">
+        <div class="alert alert-success" role="alert">
+          Le client a été crée avec succès !
+        </div>
+        <button class="btn btn-success" (click)="newProduit()">Ok</button>
+      </div> 
+
+      <div *ngIf="produitSubmitted === true">
+        <div class="alert alert-danger mt-3" role="alert">
+          Veuillez renseigner tout les champs !
+        </div>
+      </div> 
+
+   
+    </div>
+  </div>
+
+  <!-- <footer></footer> -->
+
+
+

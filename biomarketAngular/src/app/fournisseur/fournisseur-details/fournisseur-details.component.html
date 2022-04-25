@@ -1,0 +1,129 @@
+<!-------------------------------- Détail de l'objet ----------------------------------->
+
+<div id='div1' *ngIf="viewMode; else editable">
+    <div *ngIf="currentFournisseur.fournisseur_id">
+      <h4>Détail du fournisseur</h4>
+      <div>
+        <label><strong>Nom:</strong></label> {{ currentFournisseur.nom }}
+        <br>
+        <label><strong>Téléphone:</strong></label> {{ currentFournisseur.telephone }}
+        <br>
+        <label><strong>Mail:</strong></label> {{ currentFournisseur.mail }}
+        <br>
+        <label><strong>Code Postal:</strong></label> {{ currentFournisseur.cp }}
+        <br>
+        <label><strong>Adresse:</strong></label> {{ currentFournisseur.adresse }}
+        <br>
+        <label><strong>Ville:</strong></label> {{currentFournisseur.ville}}
+      </div>
+       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentFournisseur.fournisseur_id }}">Edit</a> -->
+       <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentFournisseur.fournisseur_id }}">Mettre à jour</button>
+       <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+       <button type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
+       <!-- <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="utilisateurs" >Supprimer</button> -->
+       <hr>
+  </div>
+  <div *ngIf="!currentFournisseur.fournisseur_id">
+    <br />
+    <div class="alert alert-warning" role="alert">
+      Cliquez sur un fournisseur...
+    </div>
+    <!-- <p>Cliquez sur un fournisseur...</p> -->
+  </div>
+</div>
+
+<!----------------------------- Edit ------------------------------------->
+
+<ng-template #editable>
+  <div *ngIf="currentFournisseur.fournisseur_id" class="edit-form">
+    <h4>Fournisseur</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Nom</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nom"
+          [(ngModel)]="currentFournisseur.nom"
+          name="nom"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Téléphone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="telephone"
+          [(ngModel)]="currentFournisseur.telephone"
+          name="telephone"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Mail</label>
+        <input
+          type="text"
+          class="form-control"
+          id="mail"
+          [(ngModel)]="currentFournisseur.mail"
+          name="mail"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Code Postal</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cp"
+          [(ngModel)]="currentFournisseur.cp"
+          name="cp"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Adresse</label>
+        <input
+          type="text"
+          class="form-control"
+          id="adresse"
+          [(ngModel)]="currentFournisseur.adresse"
+          name="adresse"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Ville</label>
+        <input
+          type="text"
+          class="form-control"
+          id="ville"
+          [(ngModel)]="currentFournisseur.ville"
+          name="ville"
+        />
+      </div>
+
+<!----------------------------- Bouton update et delete  --------------------------->
+
+    </form>
+    <button class="btn btn-danger btn-sm mr-2" (click)="delete()">
+      Supprimer
+    </button>
+    <button
+      type="submit"
+      class="btn btn-success btn-sm mr-22"
+      (click)="update()"
+    >
+      Update
+    </button>
+
+    <div *ngIf="updateFournisseur">
+      <div class="alert alert-success mt-3" role="alert">
+        Le fournisseur a été mis à jour avec succès !
+    </div>
+
+
+    <!-- <p>{{ message }}</p> -->
+  </div>
+  <div *ngIf="!currentFournisseur.fournisseur_id">
+    <br />
+    <p>Cannot access this Tutorial...</p>
+  </div>
+
+

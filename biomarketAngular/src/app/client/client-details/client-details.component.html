@@ -1,0 +1,142 @@
+<!-------------------------------- Détail de l'objet ----------------------------------->
+
+<div  id='div1' *ngIf="viewMode; else editable">
+    <div *ngIf="currentClient.client_id">
+      <h4>Détail du client</h4>
+      <div>
+        <label><strong>Nom:</strong></label> {{ currentClient.nom }}
+        <label><strong>Prenom:</strong></label> {{ currentClient.prenom }}
+        <br>
+        <label><strong>Code Postal:</strong></label> {{ currentClient.cp }}
+        <br>
+        <label><strong>Adresse:</strong></label> {{ currentClient.adresse }}
+        <br>
+        <label><strong>Ville:</strong></label> {{currentClient.ville}}
+        <br>
+        <label><strong>Mail:</strong></label> {{ currentClient.mail }}
+        <br>
+        <label><strong>Téléphone:</strong></label> {{ currentClient.telephone }}
+        <br>
+        <label><strong>Statut:</strong></label> {{ currentClient.statut }}
+      </div>
+      
+       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentClient.fournisseur_id }}">Edit</a> -->
+       <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentClient.client_id }}">Mettre à jour</button>
+       <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+       <button type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
+       <hr>
+       <!-- <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="clients" >Supprimer</button> -->
+  </div>
+  <div *ngIf="!currentClient.client_id">
+    <br />
+    <div class="alert alert-warning" role="alert">
+      Cliquez sur un client...
+    </div>
+  </div>
+</div>
+
+<!----------------------------- Edit ------------------------------------->
+
+<ng-template #editable>
+  <div *ngIf="currentClient.client_id" class="edit-form">
+    <h4>Client</h4>
+    <hr>
+    <form>
+      <div class="form-group">
+        <label for="title">Nom</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nom"
+          [(ngModel)]="currentClient.nom"
+          name="nom"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Code Postal</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cp"
+          [(ngModel)]="currentClient.cp"
+          name="cp"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Adresse</label>
+        <input
+          type="text"
+          class="form-control"
+          id="adresse"
+          [(ngModel)]="currentClient.adresse"
+          name="adresse"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Ville</label>
+        <input
+          type="text"
+          class="form-control"
+          id="ville"
+          [(ngModel)]="currentClient.ville"
+          name="ville"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Mail</label>
+        <input
+          type="text"
+          class="form-control"
+          id="mail"
+          [(ngModel)]="currentClient.mail"
+          name="mail"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Téléphone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="telephone"
+          [(ngModel)]="currentClient.telephone"
+          name="telephone"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Statut</label>
+        <input
+          type="text"
+          class="form-control"
+          id="statut"
+          [(ngModel)]="currentClient.statut"
+          name="statut"
+        />
+      </div>
+
+<!----------------------------- Bouton update et delete  --------------------------->
+
+    </form>
+    <button class="btn btn-danger btn-sm mr-2" (click)="delete()">
+      Supprimer
+    </button>
+    <button
+      type="submit"
+      class="btn btn-success btn-sm mr-2"
+      (click)="update()"
+    >
+      Update
+    </button>
+
+    <div *ngIf="update">
+      <div class="alert alert-success mt-3" role="alert">
+        Le client a été mis à jour avec succès !
+    </div>
+    <!-- <p>{{ message }}</p> -->
+  </div>
+  <div *ngIf="!currentClient.client_id">
+    <br />
+    <p>Cannot access this Client...</p>
+  </div>
+
+

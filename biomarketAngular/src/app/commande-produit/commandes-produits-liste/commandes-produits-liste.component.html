@@ -1,0 +1,140 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          list="datalistOptions"
+          class="form-control"
+          placeholder="Recherche par date"
+          [(ngModel)]="date"
+        />
+
+
+        <fieldset>
+          <datalist id="datalistOptions">
+             <option *ngFor="let commandeProduit of tabCommandeProduit" [value]="commandeProduit.commande.date"></option>
+             <hr>
+          </datalist>    
+         </fieldset>
+
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchDate()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        [responsive]="true"
+        (pageChange)="handlePageChange($event)"
+      ></pagination-controls>
+    </div>
+
+    <div *ngIf="detailsTab === false" class="col-md-6">
+      <h4>Liste des commandes</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="
+            let commandeProduit of tabCommandeProduit | paginate : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          "
+          [class.active]="i == currentIndex"
+          (click)="setActiveUtilisateur(commandeProduit, i)"
+          [value]="commandeProduit.commande.date"   
+        >
+     <strong>Numéro de commande </strong> {{commandeProduit.commande.commande_id}} | <strong>Passé le:</strong> {{ commandeProduit.commande.date}}
+        </li>
+      </ul>
+    </div>
+
+
+    <div *ngIf = "detailsTab === true" class="col-md-6">
+      <h4>Liste des commandes</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="
+            let tab of tabAny | paginate : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          "
+          [class.active]="i == currentIndex"
+          (click)="setActiveUtilisateur(tab, i)"
+          [value]="tab.commande.date"   
+        >
+     <strong>Numéro de commande </strong> {{tab.commande.commande_id}} | <strong>Passé le:</strong> {{ tab.commande.date}}
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <app-commande-produit-details
+        [viewMode]="true"
+        [currentCommandeProduit]="currentCommandeProduit"
+      ></app-commande-produit-details>
+    </div>
+
+
+    <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAll()">
+      Remove All
+    </button> -->
+
+    <button  routerLink="addCommandesProduits" class="m-3 btn btn-sm btn-success" (click)="addCommandeProduit()">
+      Ajouter
+    </button>
+  
+
+    <div class="mt-3">
+      ...
+      Commandes par Page:
+      <select (change)="handlePageSizeChange($event)">
+        <option *ngFor="let size of pageSizes" [ngValue]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+
+  <div  class="col-md-12 mt-5" *ngIf = 'detailsTab === true' >
+    <h4 class="mb-3">Liste du détail des commandes datant du {{date}}</h4>    
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>Produit</th>
+          <th>Quantité</th>
+          <th>Date</th>
+          <th>N° commande</th>
+          <th>Fait par</th>
+          <th>Fournisseur</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tab of tabAny">
+          <td>{{tab.produit.nom}}</td>
+          <td>{{tab.quantitekg}}Kg</td>
+          <td>{{tab.commande.date}}</td>
+          <td>{{tab.commande.commande_id}}</td>
+          <td>{{tab.commande.utilisateur.login}}</td>
+          <td>{{tab.commande.fournisseur.nom}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+

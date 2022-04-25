@@ -1,0 +1,149 @@
+<div>
+    <h4 class="text-center">Ajouter une vente</h4>
+    <hr>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="title">Nom du produit:</label>
+          <input
+            type="text"
+            class="form-control"
+            list="datalistOptions"
+            id="produitNom"
+            required
+            [(ngModel)]="produitVente.produitNom"
+            name="produitNom"
+            placeholder="Renseigner le nom du produit de la vente"
+          />
+
+          <datalist id="produit">
+            <app-produits-liste>
+          </app-produits-liste>
+         </datalist>  
+        </div>
+
+          <!-- <div class="form-group">
+            <label for="title">Passé le:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="venteDate"
+              required
+              [(ngModel)]="produitVente.venteDate"
+              name="venteDate"
+            />
+          </div> -->
+
+          <div class="form-group">
+            <label for="title">Quantité (Kg:)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="quantitekg"
+              required
+              [(ngModel)]="produitVente.quantitekg"
+              name="quantitekg"
+              placeholder="Renseigner le nom du produit de la vente"
+            />
+          </div>
+
+<!-- Formulaire Vente ------------------------------------------------------------------------->
+
+        <div class="form-group">
+          <label for="title">Faite le:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="date"
+            required
+            [(ngModel)]="vente.date"
+            name="date"
+            placeholder="Renseigner le date de la vente"
+          />
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="title">Statut:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="statut"
+            required
+            [(ngModel)]="vente.statut"
+            name="statut"
+            placeholder="Renseigner le statut de la vente"
+          />
+        </div> -->
+
+
+        <div class="form-group">
+          <label for="title">Fait par:</label>
+          <input
+            type="text"
+            class="form-control"
+            list="utilisateurListe"
+            id="utilisateurLogin"
+            required
+            [(ngModel)]="vente.utilisateurLogin"
+            name="utilisateurLogin"
+            placeholder="Renseigner le login de l'utilisateur qui a fait la vente"
+          />
+
+          <datalist id="utilisateurListe">
+            <app-utilisateurs-liste>
+          </app-utilisateurs-liste>
+         </datalist>  
+
+        </div>
+
+
+        <div class="form-group">
+          <label for="title">A:</label>
+          <input
+            type="text"
+            class="form-control"
+            list="clientListe"
+            id="clientMail"
+            required
+            [(ngModel)]="vente.clientMail"
+            name="clientMail"
+            placeholder="Renseigner le mail du client de la vente"
+          />
+
+          <datalist id="clientListe">
+            <app-clients-liste>
+          </app-clients-liste>
+         </datalist>  
+
+        </div>
+
+        <button (click)="save()" class="btn btn-success">Ajouter</button>
+      </div>
+ 
+      <div *ngIf="submitted === true && alert === false">
+        <div class="alert alert-success" role="alert">
+          {{successText}}
+        </div>
+        <button class="btn btn-success" (click)="newProduitVente()">Ok</button>
+      </div> 
+
+      <div *ngIf="alert === true">
+        <div class="alert alert-danger mt-3" role="alert">
+          {{errorText}}
+        </div>
+        <button class="btn btn-success" (click)="newProduitVente()">Ok</button>
+      </div> 
+
+
+
+      <div *ngIf="venteSubmitted === true">
+        <div class="alert alert-danger mt-3" role="alert">
+          Veuillez renseigner tout les champs !
+        </div>
+      </div> 
+
+
+
+    </div>
+  </div>
+

@@ -1,0 +1,56 @@
+<div>
+    <h4>Add Commande</h4>
+    <hr>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="title">Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="date"
+            required
+            [(ngModel)]="commande.date"
+            name="date"
+          />
+        </div>
+
+          <div class="form-group">
+            <label for="title">Passé par</label>
+            <input
+              type="text"
+              class="form-control"
+              id="utilisateurLogin"
+              required
+              [(ngModel)]="commande.utilisateurLogin"
+              name="utilisateurLogin"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="title">A</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fournisseurNom"
+              required
+              [(ngModel)]="commande.fournisseurNom"
+              name="fournisseurNom"
+            />
+
+            <!-- <datalist id="fournisseur">
+              <app-fournisseurs-liste>
+              <option *ngFor="let fournisseur of tabFournisseur" [value]="fournisseur.nom">{{fournisseur.nom}}</option>
+            </app-fournisseurs-liste>
+           </datalist>   -->
+
+          </div>
+        <button (click)="save()" class="btn btn-success">Submit</button>
+      </div>
+      <div *ngIf="submitted">
+        <h4>Commande was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newCommande()">Ok</button>
+      </div>
+    </div>
+  </div>
+

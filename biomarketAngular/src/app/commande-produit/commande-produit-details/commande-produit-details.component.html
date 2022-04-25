@@ -1,0 +1,102 @@
+<!-------------------------------- Détail de l'objet ----------------------------------->
+
+<div  id='div1' *ngIf="viewMode; else editable">
+    <div *ngIf="currentCommandeProduit.id">
+      <h4>Détail de la commande</h4>
+      <div>
+        <label><strong>Produit:</strong></label> {{ currentCommandeProduit.produit.nom }}
+        <br>
+        <label><strong>Quantité (Kg):</strong></label> {{ currentCommandeProduit.quantitekg }} Kg
+        <br>
+        <label><strong>Date de Commande:</strong></label> {{ currentCommandeProduit.commande.date }}
+        <br>
+        <label><strong>Numéro de Commande:</strong></label> {{ currentCommandeProduit.commande.commande_id }}
+        <br>
+        <label><strong>Fait par:</strong></label> {{ currentCommandeProduit.commande.utilisateur.login }}
+        <br>
+        <label><strong>A:</strong></label> {{ currentCommandeProduit.commande.fournisseur.nom}} | <strong>Tel:</strong> {{currentCommandeProduit.commande.fournisseur.telephone}}
+      </div>
+      <hr>
+
+
+       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentCommandeProduit.id }}">Edit</a> -->
+       <!-- <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentCommandeProduit.numero}}">Edit</button>
+       <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="commandesProduits" >Supprimer</button> -->
+  </div>
+  <div *ngIf="!currentCommandeProduit.id">
+    <br />
+    <div class="alert alert-warning" role="alert">
+      Cliquez sur une commande...
+    </div>
+    <!-- <p>Cliquez sur une commande...</p> -->
+  </div>
+</div>
+
+<!----------------------------- Edit ------------------------------------->
+
+<ng-template #editable>
+  <div *ngIf="currentCommandeProduit.numero" class="edit-form">
+    <h4>Commande</h4>
+    <form>
+        <div class="form-group">
+        <label for="title">Passé le:</label>
+        <input
+            type="date"
+            class="form-control"
+            id="commandeDate"
+            [(ngModel)]="currentCommandeProduit.commande.date"
+            name="commandeDate"
+        />
+        </div>
+
+      <div class="form-group">
+        <label for="description">Produit:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="produitNom"
+          [(ngModel)]="currentCommandeProduit.produit.nom"
+          name="produitNom"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Quantité (Kg):</label>
+        <input
+          type="number"
+          class="form-control"
+          id="quantitekg"
+          [(ngModel)]="currentCommandeProduit.quantitekg"
+          name="quantitekg"
+        />
+      </div>
+<!----------------------------- Bouton update et delete  --------------------------->
+
+    </form>
+    <button class="btn btn-danger btn-sm mr-2" (click)="delete()">
+      Supprimer
+    </button>
+    <button
+      type="submit"
+      class="btn btn-success btn-sm mr-2"
+      (click)="uodate()"
+    >
+      Update
+    </button>
+
+    <div *ngIf="updateCommande">
+      <div class="alert alert-success mt-3" role="alert">
+        La commande a été mis à jour avec succès !
+    </div>
+
+    <!-- <p>{{ message }}</p> -->
+  </div>
+  <div *ngIf="!currentCommandeProduit.numero">
+    <br />
+    <p>Cannot access this Commande...</p>
+  </div>
+
+
+
+
+

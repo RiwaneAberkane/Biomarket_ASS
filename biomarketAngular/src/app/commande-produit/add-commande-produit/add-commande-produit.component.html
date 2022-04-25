@@ -1,0 +1,134 @@
+<div>
+    <h4 class="text-center">Ajouter une commande</h4>
+    <hr>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="title">Nom du produit:</label>
+          <input
+            type="text"
+            class="form-control"
+            list="datalistOptions"
+            id="produitNom"
+            required
+            [(ngModel)]="commandeProduit.produitNom"
+            name="produitNom"
+            placeholder="Renseigner le nom du produit de la commande"
+          />
+
+        <datalist id="produit">
+          <app-produits-liste>
+          <option *ngFor="let produit of tab" [value]="produit.nom">{{produit.nom}}</option>
+        </app-produits-liste>
+       </datalist>  
+      </div>
+
+
+          <!-- <div class="form-group">
+            <label for="title">Passé le:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="commandeDate"
+              required
+              [(ngModel)]="commandeProduit.commandeDate"
+              name="commandeDate"
+            />
+          </div> -->
+
+          <div class="form-group">
+            <label for="title">Quantité (Kg):</label>
+            <input
+              type="number"
+              class="form-control"
+              id="quantitekg"
+              required
+              [(ngModel)]="commandeProduit.quantitekg"
+              name="quantitekg"
+              placeholder="Renseigner le nom du produit de la commande"
+            />
+          </div>
+
+<!-- Formulaire commande ----------------------------------------->
+
+
+          <div class="form-group">
+            <label for="title">Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="date"
+              required
+              [(ngModel)]="commande.date"
+              name="date"
+              placeholder="Renseigner la date de la commande"
+            />
+          </div>
+
+            <div class="form-group">
+              <label for="title">Passé par:</label>
+              <input
+                type="text"
+                class="form-control"
+                list="utilisateurliste"
+                id="utilisateurLogin"
+                required
+                [(ngModel)]="commande.utilisateurLogin"
+                name="utilisateurLogin"
+                placeholder="Renseigner le login de l'utilisateur qui a passé de la commande"
+              />
+
+              <datalist id="utilisateurliste">
+                <app-utilisateurs-liste>
+                <option *ngFor="let utilisateur of tabUtilisateur" [value]="utilisateur.login">{{utilisateur.login}}</option>
+              </app-utilisateurs-liste>
+             </datalist>  
+            </div>
+
+            <div class="form-group">
+              <label for="title">A:</label>
+              <input
+                type="text"
+                class="form-control"
+                list="fournisseur"
+                id="fournisseurNom"  
+                required
+                [(ngModel)]="commande.fournisseurNom"
+                name="fournisseurNom"
+                placeholder="Renseigner le nom du fournisseur de la commande"
+              />
+
+              <datalist id="fournisseur">
+                <app-fournisseurs-liste>
+                <div *ngFor="let fournisseur of fournisseurTab" >{{fournisseur.nom}}</div>
+              </app-fournisseurs-liste>
+             </datalist>  
+            </div>
+
+        <button (click)="save()" class="btn btn-success">Ajouter</button>
+      </div>
+    
+      <div *ngIf="submitted === true && alert === false">
+        <div class="alert alert-success" role="alert">
+          {{successText}}
+        </div>
+        <button class="btn btn-success" (click)="newCommandeProduit()">Ok</button>
+      </div> 
+
+
+
+      <div *ngIf="alert === true">
+        <div class="alert alert-danger mt-3" role="alert">
+          {{errorText}}
+        </div>
+        <button class="btn btn-success" (click)="newCommandeProduit()">Ok</button>
+      </div> 
+
+
+      <div *ngIf="commandeSubmitted === true">
+        <div class="alert alert-danger mt-3" role="alert">
+          Veuillez renseigner tout les champs !
+        </div>
+      </div> 
+    </div>
+  </div>
