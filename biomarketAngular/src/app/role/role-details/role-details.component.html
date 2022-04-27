@@ -24,7 +24,8 @@
 
 <ng-template #editable>
   <div *ngIf="currentRole.role_id" class="edit-form">
-    <h4>Rôle</h4>
+    <h4 class="text-center">Rôle</h4>
+    <hr>
     <form>
       <div class="form-group">
         <label for="title">Nom</label>
@@ -37,15 +38,15 @@
         />
       </div>
     </form>
-    <button class="btn btn-danger btn-sm mr-2" (click)="deleteRole()">
+    <!-- <button class="btn btn-danger btn-sm mr-2" (click)="deleteRole()">
       Supprimer
-    </button>
+    </button> -->
     <button
       type="submit"
       class="btn btn-success btn-sm mr-2"
       (click)="updateRole()"
     >
-      Update
+      Mettre à jour
     </button>
 
 

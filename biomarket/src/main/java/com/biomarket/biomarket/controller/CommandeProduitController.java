@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+// import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -165,27 +165,27 @@ public @ResponseBody ResponseEntity<CommandeProduit> getByDNumero(@PathVariable 
 
 /*------------------------------PUT(ID)-----------------------------------------*/
 
-@PutMapping("/api/v1/commandeProduitByNumero/{numero}")
-public @ResponseBody ResponseEntity<CommandeProduit> modifyCommandeProduit(@PathVariable int numero, @RequestBody CommandeProduitRequest commandeProduitRequest) {
-    Optional<CommandeProduit> result = commandeProduitRepository.findByNumero(numero);
-    Optional<Produit> result1 = produitRepository.findByNom(commandeProduitRequest.getProduit().getNom());
-    Optional<Commande> result2 = commandeRepository.findByDate(commandeProduitRequest.getCommande().getDate());
-    if (result.isEmpty()) {
-        return ResponseEntity.notFound().build();
-    }
-    if (result1.isEmpty()) {
-        return ResponseEntity.notFound().build();
-    }
-    if (result2.isEmpty()) {
-        return ResponseEntity.notFound().build();
-    }
-    CommandeProduit commandeProduit = result.get();
-    commandeProduit.setProduit(result1.get());
-    commandeProduit.setCommande(result2.get());
-    commandeProduit.setQuantitekg(commandeProduitRequest.getQuantitekg());
-    commandeProduitRepository.save(commandeProduit);
-    return ResponseEntity.ok().body((commandeProduit));
-    }
+// @PutMapping("/api/v1/commandeProduitByNumero/{numero}")
+// public @ResponseBody ResponseEntity<CommandeProduit> modifyCommandeProduit(@PathVariable int numero, @RequestBody CommandeProduitRequest commandeProduitRequest) {
+//     Optional<CommandeProduit> result = commandeProduitRepository.findByNumero(numero);
+//     Optional<Produit> result1 = produitRepository.findByNom(commandeProduitRequest.getProduit().getNom());
+//     Optional<Commande> result2 = commandeRepository.findByDate(commandeProduitRequest.getCommande().getDate());
+//     if (result.isEmpty()) {
+//         return ResponseEntity.notFound().build();
+//     }
+//     if (result1.isEmpty()) {
+//         return ResponseEntity.notFound().build();
+//     }
+//     if (result2.isEmpty()) {
+//         return ResponseEntity.notFound().build();
+//     }
+//     CommandeProduit commandeProduit = result.get();
+//     commandeProduit.setProduit(result1.get());
+//     commandeProduit.setCommande(result2.get());
+//     commandeProduit.setQuantitekg(commandeProduitRequest.getQuantitekg());
+//     commandeProduitRepository.save(commandeProduit);
+//     return ResponseEntity.ok().body((commandeProduit));
+//     }
 
 /*------------------------------DELETE ALL-------------------------------------*/
 

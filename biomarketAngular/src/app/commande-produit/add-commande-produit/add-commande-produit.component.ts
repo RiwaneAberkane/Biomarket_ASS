@@ -39,6 +39,7 @@ export class AddCommandeProduitComponent implements OnInit {
   newCommandeProduit(): void {
     this.submitted = false;
     this.commandeProduit = {id: '',produitNom : '',commandeDate: '',quantitekg :''};
+    this.alert = false;
 }
 
 // SAVE ------------------------
@@ -76,7 +77,7 @@ export class AddCommandeProduitComponent implements OnInit {
               this.successText ="La commande a été crée avec succès et le stock a été mis à jour !"
             },
             error: (e) => {console.error(e)
-              this.errorText = "La quantité commandé est trop importante!",
+              this.errorText = "La quantité commandée est trop importante!",
               this.alert = true}
             
           });

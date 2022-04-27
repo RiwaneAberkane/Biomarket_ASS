@@ -76,31 +76,31 @@ nav ul li:after {
 }
 
 nav ul li:nth-child(1):after { 
-	content: "Utilisateur";
+	content: "Utilisateurs";
 	line-height: 88px;
 }
 nav ul li:nth-child(2):after { 
-	content: "Rôle";
+	content: "Rôles";
 	line-height: 88px;
 }
 nav ul li:nth-child(3):after { 
-	content: "Vendeur";
+	content: "Fournisseurs";
 	line-height: 85px;
 }
 nav ul li:nth-child(4):after { 
-	content: "Client";
+	content: "Clients";
 	line-height: 70px;
 }
 nav ul li:nth-child(5):after { 
-	content: "Stock";
+	content: "Produits";
 	line-height: 70px;
 }
 nav ul li:nth-child(6):after { 
-	content: "Commande";
+	content: "Commandes";
 	line-height: 70px;
 }
 nav ul li:nth-child(7):after { 
-	content: "Vente";
+	content: "Ventes";
 	line-height: 70px;
 }
 

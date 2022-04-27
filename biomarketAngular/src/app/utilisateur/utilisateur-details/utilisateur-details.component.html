@@ -35,7 +35,7 @@
 
 <ng-template #editable>
   <div *ngIf="currentUtilisateur.utilisateur_id" class="edit-form">
-    <h4>Utilisateur</h4>
+    <h4 class="text-center">Utilisateur</h4>
     <hr>
     <form>
       <div class="form-group">
@@ -93,24 +93,29 @@
         <input
           type="text"
           class="form-control"
+          list="datalistOptions"
           id="roleNom"
           [(ngModel)]="currentUtilisateur.role.nom"
           name="roleNom"
         />
+        <datalist id="dataListOptions">
+          <app-roles-liste>
+        </app-roles-liste>
+       </datalist> 
       </div>
 
 <!----------------------------- Bouton update et delete  --------------------------->
 
     </form>
-    <button class="btn btn-danger btn-sm mr-2" (click)="deleteUtilisateur()">
+    <!-- <button class="btn btn-danger btn-sm mr-2" (click)="deleteUtilisateur()">
       Supprimer
-    </button>
+    </button> -->
     <button
       type="submit"
       class="btn btn-success btn-sm mr-2"
       (click)="updateUtilisateur()"
     >
-      Update
+      Mettre à jour
     </button>
 
 

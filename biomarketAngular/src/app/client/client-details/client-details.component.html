@@ -39,7 +39,7 @@
 
 <ng-template #editable>
   <div *ngIf="currentClient.client_id" class="edit-form">
-    <h4>Client</h4>
+    <h4 class="text-center">Client</h4>
     <hr>
     <form>
       <div class="form-group">
@@ -117,15 +117,15 @@
 <!----------------------------- Bouton update et delete  --------------------------->
 
     </form>
-    <button class="btn btn-danger btn-sm mr-2" (click)="delete()">
+    <!-- <button class="btn btn-danger btn-sm mr-2" (click)="delete()">
       Supprimer
-    </button>
+    </button> -->
     <button
       type="submit"
       class="btn btn-success btn-sm mr-2"
       (click)="update()"
     >
-      Update
+      Mettre à jour
     </button>
 
     <div *ngIf="update">

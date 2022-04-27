@@ -25,11 +25,9 @@
         }}
     </p>
       </div>
-       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentProduit.produit_id }}">Edit</a> -->
        <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentProduit.produit_id }}">Mettre à jour</button>
        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
        <button type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
-       <!-- <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="utilisateurs" >Supprimer</button> -->
        <hr>
   </div>
   <div *ngIf="!currentProduit.produit_id">
@@ -37,7 +35,6 @@
     <div class="alert alert-warning" role="alert">
       Cliquez sur un produit...
     </div>
-    <!-- <p>Cliquez sur un produit...</p> -->
   </div>
 </div>
 
@@ -45,7 +42,7 @@
 
 <ng-template #editable>
   <div *ngIf="currentProduit.produit_id" class="edit-form">
-    <h4>Produit</h4>
+    <h4 class="text-center">Produit</h4>
     <hr>
     <form>
       <div class="form-group">
@@ -102,22 +99,18 @@
 <!----------------------------- Bouton update et delete  --------------------------->
 
     </form>
-    <button class="btn btn-danger btn-sm mr-2" (click)="delete()">
-      Supprimer
-    </button>
     <button
       type="submit"
       class="btn btn-success btn-sm mr-2"
       (click)="update()"
     >
-      Update
+      Mettre à jour
     </button>
 
     <div *ngIf="updateProduit">
       <div class="alert alert-success mt-3" role="alert">
         Le produit a été mis à jour avec succès !
     </div>
-    <!-- <p>{{ message }}</p> -->
   </div>
   <div *ngIf="!currentProduit.produit_id">
     <br />
