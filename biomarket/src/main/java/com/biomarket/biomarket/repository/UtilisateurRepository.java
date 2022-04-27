@@ -8,4 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface UtilisateurRepository extends CrudRepository<Utilisateur, Integer>{
     
     public Optional<Utilisateur> findByLogin(String login);
+    public Optional<Utilisateur> findByLoginAndMdp(String login, String mdp);
+
 }

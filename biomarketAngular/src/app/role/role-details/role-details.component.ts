@@ -31,6 +31,7 @@ export class RoleDetailsComponent implements OnInit {
     if (!this.viewMode) {
       this.message = '';
       this.getRole(this.route.snapshot.params["id"]);
+      
     }
   }
   
@@ -77,6 +78,7 @@ export class RoleDetailsComponent implements OnInit {
         next: (res) => {
           console.log(res);
           this.update = true
+          
           // this.message = res.message ? res.message : 'This Role was updated successfully!';
         },
         error: (e) => console.error(e)
@@ -97,6 +99,8 @@ export class RoleDetailsComponent implements OnInit {
       });
   }
 
+
+
   confirm2() {
     this.confirmationService.confirm({
         message: 'Voulez vous vraiment supprimer ce rôle ?',
@@ -104,7 +108,7 @@ export class RoleDetailsComponent implements OnInit {
         icon: 'pi pi-info-circle',
         accept: () => {
             this.msgs = [{severity:'info', summary:'Confirmed', detail:'Record deleted'}];
-            this.deleteRole()     
+            this.deleteRole()    
         },
         reject: () => {
             this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];

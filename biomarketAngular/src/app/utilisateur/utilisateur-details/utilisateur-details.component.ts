@@ -95,14 +95,11 @@ export class UtilisateurDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          // this.router.navigate(['/utilisateurs']);
           window.location.reload();
         },
         error: (e) => console.error(e)
       });
   }
-
-
 
   confirm2() {
     this.confirmationService.confirm({

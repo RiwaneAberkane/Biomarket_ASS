@@ -14,6 +14,8 @@ export class UtilisateurService {
   private urlUserByRoleNom = 'http://localhost:8080/api/v1/utilisateurByNom/';
   private urlDeleteAll = 'http://localhost:8080/api/v1/allUtilisateur/'
   private urlByLogin = 'http://localhost:8080/api/v1/utilisateurByLogin/';
+  private urlByLoginAndMdp = 'http://localhost:8080/api/v1/utilisateurByLogin/';
+
 
   
   //CONSTRUCTOR -----------------------
@@ -42,5 +44,9 @@ export class UtilisateurService {
   }
   findByLogin(login: String): Observable<Utilisateur> {
     return this.http.get<Utilisateur>(`${this.urlByLogin}${login}`);
+  }
+
+  findByLoginAndMdp(login : any, mdp: any): Observable<Utilisateur> {
+    return this.http.get<Utilisateur>(`${this.urlByLoginAndMdp}${login}/${mdp}`);
   }
 }

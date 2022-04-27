@@ -96,9 +96,6 @@ export class FournisseurDetailsComponent implements OnInit {
       });
   }
 
-
-
-
   confirm2() {
     this.confirmationService.confirm({
         message: 'Voulez vous vraiment supprimer ce fournisseur ?',

@@ -104,6 +104,17 @@ public @ResponseBody ResponseEntity<Utilisateur> getByLogin(@PathVariable String
    return ResponseEntity.ok().body(utilisateur);
 }   
 
+/*------------------------------GET BY LOGIN AND MDP----------------------------------------*/
+
+@GetMapping("/api/v1/utilisateurByLogin/{login}/{mdp}")
+public @ResponseBody ResponseEntity<Utilisateur> getByLoginAndMdp(@PathVariable String login, @PathVariable String mdp ){
+   Optional<Utilisateur> resultat = utilisateurRepository.findByLoginAndMdp(login, mdp);
+   if(resultat.isEmpty())
+    return ResponseEntity.notFound().build();
+   Utilisateur utilisateur = resultat.get();
+   return ResponseEntity.ok().body(utilisateur);
+}   
+
 
 /*------------------------------DELETE(ID)-------------------------------------*/
 

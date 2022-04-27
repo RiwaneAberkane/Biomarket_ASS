@@ -91,13 +91,11 @@ export class ClientDetailsComponent implements OnInit {
         next: (res) => {
           console.log(res);
           // this.router.navigate(['/clients']);
-          window.location.reload();
+          // window.location.reload();
         },
         error: (e) => console.error(e)
       });
   }
-
-
 
   confirm2() {
     this.confirmationService.confirm({

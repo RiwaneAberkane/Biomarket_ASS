@@ -48,6 +48,7 @@ import { PaginationFournisseursListeComponent } from './fournisseur/pagination-f
 import { PaginationClientsListeComponent } from './client/pagination-clients-liste/pagination-clients-liste.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login/login.component';
 
 
 
@@ -88,6 +89,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PaginationUtilisateursListeComponent,
     PaginationFournisseursListeComponent,
     PaginationClientsListeComponent,
+    LoginComponent,
   ],
 
   imports: [

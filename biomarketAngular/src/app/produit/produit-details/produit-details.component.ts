@@ -95,6 +95,7 @@ export class ProduitDetailsComponent implements OnInit {
       });
   }
 
+  
   confirm2() {
     this.confirmationService.confirm({
         message: 'Voulez vous vraiment supprimer ce produit ?',

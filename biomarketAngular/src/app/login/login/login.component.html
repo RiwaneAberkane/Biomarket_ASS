@@ -1,0 +1,79 @@
+<!-- <div *ngIf="!getLogged()" class="submit-form">
+      <div class="form-group">
+        <label for="title">Login</label>
+        <input
+          type="text"
+          class="form-control"
+          id="login"
+          required
+          [(ngModel)]="login"
+          name="login"
+        />
+      </div>
+
+        <div class="form-group">
+          <label for="title">Mot de passe</label>
+          <input
+            type="password"
+            class="form-control"
+            id="motDePasse"
+            required
+            [(ngModel)]="motDePasse"
+            name="motDePasse"
+          />
+        </div>
+
+        <button (click)="logIn()" class="btn btn-success">Se connecter</button>
+</div> -->
+
+
+
+<div  *ngIf="!getLogged()" class="sidenav">
+    <div class="login-main-text">
+       <h2>BioMarket<br></h2>
+       <p>Connectez vous pour accéder à l'application.</p>
+    </div>
+ </div>
+ <div  *ngIf="!getLogged()" class="main">
+    <div class="col-md-6 col-sm-12">
+       <div class="login-form">
+          <form>
+             <div class="form-group">
+                <label>Login</label>
+                <input type="text" 
+                class="form-control" 
+                id="login"
+                placeholder="Login"
+                [(ngModel)]="login"
+                name="login">
+             </div>
+             <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" 
+                class="form-control"
+                id="motDePasse" 
+                placeholder="Mot de passe"
+                [(ngModel)]="motDePasse"
+                name="motDePasse">
+             </div>
+             <button (click)="logIn()" type="submit" class="btn btn-black">Login</button>
+             <div *ngIf="loginBoolean === true">
+               
+               <div class="alert alert-danger mt-3" role="alert">
+                Le login ou mot de passe est incorrect !  &nbsp;&nbsp;&nbsp;&nbsp;   <a href="#">x</a> 
+              </div>  
+           </div>
+          </form>
+       </div>
+    </div>
+ </div>
+
+ <div *ngif="loginBoolean === false">
+    impossible
+ </div>
+
+ <div *ngIf = "getLogged()">
+    <app-navbar></app-navbar>
+    <app-sidebar1></app-sidebar1>
+    <footer></footer>
+</div>
