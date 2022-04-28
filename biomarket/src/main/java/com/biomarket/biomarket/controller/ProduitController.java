@@ -48,6 +48,14 @@ public @ResponseBody ResponseEntity <Produit> getByNom(@PathVariable String nom)
     return ResponseEntity.ok().body(produit);
 }
 
+/*------------------------------GET BY NOM--------------------------------------------*/
+
+@GetMapping("/api/v1/produitByNom/{statut}")
+public @ResponseBody ResponseEntity<Iterable<Produit>> getByStatus(@PathVariable String statut){
+    Iterable<Produit> produitResult = produitRepository.findByStatut(statut);
+    return ResponseEntity.ok().body(produitResult);
+}
+
 /*------------------------------POST-------------------------------------------*/
 
 
@@ -59,6 +67,7 @@ public @ResponseBody ResponseEntity<Produit> postProduit(@RequestBody ProduitReq
     produit.setQuantitekg(produitRequest.getQuantitekg());
     produit.setPachatkg(produitRequest.getPachatkg());
     produit.setPventekg(produitRequest.getPventekg());
+    produit.setStatut(produitRequest.getStatut());
     produitRepository.save(produit);
     return ResponseEntity.ok().body(produit);
 }
@@ -110,6 +119,7 @@ public @ResponseBody ResponseEntity<Produit> modifyProduit(@PathVariable int id,
     produit.setQuantitekg(requestDto.getQuantitekg());
     produit.setPachatkg(requestDto.getPachatkg());
     produit.setPventekg(requestDto.getPventekg());
+    produit.setStatut(requestDto.getStatut());
     produitRepository.save(produit);
     return ResponseEntity.ok().body((produit));
     }

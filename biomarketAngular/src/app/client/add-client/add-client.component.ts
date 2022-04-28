@@ -12,6 +12,7 @@ export class AddClientComponent implements OnInit {
   client: Client ={client_id : '', nom : '', prenom: '',  cp: '',  adresse: '',  ville: '',   mail: '', telephone: '', statut: ''};
   submitted = false;
   clientSubmitted = false;
+  statut = 'Actif'
 
   constructor(private clientService: ClientService) { }
 
@@ -30,7 +31,7 @@ export class AddClientComponent implements OnInit {
 // SAVE ------------------------
 
   save(): void {
-    if (this.client.nom === '' || this.client.prenom === '' || this.client.cp === '' || this.client.adresse === '' || this.client.ville === '' || this.client.mail === '' || this.client.telephone === '' || this.client.statut === ''){
+    if (this.client.nom === '' || this.client.prenom === '' || this.client.cp === '' || this.client.adresse === '' || this.client.ville === '' || this.client.mail === '' || this.client.telephone === ''){
       console.log("Impossible");
       this.clientSubmitted = true;
       return;
@@ -43,7 +44,7 @@ export class AddClientComponent implements OnInit {
       ville: this.client.ville,
       mail: this.client.mail,
       telephone: this.client.telephone,
-      statut: this.client.statut
+      statut: this.statut
     };
     this.clientService.create(data)
       .subscribe({

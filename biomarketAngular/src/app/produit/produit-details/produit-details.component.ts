@@ -15,6 +15,7 @@ export class ProduitDetailsComponent implements OnInit {
   @Input() currentProduit: Produit ={produit_id : '', nom : '', type: '',  quantitekg: '',  pachatkg: '',  pventekg: ''};
 
   updateProduit = false;
+  status = false
   msgs: Message[] = [];
 
   message = '';
@@ -40,6 +41,23 @@ export class ProduitDetailsComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
+  }
+
+
+  disabled(){
+    
+    this.currentProduit.statut = "Inactif"
+    this.status = true
+    this.update()
+    this.showInfo()
+   
+  }
+
+  enable(){
+    this.currentProduit.statut = "Actif"
+    this.status = false
+    this.update()
+    this.showInfo()
   }
 
 // ------------------------------------------------------------
@@ -115,6 +133,9 @@ showError() {
   this.messageService.add({severity:'error', summary: 'Error', detail: 'Ce produit ne peut pas être supprimé !'});
 } 
 
+showInfo() {
+  this.messageService.add({severity:'info', summary: 'Info', detail: 'Statut mis à jour.'});
+}
 
 
 }

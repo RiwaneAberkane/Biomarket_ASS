@@ -13,11 +13,18 @@ export class ProduitService {
   private urlDeleteAllRole = 'http://localhost:8080/api/v1/allProduit/'
   
 
+  tabProduit : any[] = [];
   //CONSTRUCTOR -----------------------
 
-  constructor( private http : HttpClient) { }
+  constructor( private http : HttpClient) { 
+    this.getAll().subscribe(data => this.tabProduit = data)
+  }
 
   //CRUD ------------------------------
+  
+  getAllActive(): Observable<Produit[]>{
+    return this.http.get<Produit[]>(`${this.url}/Actif`)
+  }
   
   getAll(): Observable<Produit[]> {
     return this.http.get<Produit[]>(`${this.url}`);

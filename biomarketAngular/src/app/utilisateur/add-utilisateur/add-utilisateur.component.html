@@ -69,6 +69,18 @@
           </div>
 
           <div class="form-group">
+            <input
+              type="hidden"
+              class="form-control"
+              id="statut"
+              required
+              [ngModel]="statut" 
+              name="statut"
+              placeholder=""
+            />
+          </div>
+
+          <div class="form-group">
             <label for="title">Rôle:</label>
             <input
               type="text"

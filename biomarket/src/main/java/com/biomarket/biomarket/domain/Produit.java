@@ -19,6 +19,7 @@ public class Produit {
     float quantitekg;
     float pachatkg;
     float pventekg;
+    String statut;
 
 /*------------------------------GETTER/SETTER--------------------------------------*/
 
@@ -65,4 +66,13 @@ public class Produit {
     public void setPventekg(float pventekg) {
         this.pventekg = pventekg;
     }
+
+    public String getStatut() {
+        return this.statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+    
 }

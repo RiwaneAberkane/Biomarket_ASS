@@ -18,22 +18,15 @@
 
 
         <div class="form-group">
-          <label for="title">Statut:</label>
           <input
-            type="text"
+            type="hidden"
             class="form-control"
             id="statut"
-            list="liste"
-            required 
-            [(ngModel)]="role.statut"
+            required
+            [ngModel]="statut" 
             name="statut"
-            placeholder="Renseigner le statut du rôle"
+            placeholder=""
           />
-
-          <datalist id="liste">
-            <Option value="Actif"></Option>
-            <Option value="Inactif"></Option>
-          </datalist>
         </div>
 
         <button (click)="saveRole()" class="btn btn-success">Ajouter</button>

@@ -5,6 +5,7 @@ import { CommandeService } from 'src/app/commande/commande.service';
 import { Fournisseur } from 'src/app/fournisseur/fournisseur';
 import { FournisseurService } from 'src/app/fournisseur/fournisseur.service';
 import { Produit } from 'src/app/produit/produit';
+import { ProduitService } from 'src/app/produit/produit.service';
 import { Utilisateur } from 'src/app/utilisateur/utilisateur';
 import { UtilisateurService } from 'src/app/utilisateur/utilisateur.service';
 import { CommandeProduit } from '../commande-produit';
@@ -22,6 +23,7 @@ export class AddCommandeProduitComponent implements OnInit {
   tabUtilisateur : Utilisateur[] = [];
   tabFournisseur : Fournisseur[] = [];
   tabCommandeProduit : any[] = [];
+  tabProduit : any[] = []
 
   
   commandeProduit:   CommandeProduit = {id: '',produitNom : '',commandeDate: '',quantitekg :''};
@@ -34,7 +36,8 @@ export class AddCommandeProduitComponent implements OnInit {
   alert = false
 
 
-  constructor(private commandeProduitService: CommandeProduitService, private commandeService: CommandeService, private messageService: MessageService, private utilisateurService: UtilisateurService, private fournisseurService : FournisseurService) { }
+  constructor(private commandeProduitService: CommandeProduitService, private commandeService: CommandeService, private messageService: MessageService, private utilisateurService: UtilisateurService, private fournisseurService : FournisseurService,
+              private produitService: ProduitService) { }
 
   ngOnInit(): void { 
     this.utilisateurService.getAll().subscribe( data => {this.tabUtilisateur = data
@@ -44,7 +47,11 @@ export class AddCommandeProduitComponent implements OnInit {
     this.fournisseurService.getAll().subscribe(data => {this.tabFournisseur = data
     console.log(this.tabFournisseur);
     })
-  }
+
+    this.produitService.getAll().subscribe(data => {this.tabProduit = data
+      console.log(this.tabFournisseur)}
+    
+    )}
 
 // CREATE -------------------
 

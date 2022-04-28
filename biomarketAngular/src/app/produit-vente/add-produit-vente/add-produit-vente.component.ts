@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Client } from 'src/app/client/client';
+import { ClientService } from 'src/app/client/client.service';
+import { ProduitService } from 'src/app/produit/produit.service';
+import { Utilisateur } from 'src/app/utilisateur/utilisateur';
+import { UtilisateurService } from 'src/app/utilisateur/utilisateur.service';
 import { Vente } from 'src/app/vente/vente';
 import { VenteService } from 'src/app/vente/vente.service';
 import { ProduitVente } from '../produit-vente';
@@ -19,11 +24,26 @@ export class AddProduitVenteComponent implements OnInit {
   successText = '';
   alert = false
   tabProduitVente : any[] = []
+  tabUtilisateur : Utilisateur[] = [];
+  tabClient : Client[] = [];
+  tabProduit: any[] = []
 
-  constructor(private produitVenteService: ProduitVenteService, private venteService: VenteService) { }
+  constructor(private produitVenteService: ProduitVenteService, private venteService: VenteService,  private utilisateurService: UtilisateurService, private clientService : ClientService,
+    private produitService : ProduitService) { }
 
   ngOnInit(): void {
-  }
+    this.utilisateurService.getAll().subscribe( data => {this.tabUtilisateur = data
+      console.log(this.tabUtilisateur)} 
+        )
+
+    this.clientService.getAll().subscribe( data => {this.tabClient = data
+      console.log(this.tabClient)} 
+        )
+
+    this.produitService.getAll().subscribe(data => {this.tabProduit = data
+      console.log(this.tabProduit)}
+        
+    )}
 
 // CREATE -------------------
 

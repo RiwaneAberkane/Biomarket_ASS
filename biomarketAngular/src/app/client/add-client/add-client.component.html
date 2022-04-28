@@ -95,22 +95,15 @@
           </div>
 
           <div class="form-group">
-            <label for="title"> Statut:</label>
             <input
-              type="text"
+              type="hidden"
               class="form-control"
-              list="statutListe"
               id="statut"
               required
-              [(ngModel)]="client.statut"
+              [ngModel]="statut" 
               name="statut"
-              placeholder="Renseigner le statut du client"
+              placeholder=""
             />
-
-            <datalist id="statutListe">
-              <option value="Restaurateur"></option>
-              <option value="Particulier"></option>
-            </datalist>
           </div>
 
         <button (click)="save()" class="btn btn-success">Ajouter</button>

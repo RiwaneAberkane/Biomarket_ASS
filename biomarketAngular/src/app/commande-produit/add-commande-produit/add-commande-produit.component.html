@@ -8,7 +8,7 @@
           <input
             type="text"
             class="form-control"
-            list="datalistOptions"
+            list="produitListe"
             id="produitNom"
             required
             [(ngModel)]="commandeProduit.produitNom"
@@ -16,11 +16,11 @@
             placeholder="Renseigner le nom du produit de la commande"
           />
 
-        <datalist id="produit">
-          <app-produits-liste>
-          <option *ngFor="let produit of tab" [value]="produit.nom" >{{produit.nom}}</option>
-        </app-produits-liste>
-       </datalist>  
+          <datalist id="produitListe">
+            <ng-container  *ngFor="let produit of tabProduit">
+              <option *ngIf="produit.statut === 'Actif'" [value]="produit.nom">{{produit.nom}}</option>
+            </ng-container>
+         </datalist> 
       </div>
 
           <div class="form-group">

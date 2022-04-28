@@ -14,8 +14,13 @@ export class AddRoleComponent implements OnInit {
     nom : '',
     statut: ''
   };
+
   submitted = false;
   roleSubmitted = false;
+  statut = 'Actif'
+
+
+
   constructor(private roleService: RoleService) { }
   ngOnInit(): void {
   }
@@ -27,7 +32,7 @@ export class AddRoleComponent implements OnInit {
     }
     const data = {
       nom: this.role.nom,
-      statut: this.role.statut
+      statut: this.statut
     };
     this.roleService.create(data)
       .subscribe({

@@ -25,6 +25,7 @@ export class AddUtilisateurComponent implements OnInit {
   };
   submitted = false;
   utilisateurSubmitted = false;
+  statut = 'Actif'
 
 
   constructor(private utilisateurService: UtilisateurService) { }
@@ -62,6 +63,7 @@ export class AddUtilisateurComponent implements OnInit {
       nom: this.utilisateur.nom,
       prenom: this.utilisateur.prenom,
       telephone: this.utilisateur.telephone,
+      statut:this.statut,
       roleNom: this.utilisateur.roleNom
     };
     this.utilisateurService.create(data)

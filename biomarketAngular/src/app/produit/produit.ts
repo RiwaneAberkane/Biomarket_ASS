@@ -6,6 +6,7 @@ export class Produit {
     quantitekg : any;
     pachatkg : any;
     pventekg: any;
+    statut? : any
 
     constructor(
         produit_id : number,

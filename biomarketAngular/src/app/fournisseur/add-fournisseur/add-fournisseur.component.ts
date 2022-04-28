@@ -13,6 +13,7 @@ export class AddFournisseurComponent implements OnInit {
   fournisseur: Fournisseur = {fournisseur_id : '', nom : '', telephone: '',  mail: '',  cp: '',  adresse: '',  ville: '',};
   submitted = false;
   fournisseurSubmitted = false;
+  statut = 'Actif'
 
   constructor(private fournisseurService: FournisseurService) { }
 
@@ -42,7 +43,8 @@ export class AddFournisseurComponent implements OnInit {
       mail: this.fournisseur.mail,
       cp: this.fournisseur.cp,
       adresse: this.fournisseur.adresse,
-      ville: this.fournisseur.ville
+      ville: this.fournisseur.ville,
+      statut: this.statut
     };
     this.fournisseurService.create(data)
       .subscribe({

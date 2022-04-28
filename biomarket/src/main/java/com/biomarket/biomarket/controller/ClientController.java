@@ -35,6 +35,14 @@ public class ClientController {
         return ResponseEntity.ok().body(client);
     }
 
+/*------------------------------GET BY STATUT--------------------------------------------*/
+
+@GetMapping("/api/v1/client/{statut}")
+public @ResponseBody ResponseEntity<Iterable<Client>> getClientsByStatus(@PathVariable String statut){
+    Iterable<Client> client = clientRepository.findByStatut(statut);
+    return ResponseEntity.ok().body(client);
+}
+
 
 /*------------------------------GET BY MAIL----------------------------------------*/
 

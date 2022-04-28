@@ -30,7 +30,6 @@
             />
           </div>
 
-
           <datalist id="listType">
             <option value="Fruit"></option>
               <option value="Légume"></option>
@@ -72,6 +71,18 @@
               [(ngModel)]="produit.pventekg"
               name="pventekg"
               placeholder="Renseigner le prix de vente du produit au Kg"
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="hidden"
+              class="form-control"
+              id="statut"
+              required
+              [ngModel]="statut" 
+              name="statut"
+              placeholder=""
             />
           </div>
 

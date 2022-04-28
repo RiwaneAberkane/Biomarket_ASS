@@ -11,6 +11,7 @@ export class AddProduitComponent implements OnInit {
   produit: Produit = {produit_id : '', nom : '', type: '',  quantitekg: '',  pachatkg: '',  pventekg: ''};
   submitted = false;
   produitSubmitted = false;
+  statut = 'Actif'
 
   constructor(private produitService: ProduitService) { }
 
@@ -38,7 +39,8 @@ export class AddProduitComponent implements OnInit {
       type: this.produit.type,
       quantitekg: this.produit.quantitekg,
       pachatkg: this.produit.pachatkg,
-      pventekg: this.produit.pventekg
+      pventekg: this.produit.pventekg,
+      statut: this.statut
     };
     this.produitService.create(data)
       .subscribe({

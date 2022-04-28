@@ -12,11 +12,18 @@ export class ClientService {
   private urlDeleteAllRole = 'http://localhost:8080/api/v1/allClient/'
   
 
+  tabClients : any[] = [];
   //CONSTRUCTOR -----------------------
 
-  constructor( private http : HttpClient) { }
+  constructor( private http : HttpClient) {
+    this.getAll().subscribe(data => this.tabClients = data)
+   }
 
   //CRUD ------------------------------
+
+  getAllActive(): Observable<Client[]> {
+    return this.http.get<Client[]>(`${this.url}/Actif`);
+  }
   
   getAll(): Observable<Client[]> {
     return this.http.get<Client[]>(`${this.url}`);

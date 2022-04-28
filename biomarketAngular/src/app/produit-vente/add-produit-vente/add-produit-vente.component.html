@@ -8,7 +8,7 @@
           <input
             type="text"
             class="form-control"
-            list="datalistOptions"
+            list="produitListe"
             id="produitNom"
             required
             [(ngModel)]="produitVente.produitNom"
@@ -16,10 +16,11 @@
             placeholder="Renseigner le nom du produit de la vente"
           />
 
-          <datalist id="produit">
-            <app-produits-liste>
-          </app-produits-liste>
-         </datalist>  
+          <datalist id="produitListe">
+            <ng-container  *ngFor="let produit of tabProduit">
+              <option *ngIf="produit.statut === 'Actif'" [value]="produit.nom">{{produit.nom}}</option>
+            </ng-container>
+         </datalist> 
         </div>
 
           <div class="form-group">
@@ -80,11 +81,12 @@
             placeholder="Renseigner le login de l'utilisateur qui a fait la vente"
           />
 
-          <datalist id="utilisateurListe">
-            <app-utilisateurs-liste>
-          </app-utilisateurs-liste>
-         </datalist>  
 
+          <datalist id="utilisateurliste">
+            <ng-container  *ngFor="let utilisateur of tabUtilisateur">
+              <option *ngIf="utilisateur.statut === 'Actif'" [value]="utilisateur.login">{{utilisateur.login}}</option>
+            </ng-container>
+         </datalist>  
         </div>
 
 
@@ -102,8 +104,9 @@
           />
 
           <datalist id="clientListe">
-            <app-clients-liste>
-          </app-clients-liste>
+            <ng-container  *ngFor="let client of tabClient">
+              <option *ngIf="client.statut === 'Actif'" [value]="client.mail">{{client.mail}}</option>
+            </ng-container>
          </datalist>  
 
         </div>
