@@ -13,12 +13,17 @@
         <br>
         <label><strong>Téléphone:</strong></label> {{ currentUtilisateur.telephone }}
         <br>
-        <label><strong>Rôle:</strong></label> {{currentUtilisateur.role.nom}}
+        <label><strong>Statut:</strong></label> {{ currentUtilisateur.statut }}
+        <br>
+        <label><strong>Rôle:</strong></label> {{currentUtilisateur.role.nom}} |  {{currentUtilisateur.role.statut}}
       </div>
        <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentUtilisateur.utilisateur_id }}">Edit</a> -->
-       <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentUtilisateur.utilisateur_id }}">Mettre à jour</button>
+       <button  *ngIf=" currentUtilisateur.statut === 'Actif'" type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentUtilisateur.utilisateur_id }}">Mettre à jour</button>
        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-      <button type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
+      <button *ngIf=" currentUtilisateur.statut === 'Actif'" type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
+      <button *ngIf=" currentUtilisateur.statut === 'Actif'" type="button" class="btn btn-primary btn-sm mr-2" (click)="disabled()">Désactiver</button>
+      <button  *ngIf=" currentUtilisateur.statut === 'Inactif'" type="button" class="btn btn-primary btn-sm mr-2" (click)="enable()">Activer</button>
+      <p-toast position="top-right"></p-toast>
        <!-- <button type="button" class="btn btn-danger btn-sm mr-2" (click)="deleteUtilisateur()" routerLink="utilisateurs" >Supprimer</button> -->
        <hr>
   </div>

@@ -53,7 +53,7 @@
         (click)="setActiveRole(role, i)"
         [value]="role.nom"   
       >
-        <strong>Nom:</strong> {{ role.nom }}
+        <strong>Nom:</strong> {{ role.nom }} |  <p [ngStyle]="{'color' : role.statut === 'Actif' ? 'green' : 'red'}">  {{ role.statut }} </p>   
       </li>
     </ul>
   </div>
@@ -81,7 +81,6 @@
     </select>
   </div>
 </div>
-
 <footer></footer>
 
 <!---------------------------------------------------------------------------------------->

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, Message, PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, Message, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Fournisseur } from '../fournisseur';
 import { FournisseurService } from '../fournisseur.service';
 
@@ -17,13 +17,13 @@ export class FournisseurDetailsComponent implements OnInit {
 
   updateFournisseur = false;
   msgs: Message[] = [];
-
+  status = false
   message = '';
 
   constructor(
     private fournisseurService: FournisseurService,
     private route: ActivatedRoute,
-    private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
+    private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig, private messageService : MessageService) { }
     
   ngOnInit(): void {
     if (!this.viewMode) {
@@ -42,6 +42,23 @@ export class FournisseurDetailsComponent implements OnInit {
         error: (e) => console.error(e)
       });
   }
+
+  disabled(){
+    
+    this.currentFournisseur.statut = "Inactif"
+    this.status = true
+    this.update()
+    this.showInfo()
+   
+  }
+
+  enable(){
+    this.currentFournisseur.statut = "Actif"
+    this.status = false
+    this.update()
+    this.showInfo()
+  }
+
 
 // ------------------------------------------------------------
 
@@ -92,7 +109,8 @@ export class FournisseurDetailsComponent implements OnInit {
           // this.router.navigate(['/fournisseurs']);
           window.location.reload();
         },
-        error: (e) => console.error(e)
+        error: (e) => console.error(e, this.showError())
+
       });
   }
 
@@ -109,5 +127,13 @@ export class FournisseurDetailsComponent implements OnInit {
             this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
         }   
     });
+}
+
+showError() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Ce fournisseur ne peut pas être supprimé !'});
+} 
+
+showInfo() {
+  this.messageService.add({severity:'info', summary: 'Info', detail: 'Statut mis à jour.'});
 }
 }

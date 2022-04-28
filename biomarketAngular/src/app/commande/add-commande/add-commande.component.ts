@@ -11,7 +11,7 @@ import { CommandeService } from '../commande.service';
 export class AddCommandeComponent implements OnInit {
 
   // @Input() tabFournisseur? : Fournisseur[];
-  commande:   Commande = {commande_id: '',date : '',utilisateurLogin: '',fournisseurNom :''};
+  commande:   Commande = {commande_id: '',date : '',utilisateurLogin: '',fournisseurMail :''};
   submitted = false;
 
   constructor(private commandeService: CommandeService) { }
@@ -37,7 +37,7 @@ export class AddCommandeComponent implements OnInit {
     const data = {
       date: this.commande.date,
       utilisateurLogin: this.commande.utilisateurLogin,
-      fournisseurNom: this.commande.fournisseurNom
+      fournisseurMail: this.commande.fournisseurMail
     };
     this.commandeService.create(data)
       .subscribe({

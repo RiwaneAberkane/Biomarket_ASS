@@ -5,7 +5,7 @@ export class Commande {
     utilisateur?: any;
     utilisateurLogin?: any;
     fournisseur?: any;
-    fournisseurNom?: any
+    fournisseurMail?: any
 
     constructor(
                 commande_id: number,

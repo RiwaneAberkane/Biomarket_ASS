@@ -17,6 +17,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int role_id;
     String nom;
+    String statut;
 
 /*------------------------------GETTER/SETTER--------------------------------------*/
 
@@ -32,5 +33,14 @@ public class Role {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public String getStatut() {
+        return this.statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
 
 }

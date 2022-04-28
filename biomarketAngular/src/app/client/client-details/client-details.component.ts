@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, Message, PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, Message, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Client } from '../client';
 import { ClientService } from '../client.service';
 
@@ -16,6 +16,7 @@ export class ClientDetailsComponent implements OnInit {
   @Input()currentClient: Client = {client_id : '', nom : '', prenom: '',  cp: '',  adresse: '',  ville: '',   mail: '', telephone: '', statut: ''};
 
   updateClient = false
+  status = false
   msgs: Message[] = [];
 
   
@@ -24,7 +25,7 @@ export class ClientDetailsComponent implements OnInit {
   constructor(
     private clientService: ClientService,
     private route: ActivatedRoute,
-    private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
+    private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig, private messageService : MessageService) { }
     
   ngOnInit(): void {
     if (!this.viewMode) {
@@ -42,6 +43,22 @@ export class ClientDetailsComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
+  }
+
+  disabled(){
+    
+    this.currentClient.statut = "Inactif"
+    this.status = true
+    this.update()
+    this.showInfo()
+   
+  }
+
+  enable(){
+    this.currentClient.statut = "Actif"
+    this.status = false
+    this.update()
+    this.showInfo()
   }
 
 // ------------------------------------------------------------
@@ -93,7 +110,7 @@ export class ClientDetailsComponent implements OnInit {
           // this.router.navigate(['/clients']);
           // window.location.reload();
         },
-        error: (e) => console.error(e)
+        error: (e) => console.error(e, this.showError())
       });
   }
 
@@ -112,4 +129,11 @@ export class ClientDetailsComponent implements OnInit {
     });
 }
 
+showError() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Ce client ne peut pas être supprimé !'});
+} 
+
+showInfo() {
+  this.messageService.add({severity:'info', summary: 'Info', detail: 'Statut mis à jour.'});
+}
 }

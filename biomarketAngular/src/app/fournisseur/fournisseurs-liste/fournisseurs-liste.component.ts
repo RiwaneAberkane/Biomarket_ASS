@@ -14,6 +14,7 @@ export class FournisseursListeComponent implements OnInit {
   currentFournisseur: Fournisseur = {fournisseur_id : '', nom : '', telephone: '',  mail: '',  cp: '',  adresse: '',  ville: '',};
   currentIndex = -1;
   nom = '';
+  mail = '';
   page = 1;
   count = 0;
   pageSize = 5;
@@ -66,7 +67,7 @@ export class FournisseursListeComponent implements OnInit {
 
   search(): void {
     this.currentIndex = -1;
-    this.fournisseurService.search(this.nom)
+    this.fournisseurService.searchByMail(this.mail)
       .subscribe({
         next: (data) => {
           this.fournisseurs = data;

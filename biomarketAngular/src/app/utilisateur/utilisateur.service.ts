@@ -16,13 +16,20 @@ export class UtilisateurService {
   private urlByLogin = 'http://localhost:8080/api/v1/utilisateurByLogin/';
   private urlByLoginAndMdp = 'http://localhost:8080/api/v1/utilisateurByLogin/';
 
-
+  tabUtilisateur : any[] = [];
   
   //CONSTRUCTOR -----------------------
 
-  constructor( private http : HttpClient) { }
+  constructor( private http : HttpClient) {
+    this.getAll().subscribe(data => this.tabUtilisateur = data)
+   }
+
 
   //CRUD ------------------------------
+
+  getAllActive(): Observable<Utilisateur[]>{
+    return this.http.get<Utilisateur[]>(`${this.url}/Actif`)
+  }
   
   getAll(): Observable<Utilisateur[]> {
     return this.http.get<Utilisateur[]>(`${this.url}`);

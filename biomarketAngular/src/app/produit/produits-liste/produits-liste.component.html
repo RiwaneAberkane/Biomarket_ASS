@@ -55,7 +55,16 @@
           (click)="setActiveRole(produit, i)"
           [value]="produit.nom"   
         >
-         <strong>Produit:</strong> {{ produit.nom }}
+         <strong>Produit:</strong> {{ produit.nom }} |        <p [ngStyle]="
+         {'color': produit.quantitekg < 1 ? 'red'
+         : produit.quantitekg >= 1 && produit.quantitekg < 20 ? 'orange' 
+         : 'green'
+         }">{{
+          produit.quantitekg < 1 ? 'HORS STOCK' 
+         :produit.quantitekg >= 1 && produit.quantitekg < 20 ? 'PEU DE STOCK' 
+         : 'EN STOCK'
+         }}
+     </p>
         </li>
       </ul>
     </div>

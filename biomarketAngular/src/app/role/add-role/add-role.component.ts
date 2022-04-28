@@ -11,7 +11,8 @@ export class AddRoleComponent implements OnInit {
 
   role: Role = {
     role_id : '',
-    nom : ''
+    nom : '',
+    statut: ''
   };
   submitted = false;
   roleSubmitted = false;
@@ -26,6 +27,7 @@ export class AddRoleComponent implements OnInit {
     }
     const data = {
       nom: this.role.nom,
+      statut: this.role.statut
     };
     this.roleService.create(data)
       .subscribe({
@@ -41,7 +43,8 @@ export class AddRoleComponent implements OnInit {
     this.submitted = false;
     this.role = {
       role_id : '',
-      nom: ''
+      nom: '',
+      statut: ''
     }
   }
 }

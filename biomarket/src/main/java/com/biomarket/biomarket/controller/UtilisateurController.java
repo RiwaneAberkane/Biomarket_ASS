@@ -41,6 +41,14 @@ public class UtilisateurController {
         return ResponseEntity.ok().body(utilisateur);
     }
 
+    /*------------------------------GET BY STATUS--------------------------------------------*/
+
+    @GetMapping("/api/v1/utilisateur/{statut}")
+    public @ResponseBody ResponseEntity<Iterable<Utilisateur>> getUtilisateurByStatus(@PathVariable String statut){
+        Iterable<Utilisateur> utilisateur = utilisateurRepository.findByStatut(statut);
+        return ResponseEntity.ok().body(utilisateur);
+    }
+
 
 /*------------------------------POST ID-------------------------------------------*/
 
@@ -76,6 +84,7 @@ public @ResponseBody ResponseEntity<Utilisateur> postUtilisateurByNameRole(@Requ
     utilisateurByName.setNom(utilisateurRequestByName.getNom());
     utilisateurByName.setPrenom(utilisateurRequestByName.getPrenom());
     utilisateurByName.setTelephone(utilisateurRequestByName.getTelephone());
+    utilisateurByName.setStatut(utilisateurRequestByName.getStatut());
     utilisateurByName.setRole(resultByName.get());
     utilisateurRepository.save(utilisateurByName);
     return ResponseEntity.ok().body(utilisateurByName);
@@ -181,6 +190,7 @@ public @ResponseBody ResponseEntity<Utilisateur> modifyUtilisateurByRoleNom(@Pat
     utilisateur.setNom(requestDto.getNom());
     utilisateur.setPrenom(requestDto.getPrenom());
     utilisateur.setTelephone(requestDto.getTelephone());
+    utilisateur.setStatut(requestDto.getStatut());
     utilisateur.setRole(resultByName.get());
     utilisateurRepository.save(utilisateur);
     return ResponseEntity.ok().body((utilisateur));

@@ -28,6 +28,7 @@
        <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentProduit.produit_id }}">Mettre à jour</button>
        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
        <button type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
+       <p-toast position="top-right"></p-toast>
        <hr>
   </div>
   <div *ngIf="!currentProduit.produit_id">

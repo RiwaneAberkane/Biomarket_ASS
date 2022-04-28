@@ -85,7 +85,7 @@ public @ResponseBody ResponseEntity<Iterable<Commande>> getByAllDate(@RequestBod
 @PostMapping("/api/v1/commandeByName")
 public @ResponseBody ResponseEntity<Commande> postCommandeByName(@RequestBody CommandeRequest commandeRequestByName){
     Optional<Utilisateur> resultUtilisateur = utilisateurRepository.findByLogin(commandeRequestByName.getUtilisateurLogin());
-    Optional<Fournisseur> resultFournisseur = fournisseurRepository.findByNom(commandeRequestByName.getFournisseurNom());
+    Optional<Fournisseur> resultFournisseur = fournisseurRepository.findByMail(commandeRequestByName.getFournisseurMail());
     if(resultUtilisateur.isEmpty()){
         return ResponseEntity.notFound().build();
     }
@@ -154,7 +154,7 @@ public void deleteAllCommande(){
 public @ResponseBody ResponseEntity<Commande> modifyCommande(@PathVariable int id, @RequestBody CommandeRequest commandeRequest) {
     Optional<Commande> result = commandeRepository.findById(id);
     Optional<Utilisateur> result1 = utilisateurRepository.findByLogin(commandeRequest.getUtilisateur().getLogin());
-    Optional<Fournisseur> result2 = fournisseurRepository.findByNom(commandeRequest.getFournisseur().getNom());
+    Optional<Fournisseur> result2 = fournisseurRepository.findByMail(commandeRequest.getFournisseur().getMail());
     if (result.isEmpty()) {
         return ResponseEntity.notFound().build();
     }

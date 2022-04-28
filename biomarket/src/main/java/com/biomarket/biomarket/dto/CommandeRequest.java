@@ -13,7 +13,7 @@ public class CommandeRequest {
     private Utilisateur utilisateur;
     private Fournisseur fournisseur;
     private String utilisateurLogin;
-    private String fournisseurNom;
+    private String fournisseurMail;
 
 
 /*------------------------------GETTER/SETTER--------------------------------------*/
@@ -51,11 +51,13 @@ public class CommandeRequest {
         this.utilisateurLogin = utilisateurLogin;
     }
 
-    public String getFournisseurNom() {
-        return this.fournisseurNom;
+
+    public String getFournisseurMail() {
+        return this.fournisseurMail;
     }
 
-    public void setFournisseurNom(String fournisseurNom) {
-        this.fournisseurNom = fournisseurNom;
+    public void setFournisseurMail(String fournisseurMail) {
+        this.fournisseurMail = fournisseurMail;
     }
+
 }

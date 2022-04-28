@@ -42,6 +42,7 @@ public class RoleController {
 public @ResponseBody ResponseEntity<Role> postRole(@RequestBody RoleRequest roleRequest){
     Role role = new Role();
     role.setNom(roleRequest.getNom());
+    role.setStatut(roleRequest.getStatut());
     roleRepository.save(role);
     return ResponseEntity.ok().body(role);
 }
@@ -116,6 +117,7 @@ public @ResponseBody ResponseEntity<Role> modifyRole(@PathVariable int id,
     }
     Role role = result.get();
     role.setNom(requestDto.getNom());
+    role.setStatut(requestDto.getStatut());
     roleRepository.save(role);
     return ResponseEntity.ok().body((role));
     }  

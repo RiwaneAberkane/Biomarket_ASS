@@ -30,10 +30,18 @@ public class FournisseurController {
 /*------------------------------GET--------------------------------------------*/
 
     @GetMapping("/api/v1/fournisseur")
-    public @ResponseBody ResponseEntity<Iterable<Fournisseur>> getClients(){
+    public @ResponseBody ResponseEntity<Iterable<Fournisseur>> getFournisseur(){
         Iterable<Fournisseur> fournisseur = fournisseurRepository.findAll();
         return ResponseEntity.ok().body(fournisseur);
     }
+
+/*------------------------------GET BY STATUT--------------------------------------------*/
+
+@GetMapping("/api/v1/fournisseur/{statut}")
+public @ResponseBody ResponseEntity<Iterable<Fournisseur>> getFournisseurByStatus(@PathVariable String statut){
+    Iterable<Fournisseur> fournisseur = fournisseurRepository.findByStatut(statut);
+    return ResponseEntity.ok().body(fournisseur);
+}
 
 /*------------------------------POST-------------------------------------------*/
 
@@ -47,6 +55,7 @@ public @ResponseBody ResponseEntity<Fournisseur> postFournisseur(@RequestBody Fo
     fournisseur.setCp(fournisseurRequest.getCp());
     fournisseur.setAdresse(fournisseurRequest.getAdresse());
     fournisseur.setVille(fournisseurRequest.getVille());
+    fournisseur.setStatut(fournisseurRequest.getStatut());
     fournisseurRepository.save(fournisseur);
     return ResponseEntity.ok().body(fournisseur);
 }
@@ -70,6 +79,17 @@ public @ResponseBody ResponseEntity<Fournisseur> get(@PathVariable int id){
 @GetMapping("/api/v1/fournisseurByNom/{nom}")
 public @ResponseBody ResponseEntity<Fournisseur> getByNom(@PathVariable String nom){
    Optional<Fournisseur> fournisseurResult = fournisseurRepository.findByNom(nom);
+   if(fournisseurResult.isEmpty())
+    return ResponseEntity.notFound().build();
+   Fournisseur fournisseur = fournisseurResult.get();
+   return ResponseEntity.ok().body(fournisseur);
+}   
+
+/*------------------------------GET BY MAIL----------------------------------------*/
+
+@GetMapping("/api/v1/fournisseurByMail/{mail}")
+public @ResponseBody ResponseEntity<Fournisseur> getByMail(@PathVariable String mail){
+   Optional<Fournisseur> fournisseurResult = fournisseurRepository.findByMail(mail);
    if(fournisseurResult.isEmpty())
     return ResponseEntity.notFound().build();
    Fournisseur fournisseur = fournisseurResult.get();
@@ -114,6 +134,7 @@ public @ResponseBody ResponseEntity<Fournisseur> modifyFournisseur(@PathVariable
     fournisseur.setCp(requestDto.getCp());
     fournisseur.setAdresse(requestDto.getAdresse());
     fournisseur.setVille(requestDto.getVille());
+    fournisseur.setStatut(requestDto.getStatut());
     fournisseurRepository.save(fournisseur);
     return ResponseEntity.ok().body((fournisseur));
     }

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, Message, PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, Message, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Produit } from '../produit';
 import { ProduitService } from '../produit.service';
 
@@ -22,7 +22,7 @@ export class ProduitDetailsComponent implements OnInit {
   constructor(
     private produitService: ProduitService,
     private route: ActivatedRoute,
-    private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
+    private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig,  private messageService: MessageService ) { }
     
   ngOnInit(): void {
     if (!this.viewMode) {
@@ -91,7 +91,7 @@ export class ProduitDetailsComponent implements OnInit {
           // this.router.navigate(['/produits']);
           window.location.reload();
         },
-        error: (e) => console.error(e)
+        error: (e) => console.error(e, this.showError())
       });
   }
 
@@ -110,6 +110,11 @@ export class ProduitDetailsComponent implements OnInit {
         }   
     });
 }
+
+showError() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Ce produit ne peut pas être supprimé !'});
+} 
+
 
 
 }

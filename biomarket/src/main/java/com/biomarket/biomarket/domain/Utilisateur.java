@@ -26,6 +26,7 @@ public class Utilisateur {
     String nom;
     String prenom;
     String telephone;
+    String statut;
     
     @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
@@ -87,6 +88,15 @@ public class Utilisateur {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+
+    public String getStatut() {
+        return this.statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 
 

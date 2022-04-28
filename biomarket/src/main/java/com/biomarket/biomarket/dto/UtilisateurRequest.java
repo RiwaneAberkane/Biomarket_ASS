@@ -11,6 +11,7 @@ public class UtilisateurRequest {
     private String nom;
     private String prenom;
     private String telephone;
+    private String statut;
     private String roleNom;   // Pour créer un utilisateur en utilisant le nom de son rôle 
     private Role role; // On utilise l'objet rôle et on fait un .getNom dessus pour récupérer que le nom du rôle
 
@@ -73,4 +74,14 @@ public class UtilisateurRequest {
     public void setRole(Role role) {
         this.role = role;
     }   
+
+    public String getStatut() {
+        return this.statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
+
 }

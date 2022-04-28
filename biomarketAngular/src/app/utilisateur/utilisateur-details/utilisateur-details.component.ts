@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, Message, PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, Message, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Utilisateur } from '../utilisateur';
 import { UtilisateurService } from '../utilisateur.service';
 
@@ -23,13 +23,14 @@ export class UtilisateurDetailsComponent implements OnInit {
   };
   update = false;
   msgs: Message[] = [];
+  status = false
 
   message = '';
 
   constructor(
     private utilisateurService: UtilisateurService,
     private route: ActivatedRoute,
-    private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig, ) { }
+    private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig, private messageService: MessageService ) { }
     
   ngOnInit(): void {
     if (!this.viewMode) {
@@ -48,6 +49,23 @@ export class UtilisateurDetailsComponent implements OnInit {
         error: (e) => console.error(e)
       });
   }
+
+  disabled(){
+    
+    this.currentUtilisateur.statut = "Inactif"
+    this.status = true
+    this.updateUtilisateur()
+    this.showInfo()
+   
+  }
+
+  enable(){
+    this.currentUtilisateur.statut = "Actif"
+    this.status = false
+    this.updateUtilisateur()
+    this.showInfo()
+  }
+
 
 // ------------------------------------------------------------
 
@@ -97,7 +115,7 @@ export class UtilisateurDetailsComponent implements OnInit {
           console.log(res);
           window.location.reload();
         },
-        error: (e) => console.error(e)
+        error: (e) => console.error(e, this.showError())
       });
   }
 
@@ -115,6 +133,14 @@ export class UtilisateurDetailsComponent implements OnInit {
             this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
         }   
     });
+}
+
+showError() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Cet utilisateur ne peut pas être supprimé !'});
+} 
+
+showInfo() {
+  this.messageService.add({severity:'info', summary: 'Info', detail: 'Statut mis à jour.'});
 }
 
 }

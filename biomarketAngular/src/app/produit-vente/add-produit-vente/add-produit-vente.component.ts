@@ -18,6 +18,7 @@ export class AddProduitVenteComponent implements OnInit {
   errorText = '';
   successText = '';
   alert = false
+  tabProduitVente : any[] = []
 
   constructor(private produitVenteService: ProduitVenteService, private venteService: VenteService) { }
 
@@ -65,6 +66,7 @@ export class AddProduitVenteComponent implements OnInit {
         .subscribe({
           next: (res) => {
             console.log(res);
+            this.tabProduitVente.push(res)
             this.venteSubmitted = false;
             // this.submitted = true;
             this.successText ="La vente a été crée avec succès et le stock a été mis à jour !"

@@ -111,7 +111,7 @@ public @ResponseBody ResponseEntity<CommandeProduit> getByDNumero(@PathVariable 
 
     @PostMapping("/api/v1/commandeProduitByName")
     public @ResponseBody ResponseEntity<CommandeProduit> postCommandeProduitByName(@RequestBody CommandeProduitRequest commandeProduitRequestByName){
-    Optional<Fournisseur> resultFournisseur = fournisseurRepository.findByNom(commandeProduitRequestByName.getFournisseurNom());
+    Optional<Fournisseur> resultFournisseur = fournisseurRepository.findByMail(commandeProduitRequestByName.getFournisseurMail());
     if(resultFournisseur.isEmpty()){
         return ResponseEntity.notFound().build();
     }

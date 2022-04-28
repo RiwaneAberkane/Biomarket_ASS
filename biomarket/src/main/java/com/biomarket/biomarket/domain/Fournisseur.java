@@ -20,6 +20,7 @@ public class Fournisseur {
     int cp;
     String adresse;
     String ville;
+    String statut;
 
 /*------------------------------GETTER/SETTER--------------------------------------*/
 
@@ -74,6 +75,14 @@ public class Fournisseur {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    public String getStatut() {
+        return this.statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 
     

@@ -5,15 +5,15 @@
           type="text"
           list="datalistOptions"
           class="form-control"
-          placeholder="Recherche par nom"
-          [(ngModel)]="nom"
+          placeholder="Recherche par mail"
+          [(ngModel)]="mail"
         />
 
 
 
         <fieldset>
           <datalist id="datalistOptions">
-             <option *ngFor="let fournisseur of fournisseurTab" [value]="fournisseur.nom"></option>
+             <option *ngFor="let fournisseur of fournisseurTab" [value]="fournisseur.mail"></option>
           </datalist>    
          </fieldset>
 
@@ -22,7 +22,7 @@
           <button
             class="btn btn-outline-secondary"
             type="button"
-            (click)="search()"
+            (click)="searchByMail()"
           >
             Search
           </button>
@@ -54,9 +54,9 @@
           "
           [class.active]="i == currentIndex"
           (click)="setActiveRole(fournisseur, i)"
-          [value]="fournisseur.nom"   
+          [value]="fournisseur.mail"   
         >
-         <strong>Nom:</strong> {{ fournisseur.nom }}
+         <strong>Nom:</strong> {{ fournisseur.mail }}  | <p [ngStyle]="{'color' : fournisseur.statut === 'Actif' ? 'green' : 'red'}">  {{ fournisseur.statut }} </p>   
         </li>
       </ul>
     </div>

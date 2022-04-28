@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { of } from 'rxjs';
 import { Utilisateur } from 'src/app/utilisateur/utilisateur';
 import { UtilisateurService } from 'src/app/utilisateur/utilisateur.service';
@@ -14,19 +15,42 @@ export class LoginComponent implements OnInit {
   utilisateur?: Utilisateur
   private logged: boolean = false
   loginBoolean : boolean = false
+  loginBoolean2 : boolean = false
 
-  constructor(private utilisateurService: UtilisateurService) { }
+  constructor(private utilisateurService: UtilisateurService, private messageService: MessageService ) { }
 
   ngOnInit(): void {
   }
 
+  // logIn(){
+  //   this.utilisateurService.findByLoginAndMdp (this.login , this.motDePasse).subscribe(data => {
+  //     this.utilisateur = data
+  //     this.logged = true
+  //     localStorage.setItem("isLogged", "" + this.logged) 
+  //   })
+  //   this.loginBoolean = true;
+  //   console.log('lala');
+    
+  // }
+
+
   logIn(){
-    this.utilisateurService.findByLoginAndMdp (this.login , this.motDePasse).subscribe(data => {
-      this.utilisateur = data
-      this.logged = true
-      localStorage.setItem("isLogged", "" + this.logged) 
-    })
-    this.loginBoolean = true;
+    this.utilisateurService.findByLoginAndMdp(this.login , this.motDePasse)
+    .subscribe({
+      next: (data) => {
+        this.utilisateur = data;
+        console.log(data);
+        console.log("XXXXXXXXXXXX");
+        this.logged = true
+        localStorage.setItem("isLogged", "" + this.logged) 
+      },
+      error: (e) => console.error(
+        console.log("$$$$$$$$$$$$$$$$$$$"),
+        this.loginBoolean = true,
+        this.showError()
+       
+      ), 
+    }); 
   }
 
   getLogged() : boolean{
@@ -36,4 +60,9 @@ export class LoginComponent implements OnInit {
     else(value = false)
     return value;
   }
+
+  showError() {
+    if(this.loginBoolean === true)
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Login ou mot de passe incorrect !'});
+  } 
 }

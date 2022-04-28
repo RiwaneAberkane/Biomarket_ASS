@@ -3,11 +3,21 @@
       <h4>Détail du rôle</h4>
       <div>
         <label><strong>Nom:</strong></label> {{ currentRole.nom }}
+        <br>
+        <label><strong>Statut:</strong></label> {{ currentRole.statut }}
       </div>
        <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentRole.role_id }}">Edit</a> -->
-      <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentRole.role_id }}">Mettre à jour</button>
+
+
+      <button  *ngIf=" currentRole.statut === 'Actif'" type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentRole.role_id }}">Mettre à jour</button>
       <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
-      <button type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
+      <button  *ngIf=" currentRole.statut === 'Actif'" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
+      <button *ngIf=" currentRole.statut === 'Actif'" type="button" class="btn btn-primary btn-sm mr-2" (click)="disabled()">Désactiver</button>
+      <button  *ngIf=" currentRole.statut === 'Inactif'" type="button" class="btn btn-primary btn-sm mr-2" (click)="enable()">Activer</button>
+      <p-toast position="top-right"></p-toast>
+
+
+      
       <hr>
   </div>
   <div *ngIf="!currentRole.role_id">
@@ -35,6 +45,17 @@
           id="nom"
           [(ngModel)]="currentRole.nom"
           name="nom"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="title">Statut</label>
+        <input
+          type="text"
+          class="form-control"
+          id="statut"
+          [(ngModel)]="currentRole.statut"
+          name="statut"
         />
       </div>
     </form>

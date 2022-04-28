@@ -55,7 +55,7 @@
           (click)="setActiveRole(client, i)"
           [value]="client.mail"   
         >
-         <strong>Mail:</strong> {{ client.mail }}
+         <strong>Mail:</strong> {{ client.mail }} | <p [ngStyle]="{'color' : client.statut === 'Actif' ? 'green' : 'red'}">  {{ client.statut }} </p>   
         </li>
       </ul>
     </div>

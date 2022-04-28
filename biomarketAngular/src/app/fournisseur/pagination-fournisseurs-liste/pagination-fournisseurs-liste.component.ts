@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Fournisseur } from '../fournisseur';
 import { FournisseurService } from '../fournisseur.service';
@@ -12,9 +12,11 @@ export class PaginationFournisseursListeComponent implements OnInit {
 
   fournisseurs?: Fournisseur;
   fournisseurTab: Fournisseur[] = [];
+  fournisseurTab1: any[] = []
   currentFournisseur: Fournisseur = {fournisseur_id : '', nom : '', telephone: '',  mail: '',  cp: '',  adresse: '',  ville: '',};
   currentIndex = -1;
   nom = '';
+  mail = '';
   page = 1;
   count = 0;
   pageSize = 5;
@@ -24,6 +26,8 @@ export class PaginationFournisseursListeComponent implements OnInit {
 
   ngOnInit(): void {
     this.retrieveFournisseurs();
+    console.log('OOOOOOOO:', this.fournisseurTab1.length); 
+    
   }
   retrieveFournisseurs(): void {
     this.fournisseurService.getAll()
@@ -31,6 +35,7 @@ export class PaginationFournisseursListeComponent implements OnInit {
         next: (data) => {
           this.fournisseurTab = data;
           console.log(data);
+          this.fournisseurTab1.push(data)
         },
         error: (e) => console.error(e)
       });
@@ -65,9 +70,23 @@ export class PaginationFournisseursListeComponent implements OnInit {
 
 // Rechercher par le nom pour afficher son détail---------------------
 
-  search(): void {
+  // search(): void {
+  //   this.currentIndex = -1;
+  //   this.fournisseurService.search(this.nom)
+  //     .subscribe({
+  //       next: (data) => {
+  //         this.fournisseurs = data;
+  //         console.log(data);
+  //         this.currentFournisseur = this.fournisseurs;
+  //       },
+        
+  //       error: (e) => console.error(e)
+  //     });
+  // }
+
+  searchByMail(): void {
     this.currentIndex = -1;
-    this.fournisseurService.search(this.nom)
+    this.fournisseurService.searchByMail(this.mail)
       .subscribe({
         next: (data) => {
           this.fournisseurs = data;

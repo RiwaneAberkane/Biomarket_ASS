@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ConfirmationService, Message, PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, Message, MessageService, PrimeNGConfig } from 'primeng/api';
 import { Role } from '../role';
 import { RoleService } from '../role.service';
 
@@ -14,8 +14,12 @@ export class RoleDetailsComponent implements OnInit {
   @Input() viewMode = false;
   @Input() currentRole: Role = {
     role_id : '',
-    nom: ''
+    nom: '',
+    statut: ''
   };
+
+  status = false
+
 
   update = false;
   msgs: Message[] = [];
@@ -24,7 +28,7 @@ export class RoleDetailsComponent implements OnInit {
   constructor(
     private roleService: RoleService,
     private route: ActivatedRoute,
-    private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) { }
+    private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig, private messageService: MessageService) { }
     
 
   ngOnInit(): void {
@@ -44,6 +48,22 @@ export class RoleDetailsComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
+  }
+
+  disabled(){
+    
+    this.currentRole.statut = "Inactif"
+    this.status = true
+    this.updateRole()
+    this.showInfo()
+   
+  }
+
+  enable(){
+    this.currentRole.statut = "Actif"
+    this.status = false
+    this.updateRole()
+    this.showInfo()
   }
 
 
@@ -93,9 +113,11 @@ export class RoleDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
+         
           window.location.reload();
+          // localStorage.setItem("success", ""+this.showSuccess())
         },
-        error: (e) => console.error(e)
+        error: (e) => console.error(e, this.showError())
       });
   }
 
@@ -108,11 +130,20 @@ export class RoleDetailsComponent implements OnInit {
         icon: 'pi pi-info-circle',
         accept: () => {
             this.msgs = [{severity:'info', summary:'Confirmed', detail:'Record deleted'}];
-            this.deleteRole()    
+            this.deleteRole()  
         },
         reject: () => {
             this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
         }   
     });
 }
+
+showError() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Ce rôle ne peut pas être supprimé !'});
+} 
+
+showInfo() {
+  this.messageService.add({severity:'info', summary: 'Info', detail: 'Statut mis à jour.'});
+}
+
 }

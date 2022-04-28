@@ -138,6 +138,33 @@
     </div>
   </div>
 
+  <div  class="col-md-12 mt-5" >
+    <h4 class="mb-3">Vue général de la vente</h4>    
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>Produit</th>
+          <th>Quantité</th>
+          <th>Date</th>
+          <th>N° vente</th>
+          <th>Fait par</th>
+          <th>Client</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tab of tabProduitVente">
+          <td>{{tab.produit.nom}}</td>
+          <td>{{tab.quantitekg}}Kg</td>
+          <td>{{tab.vente.date}}</td>
+          <td>{{tab.vente.vente_id}}</td>
+          <td>{{tab.vente.utilisateur.login}}</td>
+          <td>{{tab.vente.client.mail}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
 
 
 <footer></footer>

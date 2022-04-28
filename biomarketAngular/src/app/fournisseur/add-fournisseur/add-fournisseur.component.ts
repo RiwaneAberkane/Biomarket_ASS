@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Fournisseur } from '../fournisseur';
 import { FournisseurService } from '../fournisseur.service';
 
@@ -9,6 +9,7 @@ import { FournisseurService } from '../fournisseur.service';
 })
 export class AddFournisseurComponent implements OnInit {
 
+  
   fournisseur: Fournisseur = {fournisseur_id : '', nom : '', telephone: '',  mail: '',  cp: '',  adresse: '',  ville: '',};
   submitted = false;
   fournisseurSubmitted = false;

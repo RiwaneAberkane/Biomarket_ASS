@@ -18,7 +18,7 @@
 
         <datalist id="produit">
           <app-produits-liste>
-          <option *ngFor="let produit of tab" [value]="produit.nom">{{produit.nom}}</option>
+          <option *ngFor="let produit of tab" [value]="produit.nom" >{{produit.nom}}</option>
         </app-produits-liste>
        </datalist>  
       </div>
@@ -68,33 +68,36 @@
               />
 
               <datalist id="utilisateurliste">
-                <app-utilisateurs-liste>
-                <option *ngFor="let utilisateur of tabUtilisateur" [value]="utilisateur.login">{{utilisateur.login}}</option>
-              </app-utilisateurs-liste>
+                <ng-container  *ngFor="let utilisateur of tabUtilisateur">
+                  <option *ngIf="utilisateur.statut === 'Actif'" [value]="utilisateur.login">{{utilisateur.login}}</option>
+                </ng-container>
              </datalist>  
             </div>
+
+
 
             <div class="form-group">
               <label for="title">A:</label>
               <input
                 type="text"
                 class="form-control"
-                list="fournisseur"
-                id="fournisseurNom"  
+                list="fournisseurListe"
+                id="fournisseurMail"  
                 required
-                [(ngModel)]="commande.fournisseurNom"
-                name="fournisseurNom"
-                placeholder="Renseigner le nom du fournisseur de la commande"
+                [(ngModel)]="commande.fournisseurMail"
+                name="fournisseurMail"
+                placeholder="Renseigner le mail du fournisseur de la commande"
               />
 
-              <datalist id="fournisseur">
-                <app-fournisseurs-liste>
-                <div *ngFor="let fournisseur of fournisseurTab" >{{fournisseur.nom}}</div>
-              </app-fournisseurs-liste>
-             </datalist>  
+              <datalist id="fournisseurListe">
+                <ng-container  *ngFor="let fournisseur of tabFournisseur">
+                  <option *ngIf="fournisseur.statut === 'Actif'" [value]="fournisseur.mail">{{fournisseur.mail}}</option>
+                </ng-container>
+             </datalist>   
             </div>
 
         <button (click)="save()" class="btn btn-success">Ajouter</button>
+        <p-toast position="top-right"></p-toast>
       </div>
     
       <div *ngIf="submitted === true && alert === false">
@@ -120,6 +123,32 @@
         </div>
       </div> 
     </div>
+  </div>
+
+  <div  class="col-md-12 mt-5">
+    <h4 class="mb-3">Vue général de la commande</h4>    
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>Produit</th>
+          <th>Quantité</th>
+          <th>Date</th>
+          <th>N° commande</th>
+          <th>Fait par</th>
+          <th>Fournisseur</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tab of tabCommandeProduit">
+          <td>{{tab.produit.nom}}</td>
+          <td>{{tab.quantitekg}}Kg</td>
+          <td>{{tab.commande.date}}</td>
+          <td>{{tab.commande.commande_id}}</td>
+          <td>{{tab.commande.utilisateur.login}}</td>
+          <td>{{tab.commande.fournisseur.mail}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <footer></footer>

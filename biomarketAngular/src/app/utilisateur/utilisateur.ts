@@ -5,6 +5,7 @@ export class Utilisateur {
     nom: string;
     prenom: string;
     telephone: string;
+    statut ?:any
     role?: any;
     roleNom?: any
 

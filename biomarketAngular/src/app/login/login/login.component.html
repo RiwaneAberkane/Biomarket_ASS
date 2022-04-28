@@ -56,21 +56,27 @@
                 [(ngModel)]="motDePasse"
                 name="motDePasse">
              </div>
-             <button (click)="logIn()" type="submit" class="btn btn-black">Login</button>
-             <div *ngIf="loginBoolean === true">
-               
+             <button  pButton pRipple  (click)="logIn()" type="submit" class="btn btn-black">Login</button>
+             <!-- <button type="button" pButton pRipple (click)="logIn() " label="Success" class="p-button-success mb-2"></button> -->
+             <p-toast position="bottom-center"></p-toast>
+
+
+             <!-- <div *ngIf="loginBoolean === true">
                <div class="alert alert-danger mt-3" role="alert">
-                Le login ou mot de passe est incorrect !  &nbsp;&nbsp;&nbsp;&nbsp;   <a href="#">x</a> 
+                Le login ou mot de passe est incorrect !  &nbsp;&nbsp;&nbsp;&nbsp; <a href="#">x</a> 
               </div>  
-           </div>
+           </div> -->
           </form>
        </div>
     </div>
  </div>
 
- <div *ngif="loginBoolean === false">
+
+ <!-- <div *ngif="loginBoolean === false">
     impossible
- </div>
+ </div> -->
+
+
 
  <div *ngIf = "getLogged()">
     <app-navbar></app-navbar>

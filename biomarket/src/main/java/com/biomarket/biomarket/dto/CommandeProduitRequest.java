@@ -16,7 +16,7 @@ public class CommandeProduitRequest {
     Date commandeDate;
 
     float quantitekg;
-    String fournisseurNom;
+    String fournisseurMail;
 
 /*------------------------------GETTER/SETTER--------------------------------------*/
 
@@ -62,13 +62,12 @@ public class CommandeProduitRequest {
         this.commandeDate = commandeDate;
     }
     
-
-    public String getFournisseurNom() {
-        return this.fournisseurNom;
+    public String getFournisseurMail() {
+        return this.fournisseurMail;
     }
 
-    public void setFournisseurNom(String fournisseurNom) {
-        this.fournisseurNom = fournisseurNom;
+    public void setFournisseurMail(String fournisseurMail) {
+        this.fournisseurMail = fournisseurMail;
     }
 
 

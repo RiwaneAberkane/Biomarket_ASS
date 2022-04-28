@@ -6,6 +6,7 @@ export class Fournisseur {
     cp : String;
     adresse : String;
     ville : String;
+    statut? :any
 
     constructor( 
         fournisseur_id : number,

@@ -4,6 +4,7 @@ package com.biomarket.biomarket.dto;
 
 public class RoleRequest {
     private String nom;
+    private String statut;
     
 /*------------------------------GETTER/SETTER--------------------------------------*/
 
@@ -15,5 +16,15 @@ public class RoleRequest {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+
+    public String getStatut() {
+        return this.statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { Role } from '../role';
 import { RoleService } from '../role.service';
@@ -14,7 +15,7 @@ export class RolesListeComponent implements OnInit {
   
   roles?: Role;
   roleTab : Role[] = [];
-  currentRole: Role = {role_id : '', nom : ''};
+  currentRole: Role = {role_id : '', nom : '',  statut: ''};
   currentIndex = -1;
   nom = '';
   page = 1;
@@ -42,7 +43,7 @@ export class RolesListeComponent implements OnInit {
   
   refreshList(): void {
     this.retrieveRoles();
-    this.currentRole = {role_id : '', nom : ''};
+    this.currentRole = {role_id : '', nom : '',  statut: ''};
     this.currentIndex = -1;
   }
 
@@ -118,6 +119,6 @@ export class RolesListeComponent implements OnInit {
   //   this.nom = name
 
   // }
-  
+
 }
 
