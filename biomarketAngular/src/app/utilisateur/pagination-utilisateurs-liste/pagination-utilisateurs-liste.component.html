@@ -9,7 +9,6 @@
           [(ngModel)]="login"
         />
 
-
         <fieldset>
           <datalist id="datalistOptions">
              <option *ngFor="let user of tabUtilisateur" [value]="user.login"></option>
@@ -67,16 +66,10 @@
       ></app-utilisateur-details>
     </div>
 
-    <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUtilisateur()">
-      Remove All
-    </button> -->
-
     <button  routerLink="addUtilisateurs" class="m-3 btn btn-sm btn-success" (click)="addUtilisateur()">
       Ajouter
     </button>
 
-
-    <!-- <app-pagination-pv></app-pagination-pv> -->
   
     <div class="mt-3">
       ...
@@ -89,4 +82,4 @@
     </div>
   </div>
 
-  <footer></footer>
+<footer></footer>

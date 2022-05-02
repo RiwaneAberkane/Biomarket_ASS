@@ -10,9 +10,10 @@
         <br>
         <label><strong>A:</strong></label> {{ currentVente.client.mail }} | <strong>Numéro de tel:</strong> {{currentVente.client.telephone}}
       </div>
-       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentVente.vente_id }}">Edit</a> -->
+
        <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentVente.vente_id }}">Edit</button>
        <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="utilisateurs" >Delete</button>
+       
   </div>
   <div *ngIf="!currentVente.vente_id">
     <br />
@@ -74,7 +75,7 @@
   </div>
   <div *ngIf="!currentVente.vente_id">
     <br />
-    <p>Cannot access this Tutorial...</p>
+    <p>Cannot access this vente...</p>
   </div>
 </ng-template>
 

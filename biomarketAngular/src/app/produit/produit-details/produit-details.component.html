@@ -8,14 +8,14 @@
         <br>
         <label><strong>Type:</strong></label> {{ currentProduit.type }}
         <br>
+        <label><strong>Quantité (Kg):</strong></label> {{ currentProduit.quantitekg }} Kg
+        <br>
         <label><strong>Plafond prix achat au Kg:</strong></label> {{ currentProduit.pachatkg }} €
         <br>
         <label><strong>Prix Vente au Kg:</strong></label> {{ currentProduit.pventekg }} €
         <br>
-        <label><strong>Quantité (Kg):</strong></label> {{ currentProduit.quantitekg }} Kg
-        <br>
-        <label><strong>Statut:</strong></label> {{ currentProduit.statut }}
-        <br>
+        <label><strong>Statut: </strong></label> <span  [ngStyle]="{'color' : currentProduit.statut === 'Actif' ? 'green' : 'red'}" > {{ currentProduit.statut }}</span>
+        <br> 
         <p [ngStyle]="
         {'color': currentProduit.quantitekg < 1 ? 'red'
         : currentProduit.quantitekg >= 1 && currentProduit.quantitekg < 20 ? 'orange' 
@@ -47,6 +47,8 @@
 
 <ng-template #editable>
   <div *ngIf="currentProduit.produit_id" class="edit-form">
+    <div class="list row">
+      <div class="col-md-12">
     <h4 class="text-center">Produit</h4>
     <hr>
     <form>
@@ -100,10 +102,11 @@
           name="pventekg"
         />
       </div>
-
-<!----------------------------- Bouton update et delete  --------------------------->
-
     </form>
+
+<!----------------------------- Bouton update  --------------------------->
+
+    
     <button
       type="submit"
       class="btn btn-success btn-sm mr-2"
@@ -111,16 +114,12 @@
     >
       Mettre à jour
     </button>
-
-    <div *ngIf="updateProduit">
-      <div class="alert alert-success mt-3" role="alert">
-        Le produit a été mis à jour avec succès !
-    </div>
-  </div>
-  <div *ngIf="!currentProduit.produit_id">
-    <br />
-    <p>Cannot access this Tutorial...</p>
-  </div>
+    <p-toast position="top-right"></p-toast>
+ </div>
+</div>
+</div>
+<footer></footer>
+</ng-template>
 
 
 

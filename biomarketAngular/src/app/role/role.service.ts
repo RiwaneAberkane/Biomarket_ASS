@@ -10,7 +10,7 @@ export class RoleService {
   
   private url = 'http://localhost:8080/api/v1/role/';
   private urlByName = 'http://localhost:8080/api/v1/roleByNom/';
-  private urlDeleteAllRole = 'http://localhost:8080/api/v1/allFournisseur/'
+  private urlDeleteAllRole = 'http://localhost:8080/api/v1/allRole/'
   
 
   //CONSTRUCTOR -----------------------

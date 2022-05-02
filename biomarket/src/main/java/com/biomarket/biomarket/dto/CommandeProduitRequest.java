@@ -18,6 +18,8 @@ public class CommandeProduitRequest {
     float quantitekg;
     String fournisseurMail;
 
+    String statut;
+
 /*------------------------------GETTER/SETTER--------------------------------------*/
 
 
@@ -69,6 +71,16 @@ public class CommandeProduitRequest {
     public void setFournisseurMail(String fournisseurMail) {
         this.fournisseurMail = fournisseurMail;
     }
+
+
+    public String getStatut() {
+        return this.statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
 
 
 }

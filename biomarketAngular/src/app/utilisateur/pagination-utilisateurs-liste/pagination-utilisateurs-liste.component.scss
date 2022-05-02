@@ -4,11 +4,20 @@
     margin: auto;
   }
 
-  footer{
-    margin-top: 269px;
-  }
-
+  // footer{
+  //   margin-top: 269px;
+  // }
 
   *{
     text-align: center;
   }
+
+  footer{
+    display: flex;
+    background: url('../../images/banniere2.png') no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    justify-content: space-between;
+    height: 250px;
+    bottom: 100%;
+}

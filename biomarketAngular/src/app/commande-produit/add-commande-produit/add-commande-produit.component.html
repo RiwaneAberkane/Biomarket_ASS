@@ -1,4 +1,5 @@
-<div>
+<div class="list row">
+  <div class="col-md-12">
     <h4 class="text-center">Ajouter un produit</h4>
     <hr>
     <div class="submit-form">
@@ -96,9 +97,22 @@
              </datalist>   
             </div>
 
+            <div class="form-group">
+              <input
+                type="hidden"
+                class="form-control"
+                id="statut"
+                required
+                [ngModel]="statut" 
+                name="statut"
+                placeholder=""
+              />
+            </div>
+
         <button (click)="save()" class="btn btn-success">Ajouter</button>
         <p-toast position="top-right"></p-toast>
       </div>
+      <p-toast position="top-right"></p-toast>
     
       <div *ngIf="submitted === true && alert === false">
         <div class="alert alert-success" role="alert">
@@ -116,16 +130,10 @@
         <button class="btn btn-success" (click)="newCommandeProduit()">Ok</button>
       </div> 
 
-
-      <div *ngIf="commandeSubmitted === true">
-        <div class="alert alert-danger mt-3" role="alert">
-          Veuillez renseigner tout les champs !
-        </div>
-      </div> 
     </div>
   </div>
 
-  <div  class="col-md-12 mt-5">
+  <div *ngIf="tabbo === true"  class="col-md-12 mt-5">
     <h4 class="mb-3">Vue général de la commande</h4>    
     <table class="table">
       <thead class="thead-light">
@@ -136,6 +144,7 @@
           <th>N° commande</th>
           <th>Fait par</th>
           <th>Fournisseur</th>
+          <th>Statut du produit de la commande</th>
         </tr>
       </thead>
       <tbody>
@@ -146,9 +155,12 @@
           <td>{{tab.commande.commande_id}}</td>
           <td>{{tab.commande.utilisateur.login}}</td>
           <td>{{tab.commande.fournisseur.mail}}</td>
+          <td><span [ngStyle]="{'color' : tab.statut === 'En attente de confirmation ...' ? 'orange' : tab.statut === 'Confirmé' ? 'green' :'red'}" > {{ tab.statut }} </span></td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
 
-  <footer></footer>
+
+<footer></footer>

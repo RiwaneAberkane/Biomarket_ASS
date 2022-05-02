@@ -10,14 +10,12 @@ import { ProduitService } from '../produit.service';
   styleUrls: ['./produit-details.component.scss']
 })
 export class ProduitDetailsComponent implements OnInit {
+
   @Input() viewMode = false;
-
   @Input() currentProduit: Produit ={produit_id : '', nom : '', type: '',  quantitekg: '',  pachatkg: '',  pventekg: ''};
-
   updateProduit = false;
   status = false
   msgs: Message[] = [];
-
   message = '';
 
   constructor(
@@ -25,12 +23,16 @@ export class ProduitDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,  private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig,  private messageService: MessageService ) { }
     
+
+
   ngOnInit(): void {
     if (!this.viewMode) {
       this.message = '';
       this.getProduit(this.route.snapshot.params["id"]);
     }
   }
+
+
   
   getProduit(id: Number): void {
     this.produitService.get(id)
@@ -45,10 +47,9 @@ export class ProduitDetailsComponent implements OnInit {
 
 
   disabled(){
-    
     this.currentProduit.statut = "Inactif"
     this.status = true
-    this.update()
+    this.updateEnable()
     this.showInfo()
    
   }
@@ -56,44 +57,42 @@ export class ProduitDetailsComponent implements OnInit {
   enable(){
     this.currentProduit.statut = "Actif"
     this.status = false
-    this.update()
+    this.updateEnable()
     this.showInfo()
   }
 
-// ------------------------------------------------------------
-
-  // updatePublished(status: boolean): void {
-  //   const data = {
-  //     login: this.currentUtilisateur.login,
-  //     mdp: this.currentUtilisateur.mdp,
-  //     nom: this.currentUtilisateur.nom,
-  //     prenom: this.currentUtilisateur.prenom,
-  //     telephone: this.currentUtilisateur.telephone,
-  //   };
-  //   this.message = '';
-  //   this.utilisateurService.update(this.currentUtilisateur.utilisateur_id, data)
-  //     .subscribe({
-  //       next: (res) => {
-  //         console.log(res);
-  //         this.currentUtilisateur.utilisateur_id = status;
-  //         this.message = res.message ? res.message : 'The status was updated successfully!';
-  //       },
-  //       error: (e) => console.error(e)
-  //     });
-  // }
-
-// ------------------------------------------------------------
 
 // UPDATE ---------------------------
 
   update(): void {
+    if (this.currentProduit.nom === '' || this.currentProduit.type === '' || this.currentProduit.quantitekg === ''){
+      this.showErrorVide();
+      return;
+    }
+    if (this.currentProduit.type != 'Légume' && this.currentProduit.type != 'Fruit'){
+      this.showErrorType();
+      return;
+    }
     this.message = '';
     this.produitService.update(this.currentProduit.produit_id, this.currentProduit)
       .subscribe({
         next: (res) => {
           console.log(res);
           this.updateProduit = true
-          // this.message = res.message ? res.message : 'This Produit was updated successfully!';
+          this.showSuccess();
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+
+  updateEnable(): void {
+    this.message = '';
+    this.produitService.update(this.currentProduit.produit_id, this.currentProduit)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.updateProduit = true
         },
         error: (e) => console.error(e)
       });
@@ -106,7 +105,6 @@ export class ProduitDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          // this.router.navigate(['/produits']);
           window.location.reload();
         },
         error: (e) => console.error(e, this.showError())
@@ -129,6 +127,10 @@ export class ProduitDetailsComponent implements OnInit {
     });
 }
 
+// MESSAGE SERVICE -------------------
+
+
+
 showError() {
   this.messageService.add({severity:'error', summary: 'Error', detail: 'Ce produit ne peut pas être supprimé !'});
 } 
@@ -137,5 +139,16 @@ showInfo() {
   this.messageService.add({severity:'info', summary: 'Info', detail: 'Statut mis à jour.'});
 }
 
+showErrorVide() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Veuillez renseigner tout les champs !'});
+} 
+
+showErrorType() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Problème type (Fruit ou Légume) !'});
+} 
+
+showSuccess() {
+  this.messageService.add({severity:'success', summary: 'Success', detail: 'Produit mis à jour avec succès !'});
+}
 
 }

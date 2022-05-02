@@ -25,20 +25,25 @@ public class ProduitVente {
     @ManyToOne
     @MapsId("vente_id")
     @JoinColumn(name = "vente_id")
+
     Vente vente;
+
+    int numero;
     
     float quantitekg;
+
+    String statut;
 
 /*------------------------------GETTER/SETTER--------------------------------------*/
 
 
-    // public int getNumero() {
-    //     return this.numero;
-    // }
+    public int getNumero() {
+        return this.numero;
+    }
 
-    // public void setNumero(int numero) {
-    //     this.numero = numero;
-    // }
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
 
     public ProduitVenteKey getId() {
         return this.id;
@@ -72,5 +77,12 @@ public class ProduitVente {
         this.quantitekg = quantitekg;
     }
     
-    
+    public String getStatut() {
+        return this.statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
 }

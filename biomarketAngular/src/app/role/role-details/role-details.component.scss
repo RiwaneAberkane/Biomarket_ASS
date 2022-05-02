@@ -3,10 +3,18 @@
     margin: auto;
   }
 
-  footer{
-    margin-top: 380px;
-  }
 
+  footer{
+    display: flex;
+    background: url('../../images/banniere2.png') no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    justify-content: space-between;
+    margin-top: 30px;
+    height: 250px;
+    bottom: 100%;
+  }
+  
   @media (max-width: 767px){
     #div1{
       margin-top: 20px;

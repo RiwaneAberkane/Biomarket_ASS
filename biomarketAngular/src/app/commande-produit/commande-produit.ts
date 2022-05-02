@@ -5,7 +5,8 @@ export class CommandeProduit {
     commande?: any;
     commandeDate?: any;
     quantitekg : any;
-    numero?: number
+    numero?: number;
+    statut?: any;
 
     constructor( id: number, quantitekg: any){
         this.id = id

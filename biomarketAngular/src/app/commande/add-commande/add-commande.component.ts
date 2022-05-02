@@ -10,7 +10,6 @@ import { CommandeService } from '../commande.service';
 })
 export class AddCommandeComponent implements OnInit {
 
-  // @Input() tabFournisseur? : Fournisseur[];
   commande:   Commande = {commande_id: '',date : '',utilisateurLogin: '',fournisseurMail :''};
   submitted = false;
 
@@ -19,9 +18,8 @@ export class AddCommandeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 // CREATE -------------------
-
-
 
   newCommande(): void {
     this.submitted = false;

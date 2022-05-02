@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Client } from '../client';
 import { ClientService } from '../client.service';
 
@@ -13,8 +14,11 @@ export class AddClientComponent implements OnInit {
   submitted = false;
   clientSubmitted = false;
   statut = 'Actif'
+  invalid = true
 
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService,  private messageService: MessageService) { }
+
+  
 
   ngOnInit(): void {
   }
@@ -30,12 +34,16 @@ export class AddClientComponent implements OnInit {
 
 // SAVE ------------------------
 
+
   save(): void {
-    if (this.client.nom === '' || this.client.prenom === '' || this.client.cp === '' || this.client.adresse === '' || this.client.ville === '' || this.client.mail === '' || this.client.telephone === ''){
+ 
+      if (this.client.nom === '' || this.client.prenom === '' || this.client.cp === '' || this.client.adresse === '' || this.client.ville === '' || this.client.mail === '' || this.client.telephone === ''){
       console.log("Impossible");
       this.clientSubmitted = true;
+      this.showError();
       return;
     }
+    
     const data = {
       nom: this.client.nom,
       prenom: this.client.prenom,
@@ -52,9 +60,26 @@ export class AddClientComponent implements OnInit {
           console.log(res);
           this.submitted = true;
           this.clientSubmitted = false
+          this.showSuccess();
         },
-        error: (e) => console.error(e)
+        error: (e) => console.error(e,
+          this.showErrorUpdate)
       });
   }
 
+// SHOW SUCCESS ------------------------
+
+
+  showError() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Veuillez renseigner tout les champs !'});
+  } 
+
+  showErrorUpdate() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Impossible de créer ce client !'});
+  } 
+
+  showSuccess() {
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Le client a été crée avec succès !'});
+  }
+  
 }

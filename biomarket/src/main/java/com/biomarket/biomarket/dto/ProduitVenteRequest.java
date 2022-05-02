@@ -16,9 +16,19 @@ public class ProduitVenteRequest {
     Date venteDate;
     float quantitekg;
     String client;
+    String statut;
+    int numero;
 
 /*------------------------------GETTER/SETTER--------------------------------------*/
 
+
+    public int getNumero() {
+        return this.numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
  
     public Produit getProduit() {
         return this.produit;
@@ -68,4 +78,13 @@ public class ProduitVenteRequest {
     public void setClient(String client) {
         this.client = client;
     }
+
+    public String getStatut() {
+        return this.statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
 }

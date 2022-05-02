@@ -9,6 +9,7 @@ import { FournisseurService } from '../fournisseur.service';
   styleUrls: ['./fournisseurs-liste.component.scss']
 })
 export class FournisseursListeComponent implements OnInit {
+  
   fournisseurs?: Fournisseur;
   fournisseurTab: Fournisseur[] = [];
   currentFournisseur: Fournisseur = {fournisseur_id : '', nom : '', telephone: '',  mail: '',  cp: '',  adresse: '',  ville: '',};

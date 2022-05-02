@@ -16,16 +16,16 @@
         <br>
         <label><strong>Ville:</strong></label> {{currentFournisseur.ville}}
         <br>
-        <label><strong>Statut:</strong></label> {{currentFournisseur.statut}}
+        <label><strong>Statut:</strong></label> <span [ngStyle]="{'color' : currentFournisseur.statut === 'Actif' ? 'green' : 'red'}" > {{ currentFournisseur.statut }} </span>
       </div>
-       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentFournisseur.fournisseur_id }}">Edit</a> -->
+
        <button *ngIf=" currentFournisseur.statut === 'Actif'" type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentFournisseur.fournisseur_id }}">Mettre à jour</button>
        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
        <button *ngIf=" currentFournisseur.statut === 'Actif'" type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
        <button *ngIf=" currentFournisseur.statut === 'Actif'" type="button" class="btn btn-primary btn-sm mr-2" (click)="disabled()">Désactiver</button>
        <button  *ngIf=" currentFournisseur.statut === 'Inactif'" type="button" class="btn btn-primary btn-sm mr-2" (click)="enable()">Activer</button>
        <p-toast position="top-right"></p-toast>
-       <!-- <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="utilisateurs" >Supprimer</button> -->
+  
        <hr>
   </div>
   <div *ngIf="!currentFournisseur.fournisseur_id">
@@ -33,7 +33,6 @@
     <div class="alert alert-warning" role="alert">
       Cliquez sur un fournisseur...
     </div>
-    <!-- <p>Cliquez sur un fournisseur...</p> -->
   </div>
 </div>
 
@@ -41,6 +40,8 @@
 
 <ng-template #editable>
   <div *ngIf="currentFournisseur.fournisseur_id" class="edit-form">
+    <div class="list row">
+      <div class="col-md-12">
     <h4 class="text-center">Fournisseur</h4>
     <hr>
     <form>
@@ -104,13 +105,11 @@
           name="ville"
         />
       </div>
-
-<!----------------------------- Bouton update et delete  --------------------------->
-
     </form>
-    <!-- <button class="btn btn-danger btn-sm mr-2" (click)="delete()">
-      Supprimer
-    </button> -->
+
+<!----------------------------- Bouton update  --------------------------->
+
+  
     <button
       type="submit"
       class="btn btn-success btn-sm mr-22"
@@ -118,19 +117,14 @@
     >
       Mettre à jour
     </button>
-
-    <div *ngIf="updateFournisseur">
-      <div class="alert alert-success mt-3" role="alert">
-        Le fournisseur a été mis à jour avec succès !
-    </div>
-
-
-    <!-- <p>{{ message }}</p> -->
+    <p-toast position="top-right"></p-toast>
   </div>
-  <div *ngIf="!currentFournisseur.fournisseur_id">
-    <br />
-    <p>Cannot access this Tutorial...</p>
-  </div>
+</div>
+</div>
+<footer></footer>
+</ng-template>
+
+
 
   
 

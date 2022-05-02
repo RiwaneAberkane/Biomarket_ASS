@@ -20,8 +20,6 @@ export class AddVenteComponent implements OnInit {
 
 // CREATE -------------------
 
-
-
   newVente(): void {
     this.submitted = false;
     this.vente = {
@@ -31,6 +29,7 @@ export class AddVenteComponent implements OnInit {
 }
 
 // SAVE ------------------------
+
 
   save(): void {
     const data = {

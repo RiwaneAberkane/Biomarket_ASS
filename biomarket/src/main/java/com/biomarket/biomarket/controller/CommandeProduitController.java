@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -105,39 +105,69 @@ public @ResponseBody ResponseEntity<CommandeProduit> getByDNumero(@PathVariable 
     // return ResponseEntity.ok().body(commandeProduit);
     // }
     
+/*------------------------------POST BY NAME AVEC MISE A JOUR STOCK--------------------------------------------*/
+
+
+
+    // @PostMapping("/api/v1/commandeProduitByName")
+    // public @ResponseBody ResponseEntity<CommandeProduit> postCommandeProduitByName(@RequestBody CommandeProduitRequest commandeProduitRequestByName){
+    // Optional<Fournisseur> resultFournisseur = fournisseurRepository.findByMail(commandeProduitRequestByName.getFournisseurMail());
+    // if(resultFournisseur.isEmpty()){
+    //     return ResponseEntity.notFound().build();
+    // }
+
+    // Optional<Produit> resultproduit = produitRepository.findByNom(commandeProduitRequestByName.getProduitNom());
+    // Optional<Commande> resultcommande= commandeRepository.findByDateAndFournisseur(commandeProduitRequestByName.getCommandeDate(), resultFournisseur.get());
+    // if(resultproduit.isEmpty()){
+    //     return ResponseEntity.notFound().build();
+    // }
+    // if(resultcommande.isEmpty()){
+    //     return ResponseEntity.notFound().build();
+    // }
+    // Produit produit = resultproduit.get();
+    // if(commandeProduitRequestByName.getQuantitekg() > 100)
+    // {
+    //     return ResponseEntity.notFound().build();
+    // }
+    // produit.setQuantitekg(produit.getQuantitekg() + commandeProduitRequestByName.getQuantitekg());
+    // produitRepository.save(produit);
+    // CommandeProduit commandeProduit = new CommandeProduit();
+    // commandeProduit.setProduit(resultproduit.get());
+    // commandeProduit.setCommande(resultcommande.get());
+    // commandeProduit.setQuantitekg(commandeProduitRequestByName.getQuantitekg());
+    // commandeProduitRepository.save(commandeProduit);
+    // return ResponseEntity.ok().body(commandeProduit);
+    // }
+
+
 /*------------------------------POST BY NAME--------------------------------------------*/
 
 
 
-    @PostMapping("/api/v1/commandeProduitByName")
-    public @ResponseBody ResponseEntity<CommandeProduit> postCommandeProduitByName(@RequestBody CommandeProduitRequest commandeProduitRequestByName){
-    Optional<Fournisseur> resultFournisseur = fournisseurRepository.findByMail(commandeProduitRequestByName.getFournisseurMail());
-    if(resultFournisseur.isEmpty()){
-        return ResponseEntity.notFound().build();
-    }
+@PostMapping("/api/v1/commandeProduitByName")
+public @ResponseBody ResponseEntity<CommandeProduit> postCommandeProduitByName(@RequestBody CommandeProduitRequest commandeProduitRequestByName){
+Optional<Fournisseur> resultFournisseur = fournisseurRepository.findByMail(commandeProduitRequestByName.getFournisseurMail());
+if(resultFournisseur.isEmpty()){
+    return ResponseEntity.notFound().build();
+}
 
-    Optional<Produit> resultproduit = produitRepository.findByNom(commandeProduitRequestByName.getProduitNom());
-    Optional<Commande> resultcommande= commandeRepository.findByDateAndFournisseur(commandeProduitRequestByName.getCommandeDate(), resultFournisseur.get());
-    if(resultproduit.isEmpty()){
-        return ResponseEntity.notFound().build();
-    }
-    if(resultcommande.isEmpty()){
-        return ResponseEntity.notFound().build();
-    }
-    Produit produit = resultproduit.get();
-    if(commandeProduitRequestByName.getQuantitekg() > 100)
-    {
-        return ResponseEntity.notFound().build();
-    }
-    produit.setQuantitekg(produit.getQuantitekg() + commandeProduitRequestByName.getQuantitekg());
-    produitRepository.save(produit);
-    CommandeProduit commandeProduit = new CommandeProduit();
-    commandeProduit.setProduit(resultproduit.get());
-    commandeProduit.setCommande(resultcommande.get());
-    commandeProduit.setQuantitekg(commandeProduitRequestByName.getQuantitekg());
-    commandeProduitRepository.save(commandeProduit);
-    return ResponseEntity.ok().body(commandeProduit);
-    }
+Optional<Produit> resultproduit = produitRepository.findByNom(commandeProduitRequestByName.getProduitNom());
+Optional<Commande> resultcommande= commandeRepository.findByDateAndFournisseur(commandeProduitRequestByName.getCommandeDate(), resultFournisseur.get());
+if(resultproduit.isEmpty()){
+    return ResponseEntity.notFound().build();
+}
+if(resultcommande.isEmpty()){
+    return ResponseEntity.notFound().build();
+}
+CommandeProduit commandeProduit = new CommandeProduit();
+commandeProduit.setProduit(resultproduit.get());
+commandeProduit.setCommande(resultcommande.get());
+commandeProduit.setQuantitekg(commandeProduitRequestByName.getQuantitekg());
+commandeProduit.setStatut(commandeProduitRequestByName.getStatut());
+commandeProduitRepository.save(commandeProduit);
+return ResponseEntity.ok().body(commandeProduit);
+}
+
 
 /*------------------------------PUT(ID)-----------------------------------------*/
 
@@ -165,6 +195,26 @@ public @ResponseBody ResponseEntity<CommandeProduit> getByDNumero(@PathVariable 
 
 /*------------------------------PUT(ID)-----------------------------------------*/
 
+@PutMapping("/api/v1/commandeProduitByNumero/{numero}")
+public @ResponseBody ResponseEntity<CommandeProduit> modifyCommandeProduit(@PathVariable int numero, @RequestBody CommandeProduitRequest commandeProduitRequest) {
+    Optional<CommandeProduit> result = commandeProduitRepository.findByNumero(numero);
+    Optional<Produit> result1 = produitRepository.findByNom(commandeProduitRequest.getProduit().getNom());
+    if (result.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+    if (result1.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+    CommandeProduit commandeProduit = result.get();
+    commandeProduit.setProduit(result1.get());
+    commandeProduit.setStatut(commandeProduitRequest.getStatut());
+    commandeProduitRepository.save(commandeProduit);
+    return ResponseEntity.ok().body((commandeProduit));
+    }
+
+
+/*------------------------------PUT(ID)-----------------------------------------*/
+
 // @PutMapping("/api/v1/commandeProduitByNumero/{numero}")
 // public @ResponseBody ResponseEntity<CommandeProduit> modifyCommandeProduit(@PathVariable int numero, @RequestBody CommandeProduitRequest commandeProduitRequest) {
 //     Optional<CommandeProduit> result = commandeProduitRepository.findByNumero(numero);
@@ -186,6 +236,7 @@ public @ResponseBody ResponseEntity<CommandeProduit> getByDNumero(@PathVariable 
 //     commandeProduitRepository.save(commandeProduit);
 //     return ResponseEntity.ok().body((commandeProduit));
 //     }
+
 
 /*------------------------------DELETE ALL-------------------------------------*/
 

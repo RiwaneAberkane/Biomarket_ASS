@@ -1,4 +1,5 @@
-<div>
+<div class="list row">
+  <div class="col-md-12">
     <h4 class="text-center">Ajouter un utilisateur</h4>
     <hr>
     <div class="submit-form">
@@ -9,11 +10,18 @@
             type="email"
             class="form-control"
             id="login"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
             required
             [(ngModel)]="utilisateur.login"
+            #emailref="ngModel"
             name="login"
             placeholder="Renseigner le login de l'utilisateur"
+            [class.success]="!emailref.invalid"
           />
+
+          <div id="invalid" *ngIf="emailref.errors &&(emailref.touched || emailref.dirty)" class ="text-error">
+            Invalid email ...
+         </div>
         </div>
 
         <div class="form-group">
@@ -103,6 +111,7 @@
           
         <button (click)="saveUser()" class="btn btn-success">Ajouter</button>
       </div>
+      <p-toast position="top-right"></p-toast>
 
       <div *ngIf="submitted === true">
         <div class="alert alert-success" role="alert">
@@ -110,15 +119,8 @@
         </div>
         <button class="btn btn-success" (click)="newUser()">Ok</button>
       </div> 
-
-      <div *ngIf="utilisateurSubmitted === true">
-        <div class="alert alert-danger mt-3" role="alert">
-          Veuillez renseigner tout les champs !
-        </div>
-      </div> 
-
-
     </div>
   </div>
+</div>
 
-  <footer></footer>
+<footer></footer>

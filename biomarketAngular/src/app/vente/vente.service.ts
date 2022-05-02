@@ -12,7 +12,7 @@ export class VenteService {
   private urlByNameVente =  'http://localhost:8080/api/v1/venteByName/';
   private urlUserByVenteNom = 'http://localhost:8080/api/v1/venteByName/';
   private urlDeleteAll = 'http://localhost:8080/api/v1/allVenteallCommande/'
-  private urlByLogin = 'http://localhost:8080/api/v1/venteByDate/';
+  private urlByDate = 'http://localhost:8080/api/v1/venteByDate/';
 
   
   //CONSTRUCTOR -----------------------------------------
@@ -40,6 +40,6 @@ export class VenteService {
     return this.http.delete(this.urlDeleteAll);
   }
   findByDate(date: any): Observable<Vente> {
-    return this.http.get<Vente>(`${this.urlByLogin}${date}`);
+    return this.http.get<Vente>(`${this.urlByDate}${date}`);
   }
 }

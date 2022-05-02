@@ -57,7 +57,7 @@ nav ul li {
 	position: relative;
   width: 70px;
   cursor: pointer;
-	background: #F8F9FA;
+	background: #007BFF;
 	text-transform: uppercase;
 	transition:all .4s ease-out;
 }
@@ -75,31 +75,31 @@ nav ul li:after {
 	transition:all .4s ease-out;
 }
 
-nav ul li:nth-child(1):after { 
+nav ul li:nth-child(6):after { 
 	content: "Utilisateurs";
 	line-height: 88px;
 }
-nav ul li:nth-child(2):after { 
+nav ul li:nth-child(7):after { 
 	content: "Rôles";
 	line-height: 88px;
 }
-nav ul li:nth-child(3):after { 
+nav ul li:nth-child(4):after { 
 	content: "Fournisseurs";
 	line-height: 85px;
 }
-nav ul li:nth-child(4):after { 
+nav ul li:nth-child(2):after { 
 	content: "Clients";
 	line-height: 70px;
 }
-nav ul li:nth-child(5):after { 
+nav ul li:nth-child(1):after { 
 	content: "Produits";
 	line-height: 70px;
 }
-nav ul li:nth-child(6):after { 
+nav ul li:nth-child(5):after { 
 	content: "Commandes";
 	line-height: 70px;
 }
-nav ul li:nth-child(7):after { 
+nav ul li:nth-child(3):after { 
 	content: "Ventes";
 	line-height: 70px;
 }
@@ -335,5 +335,5 @@ ul{
 }
 
 i{
-	color: #007BFF;
+	color: white;
 }

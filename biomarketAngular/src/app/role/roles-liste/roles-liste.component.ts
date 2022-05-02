@@ -115,10 +115,5 @@ export class RolesListeComponent implements OnInit {
     this.router.navigate(['/add']);
   }
 
-  // nameValue(name: any){
-  //   this.nom = name
-
-  // }
-
 }
 

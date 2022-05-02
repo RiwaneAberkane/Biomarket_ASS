@@ -4,7 +4,7 @@
     <div *ngIf="currentProduitVente.id">
       <h4>Détail de la vente</h4>
       <div>
-        <label><strong>Produit:</strong></label> {{ currentProduitVente.produit.nom }}
+        <label><strong>Produit:</strong></label> {{ currentProduitVente.produit.nom }} <span [ngStyle]="{'color' : currentProduitVente.produit.statut === 'Actif' ? 'green' : 'red'}">({{ currentProduitVente.produit.statut }})</span>
         <br>
         <label><strong>Quantité (Kg):</strong></label> {{ currentProduitVente.quantitekg }} Kg
         <br>
@@ -12,21 +12,24 @@
         <br>
         <label><strong>Numéro de Vente:</strong></label> {{ currentProduitVente.vente.vente_id }}
         <br>
-        <label><strong>Fait par:</strong></label> {{ currentProduitVente.vente.utilisateur.login }}
+        <label><strong>Fait par:</strong></label> {{ currentProduitVente.vente.utilisateur.login }} <span [ngStyle]="{'color' : currentProduitVente.vente.utilisateur.statut === 'Actif' ? 'green' : 'red'}">({{ currentProduitVente.vente.utilisateur.statut }})</span> 
         <br>
-        <label><strong>A:</strong></label> {{ currentProduitVente.vente.client.mail}} | <strong>Tel:</strong> {{currentProduitVente.vente.client.telephone}}
+        <label><strong>A:</strong></label> {{ currentProduitVente.vente.client.mail}}  <span [ngStyle]="{'color' : currentProduitVente.vente.client.statut === 'Actif' ? 'green' : 'red'}">({{ currentProduitVente.vente.client.statut }})</span>
+        <br>
+        <label><strong>Statut:</strong></label>   <span [ngStyle]="{'color' : currentProduitVente.statut === 'Vendu' ? 'green' : 'red'}"> {{ currentProduitVente.statut }} </span> 
       </div>
       <hr>
-       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentCommandeProduit.id }}">Edit</a> -->
-       <!-- <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentProduitVente.id}}">Edit</button>
-       <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="produitsVentes" >Supprimer</button> -->
+
+      <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+      <button *ngIf="currentProduitVente.statut === 'Vendu'" type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm1()">Retour</button>
+      <p-toast position="top-right"></p-toast>
+    
   </div>
   <div *ngIf="!currentProduitVente.id">
     <br />
     <div class="alert alert-warning" role="alert">
       Cliquez sur une vente...
     </div>
-    <!-- <p>Cliquez sur une vente...</p> -->
   </div>
 </div>
 
@@ -73,20 +76,6 @@
 
 <!-- Formulaire Vente ------------------------------------------------------------------------->
 
-<!-- <div class="form-group">
-  <label for="title">Faite le:</label>
-  <input
-    type="date"
-    class="form-control"
-    id="date"
-    required
-    [(ngModel)]="currentProduitVente.vente.date"
-    name="date"
-    placeholder="Renseigner lea date de la vente"
-  />
-</div> -->
-
-
 <div class="form-group">
   <label for="title">Fait par:</label>
   <input
@@ -111,11 +100,12 @@
     name="clientMail"
   />
 </div>
+</form>
 
 
-<!----------------------------- Bouton update et delete  --------------------------->
+<!----------------------------- Bouton update --------------------------->
 
-    </form>
+   
     <button class="badge badge-danger mr-2" (click)="delete()">
       Supprimer
     </button>
@@ -126,18 +116,13 @@
     >
       Update
     </button>
-
-
     <div *ngIf="updateVente">
       <div class="alert alert-success mt-3" role="alert">
         La vente a été mise à jour avec succès !
     </div>
-
-    <!-- <p>{{ message }}</p> -->
   </div>
-  <div *ngIf="!currentProduitVente.id">
-    <br />
-    <p>Cannot access this vente...</p>
-  </div>
+</div>
+<footer></footer>
+</ng-template>
 
 

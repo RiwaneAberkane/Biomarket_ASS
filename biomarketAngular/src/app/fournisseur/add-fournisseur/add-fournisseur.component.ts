@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Fournisseur } from '../fournisseur';
 import { FournisseurService } from '../fournisseur.service';
 
@@ -8,14 +9,13 @@ import { FournisseurService } from '../fournisseur.service';
   styleUrls: ['./add-fournisseur.component.scss']
 })
 export class AddFournisseurComponent implements OnInit {
-
   
   fournisseur: Fournisseur = {fournisseur_id : '', nom : '', telephone: '',  mail: '',  cp: '',  adresse: '',  ville: '',};
   submitted = false;
   fournisseurSubmitted = false;
   statut = 'Actif'
 
-  constructor(private fournisseurService: FournisseurService) { }
+  constructor(private fournisseurService: FournisseurService, private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -35,6 +35,7 @@ export class AddFournisseurComponent implements OnInit {
     if (this.fournisseur.nom === '' || this.fournisseur.telephone === '' || this.fournisseur.mail === '' || this.fournisseur.cp === '' || this.fournisseur.adresse === '' || this.fournisseur.ville === ''){
       console.log("Impossible");
       this.fournisseurSubmitted = true;
+      this.showError();
       return;
     }
     const data = {
@@ -52,8 +53,26 @@ export class AddFournisseurComponent implements OnInit {
           console.log(res);
           this.submitted = true;
           this.fournisseurSubmitted = false;
+          this.showSuccess()
         },
-        error: (e) => console.error(e)
+        error: (e) => console.error(e,
+          this.showError1())
       });
   }
+
+// MESSAGE SERVICE ------------------------------
+
+  showError() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Veuillez renseigner tout les champs !'});
+  } 
+
+  showError1() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Impossible de créer ce fournissseur !'});
+  } 
+
+
+  showSuccess() {
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Le fournisseur a été crée avec succès !'});
+  }
+  
 }

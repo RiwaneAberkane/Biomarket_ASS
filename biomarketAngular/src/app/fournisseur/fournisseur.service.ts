@@ -9,14 +9,16 @@ import { Fournisseur } from './fournisseur';
 export class FournisseurService {
 
   private url = 'http://localhost:8080/api/v1/fournisseur/';
+  private urlStatut= 'http://localhost:8080/api/v1/fournisseurStatut/';
   private URLsearch = 'http://localhost:8080/api/v1/fournisseurByNom/';
   private URLsearchByMail = 'http://localhost:8080/api/v1/fournisseurByMail/';
-
-  private urlDeleteAllRole = 'http://localhost:8080/api/v1/allRole/'
+  private urlDeleteAllFournisseur = 'http://localhost:8080/api/v1/allFournisseur/'
   
 
   tabFournisseur : any[] = []
+  
   //CONSTRUCTOR -----------------------
+
 
   constructor( private http : HttpClient) {
     this.getAll().subscribe(data => this.tabFournisseur = data)
@@ -24,9 +26,9 @@ export class FournisseurService {
 
   //CRUD ------------------------------
   
-
+  
   getAllActive(): Observable<Fournisseur[]>{
-    return this.http.get<Fournisseur[]>(`${this.url}/Actif`)
+    return this.http.get<Fournisseur[]>(`${this.urlStatut}/Actif`)
   }
 
   getAll(): Observable<Fournisseur[]> {
@@ -45,7 +47,7 @@ export class FournisseurService {
     return this.http.delete(`${this.url}${id}`);
   }
   deleteAll(): Observable<any> {
-    return this.http.delete(this.urlDeleteAllRole);
+    return this.http.delete(this.urlDeleteAllFournisseur);
   }
   search(nom: String): Observable<Fournisseur> {
     return this.http.get<Fournisseur>(`${this.URLsearch}${nom}`);

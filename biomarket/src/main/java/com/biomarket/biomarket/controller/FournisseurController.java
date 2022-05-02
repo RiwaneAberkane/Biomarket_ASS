@@ -37,7 +37,7 @@ public class FournisseurController {
 
 /*------------------------------GET BY STATUT--------------------------------------------*/
 
-@GetMapping("/api/v1/fournisseur/{statut}")
+@GetMapping("/api/v1/fournisseurStatut/{statut}")
 public @ResponseBody ResponseEntity<Iterable<Fournisseur>> getFournisseurByStatus(@PathVariable String statut){
     Iterable<Fournisseur> fournisseur = fournisseurRepository.findByStatut(statut);
     return ResponseEntity.ok().body(fournisseur);

@@ -39,30 +39,6 @@ export class CommandeDetailsComponent implements OnInit {
       });
   }
 
-// ------------------------------------------------------------
-
-  // updatePublished(status: boolean): void {
-  //   const data = {
-  //     login: this.currentUtilisateur.login,
-  //     mdp: this.currentUtilisateur.mdp,
-  //     nom: this.currentUtilisateur.nom,
-  //     prenom: this.currentUtilisateur.prenom,
-  //     telephone: this.currentUtilisateur.telephone,
-  //   };
-  //   this.message = '';
-  //   this.utilisateurService.update(this.currentUtilisateur.utilisateur_id, data)
-  //     .subscribe({
-  //       next: (res) => {
-  //         console.log(res);
-  //         this.currentUtilisateur.utilisateur_id = status;
-  //         this.message = res.message ? res.message : 'The status was updated successfully!';
-  //       },
-  //       error: (e) => console.error(e)
-  //     });
-  // }
-
-// ------------------------------------------------------------
-
 // UPDATE ---------------------------
 
   uodate(): void {

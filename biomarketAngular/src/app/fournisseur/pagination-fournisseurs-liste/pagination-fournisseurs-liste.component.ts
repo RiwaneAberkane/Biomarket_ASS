@@ -26,8 +26,6 @@ export class PaginationFournisseursListeComponent implements OnInit {
 
   ngOnInit(): void {
     this.retrieveFournisseurs();
-    console.log('OOOOOOOO:', this.fournisseurTab1.length); 
-    
   }
   retrieveFournisseurs(): void {
     this.fournisseurService.getAll()
@@ -41,6 +39,7 @@ export class PaginationFournisseursListeComponent implements OnInit {
       });
   }
   
+
   refreshList(): void {
     this.retrieveFournisseurs();
     this.currentFournisseur =  {fournisseur_id : '', nom : '', telephone: '',  mail: '',  cp: '',  adresse: '',  ville: '',};
@@ -68,21 +67,7 @@ export class PaginationFournisseursListeComponent implements OnInit {
       });
   }
 
-// Rechercher par le nom pour afficher son détail---------------------
-
-  // search(): void {
-  //   this.currentIndex = -1;
-  //   this.fournisseurService.search(this.nom)
-  //     .subscribe({
-  //       next: (data) => {
-  //         this.fournisseurs = data;
-  //         console.log(data);
-  //         this.currentFournisseur = this.fournisseurs;
-  //       },
-        
-  //       error: (e) => console.error(e)
-  //     });
-  // }
+// Rechercher par le mail pour afficher son détail---------------------
 
   searchByMail(): void {
     this.currentIndex = -1;

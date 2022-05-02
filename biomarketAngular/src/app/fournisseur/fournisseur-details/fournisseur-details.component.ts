@@ -12,9 +12,7 @@ import { FournisseurService } from '../fournisseur.service';
 export class FournisseurDetailsComponent implements OnInit {
 
   @Input() viewMode = false;
-
   @Input() currentFournisseur: Fournisseur = {fournisseur_id : '', nom : '', telephone: '',  mail: '',  cp: '',  adresse: '',  ville: '',};
-
   updateFournisseur = false;
   msgs: Message[] = [];
   status = false
@@ -44,10 +42,9 @@ export class FournisseurDetailsComponent implements OnInit {
   }
 
   disabled(){
-    
     this.currentFournisseur.statut = "Inactif"
     this.status = true
-    this.update()
+    this.updateSuccess()
     this.showInfo()
    
   }
@@ -55,45 +52,38 @@ export class FournisseurDetailsComponent implements OnInit {
   enable(){
     this.currentFournisseur.statut = "Actif"
     this.status = false
-    this.update()
+    this.updateSuccess()
     this.showInfo()
   }
 
 
-// ------------------------------------------------------------
-
-  // updatePublished(status: boolean): void {
-  //   const data = {
-  //     login: this.currentUtilisateur.login,
-  //     mdp: this.currentUtilisateur.mdp,
-  //     nom: this.currentUtilisateur.nom,
-  //     prenom: this.currentUtilisateur.prenom,
-  //     telephone: this.currentUtilisateur.telephone,
-  //   };
-  //   this.message = '';
-  //   this.utilisateurService.update(this.currentUtilisateur.utilisateur_id, data)
-  //     .subscribe({
-  //       next: (res) => {
-  //         console.log(res);
-  //         this.currentUtilisateur.utilisateur_id = status;
-  //         this.message = res.message ? res.message : 'The status was updated successfully!';
-  //       },
-  //       error: (e) => console.error(e)
-  //     });
-  // }
-
-// ------------------------------------------------------------
-
 // UPDATE ---------------------------
 
   update(): void {
+    if (this.currentFournisseur.nom === '' || this.currentFournisseur.telephone === '' || this.currentFournisseur.mail === '' || this.currentFournisseur.cp === '' || this.currentFournisseur.adresse === '' || this.currentFournisseur.ville === ''){
+      this.showErrorVide();
+      return;
+    }
     this.message = '';
     this.fournisseurService.update(this.currentFournisseur.fournisseur_id, this.currentFournisseur)
       .subscribe({
         next: (res) => {
           console.log(res);
           this.updateFournisseur = true
-          // this.message = res.message ? res.message : 'This Fournisseur was updated successfully!';
+          this.showSuccess();
+        },
+        error: (e) => console.error(e, 
+          this.showError1())
+      });
+  }
+
+  updateSuccess(): void {
+    this.message = '';
+    this.fournisseurService.update(this.currentFournisseur.fournisseur_id, this.currentFournisseur)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.updateFournisseur = true
         },
         error: (e) => console.error(e)
       });
@@ -106,7 +96,6 @@ export class FournisseurDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          // this.router.navigate(['/fournisseurs']);
           window.location.reload();
         },
         error: (e) => console.error(e, this.showError())
@@ -133,7 +122,19 @@ showError() {
   this.messageService.add({severity:'error', summary: 'Error', detail: 'Ce fournisseur ne peut pas être supprimé !'});
 } 
 
+showError1() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Ce fournisseur ne peut pas être mis à jour !'});
+} 
+
+showErrorVide() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Veuillez renseigner tout les champs !'});
+} 
+
 showInfo() {
   this.messageService.add({severity:'info', summary: 'Info', detail: 'Statut mis à jour.'});
+}
+
+showSuccess() {
+  this.messageService.add({severity:'success', summary: 'Success', detail: 'Fournisseur mis à jour avec succès !'});
 }
 }

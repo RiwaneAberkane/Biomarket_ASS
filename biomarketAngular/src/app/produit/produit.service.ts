@@ -10,10 +10,12 @@ export class ProduitService {
 
   private url = 'http://localhost:8080/api/v1/produit/';
   private URLsearch = 'http://localhost:8080/api/v1/produitByNom/';
-  private urlDeleteAllRole = 'http://localhost:8080/api/v1/allProduit/'
+  private URLsearchStatut = 'http://localhost:8080/api/v1/produitByNomStatut/';
+  private urlDeleteAllProduit = 'http://localhost:8080/api/v1/allProduit/'
   
 
   tabProduit : any[] = [];
+
   //CONSTRUCTOR -----------------------
 
   constructor( private http : HttpClient) { 
@@ -23,7 +25,7 @@ export class ProduitService {
   //CRUD ------------------------------
   
   getAllActive(): Observable<Produit[]>{
-    return this.http.get<Produit[]>(`${this.url}/Actif`)
+    return this.http.get<Produit[]>(`${this.URLsearchStatut}/Actif`)
   }
   
   getAll(): Observable<Produit[]> {
@@ -42,7 +44,7 @@ export class ProduitService {
     return this.http.delete(`${this.url}${id}`);
   }
   deleteAll(): Observable<any> {
-    return this.http.delete(this.urlDeleteAllRole);
+    return this.http.delete(this.urlDeleteAllProduit);
   }
   search(nom: String): Observable<Produit> {
     return this.http.get<Produit>(`${this.URLsearch}${nom}`);

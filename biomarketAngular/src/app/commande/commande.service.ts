@@ -12,7 +12,7 @@ export class CommandeService {
   private urlCommandeByName =  'http://localhost:8080/api/v1/commandeByName/';
   private urlUserByVenteNom = 'http://localhost:8080/api/v1/commandeByName/';
   private urlDeleteAll = 'http://localhost:8080/api/v1/allCommande/'
-  private urlByDate = 'http://localhost:8080/api/v1/commandeByDate/';
+  private urlSearchByDate = 'http://localhost:8080/api/v1/commandeByDate/';
 
   
   //CONSTRUCTOR -----------------------------------------
@@ -40,7 +40,7 @@ export class CommandeService {
     return this.http.delete(this.urlDeleteAll);
   }
   findByDate(date: any): Observable<Commande> {
-    return this.http.get<Commande>(`${this.urlByDate}${date}`);
+    return this.http.get<Commande>(`${this.urlSearchByDate}${date}`);
   }
 }
 

@@ -9,8 +9,6 @@
           [(ngModel)]="nom"
         />
 
-
-
         <fieldset>
           <datalist id="datalistOptions">
              <option *ngFor="let fournisseur of fournisseurTab" [value]="fournisseur.nom"></option>
@@ -68,23 +66,10 @@
       ></app-fournisseur-details>
     </div>
 
-    <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAll()">
-      Remove All
-    </button> -->
-
     <button  routerLink="addFournisseurs" class="m-3 btn btn-sm btn-success" (click)="addFournisseur()">
       Ajouter
     </button>
 
-    <!-- <div class="mt-3">
-      ...
-      Items per Page:
-      <select (change)="handlePageSizeChange($event)">
-        <option *ngFor="let size of pageSizes" [ngValue]="size">
-          {{ size }}
-        </option>
-      </select>
-    </div> -->
   </div>
 
   

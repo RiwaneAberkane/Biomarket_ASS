@@ -12,14 +12,10 @@ import { ClientService } from '../client.service';
 export class ClientDetailsComponent implements OnInit {
 
   @Input() viewMode = false;
-
   @Input()currentClient: Client = {client_id : '', nom : '', prenom: '',  cp: '',  adresse: '',  ville: '',   mail: '', telephone: '', statut: ''};
-
-  updateClient = false
+  updateClient = false;
   status = false
   msgs: Message[] = [];
-
-  
   message = '';
 
   constructor(
@@ -45,11 +41,14 @@ export class ClientDetailsComponent implements OnInit {
       });
   }
 
+
+// ENABLE ---------------------------------------- 
+
   disabled(){
     
     this.currentClient.statut = "Inactif"
     this.status = true
-    this.update()
+    this.updateSuccess()
     this.showInfo()
    
   }
@@ -57,44 +56,37 @@ export class ClientDetailsComponent implements OnInit {
   enable(){
     this.currentClient.statut = "Actif"
     this.status = false
-    this.update()
+    this.updateSuccess()
     this.showInfo()
   }
 
-// ------------------------------------------------------------
 
-  // updatePublished(status: boolean): void {
-  //   const data = {
-  //     login: this.currentUtilisateur.login,
-  //     mdp: this.currentUtilisateur.mdp,
-  //     nom: this.currentUtilisateur.nom,
-  //     prenom: this.currentUtilisateur.prenom,
-  //     telephone: this.currentUtilisateur.telephone,
-  //   };
-  //   this.message = '';
-  //   this.utilisateurService.update(this.currentUtilisateur.utilisateur_id, data)
-  //     .subscribe({
-  //       next: (res) => {
-  //         console.log(res);
-  //         this.currentUtilisateur.utilisateur_id = status;
-  //         this.message = res.message ? res.message : 'The status was updated successfully!';
-  //       },
-  //       error: (e) => console.error(e)
-  //     });
-  // }
-
-// ------------------------------------------------------------
-
-// UPDATE ---------------------------
+// UPDATE -----------------------------------------
 
   update(): void {
+    if (this.currentClient.nom === '' || this.currentClient.prenom === '' || this.currentClient.cp === '' || this.currentClient.adresse === '' || this.currentClient.ville === '' || this.currentClient.mail === '' || this.currentClient.telephone === ''){
+      this.showErrorVide();
+      return;
+    }
     this.message = '';
     this.clientService.update(this.currentClient.client_id, this.currentClient)
       .subscribe({
         next: (res) => {
           console.log(res);
           this.updateClient = true
-          // this.message = res.message ? res.message : 'This Client was updated successfully!';
+          this.showSuccess();
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  updateSuccess(): void {
+    this.message = '';
+    this.clientService.update(this.currentClient.client_id, this.currentClient)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.updateClient = true
         },
         error: (e) => console.error(e)
       });
@@ -107,7 +99,6 @@ export class ClientDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          // this.router.navigate(['/clients']);
           window.location.reload();
         },
         error: (e) => console.error(e, this.showError())
@@ -129,11 +120,22 @@ export class ClientDetailsComponent implements OnInit {
     });
 }
 
+// MESSAGE SERVICE --------------------------------------------
+
 showError() {
   this.messageService.add({severity:'error', summary: 'Error', detail: 'Ce client ne peut pas être supprimé !'});
+} 
+
+showErrorVide() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Veuillez renseigner tout les champs !'});
 } 
 
 showInfo() {
   this.messageService.add({severity:'info', summary: 'Info', detail: 'Statut mis à jour.'});
 }
+
+showSuccess() {
+  this.messageService.add({severity:'success', summary: 'Success', detail: 'Client mis à jour avec succès !'});
+}
+
 }

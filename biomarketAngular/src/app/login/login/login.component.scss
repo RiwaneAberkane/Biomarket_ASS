@@ -1,13 +1,13 @@
-footer{
-    display: flex;
-    background: url('../../images/banniere2.png') no-repeat;
-    background-position: bottom;
-    background-size: cover;
-    margin-top: 175px;
-    justify-content: space-between;
-    height: 250px;
-    bottom: 100%;
-}
+// footer{
+//     display: flex;
+//     background: url('../../images/banniere2.png') no-repeat;
+//     background-position: bottom;
+//     background-size: cover;
+//     margin-top: 30px;
+//     justify-content: space-between;
+//     height: 250px;
+//     bottom: 100%;
+// }
 
 body {
     font-family: "Lato", sans-serif;
@@ -84,26 +84,3 @@ body {
     background-color: #007BFF !important;
     color: #fff;
 }
-
-
-// @media screen and (min-width: 1750px) {
-    
-//     *{
-
-//         margin:0;
-        
-//         padding:0;
-        
-//         }
-//     footer{
-//         display: flex;
-//         background: url('../../images/banniere2.png') no-repeat;
-//         background-position: bottom;
-//         background-size: cover;
-//         margin-top: 200px;
-//         justify-content: space-between;
-//         height: 519px;
-//         bottom: 100%;
-//     }
-
-// }

@@ -54,7 +54,7 @@ export class UtilisateurDetailsComponent implements OnInit {
     
     this.currentUtilisateur.statut = "Inactif"
     this.status = true
-    this.updateUtilisateur()
+    this.updateUtilisateur1()
     this.showInfo()
    
   }
@@ -62,47 +62,41 @@ export class UtilisateurDetailsComponent implements OnInit {
   enable(){
     this.currentUtilisateur.statut = "Actif"
     this.status = false
-    this.updateUtilisateur()
+    this.updateUtilisateur1()
     this.showInfo()
   }
 
 
-// ------------------------------------------------------------
-
-  // updatePublished(status: boolean): void {
-  //   const data = {
-  //     login: this.currentUtilisateur.login,
-  //     mdp: this.currentUtilisateur.mdp,
-  //     nom: this.currentUtilisateur.nom,
-  //     prenom: this.currentUtilisateur.prenom,
-  //     telephone: this.currentUtilisateur.telephone,
-  //   };
-  //   this.message = '';
-  //   this.utilisateurService.update(this.currentUtilisateur.utilisateur_id, data)
-  //     .subscribe({
-  //       next: (res) => {
-  //         console.log(res);
-  //         this.currentUtilisateur.utilisateur_id = status;
-  //         this.message = res.message ? res.message : 'The status was updated successfully!';
-  //       },
-  //       error: (e) => console.error(e)
-  //     });
-  // }
-
-// ------------------------------------------------------------
 
 // UPDATE ---------------------------
 
   updateUtilisateur(): void {
+    if (this.currentUtilisateur.login === '' || this.currentUtilisateur.mdp === '' || this.currentUtilisateur.nom === '' || this.currentUtilisateur.prenom === '' || this.currentUtilisateur.telephone === ''){
+      this.showErrorVide();
+      return;
+    }
     this.message = '';
     this.utilisateurService.update(this.currentUtilisateur.utilisateur_id, this.currentUtilisateur)
       .subscribe({
         next: (res) => {
           console.log(res);
           this.update = true
-          // this.message = res.message ? res.message : 'This User was updated successfully!';
+          this.showSuccess()
         },
         error: (e) => console.error(e)
+      });
+  }
+
+  updateUtilisateur1(): void {
+    this.message = '';
+    this.utilisateurService.update(this.currentUtilisateur.utilisateur_id, this.currentUtilisateur)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.update = true
+        },
+        error: (e) => console.error(e,
+          this.showError1())
       });
   }
 
@@ -139,8 +133,20 @@ showError() {
   this.messageService.add({severity:'error', summary: 'Error', detail: 'Cet utilisateur ne peut pas être supprimé !'});
 } 
 
+showError1() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Cet utilisateur ne peut pas être mis à jour !'});
+} 
+
 showInfo() {
   this.messageService.add({severity:'info', summary: 'Info', detail: 'Statut mis à jour.'});
 }
+
+showSuccess() {
+  this.messageService.add({severity:'success', summary: 'Success', detail: "Uilisateur mis à jour avec succès !"});
+}
+
+showErrorVide() {
+  this.messageService.add({severity:'error', summary: 'Error', detail: 'Veuillez renseigner tout les champs !'});
+} 
 
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Role } from 'src/app/role/role';
 import { Utilisateur } from '../utilisateur';
 import { UtilisateurService } from '../utilisateur.service';
@@ -28,7 +29,7 @@ export class AddUtilisateurComponent implements OnInit {
   statut = 'Actif'
 
 
-  constructor(private utilisateurService: UtilisateurService) { }
+  constructor(private utilisateurService: UtilisateurService, private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -55,6 +56,7 @@ export class AddUtilisateurComponent implements OnInit {
     if (this.utilisateur.login === '' || this.utilisateur.mdp === '' || this.utilisateur.nom === '' || this.utilisateur.prenom === '' || this.utilisateur.telephone === '' || this.utilisateur.roleNom === ''){
       console.log("Impossible");
       this.utilisateurSubmitted = true;
+      this.showError()
       return;
     }
     const data = {
@@ -72,8 +74,24 @@ export class AddUtilisateurComponent implements OnInit {
           console.log(res);
           this.submitted = true;
           this.utilisateurSubmitted = false;
+          this.showSuccess()
         },
-        error: (e) => console.error(e)
+        error: (e) => console.error(e,
+          this.showError1())
       });
   }
+  
+
+  showError() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Veuillez renseigner tout les champs !'});
+  } 
+
+  showError1() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Impossible de créer cet utilisateur !'});
+  } 
+
+  showSuccess() {
+    this.messageService.add({severity:'success', summary: 'Success', detail: "L'utilisateur a été crée avec succès !"});
+  }
+  
 }

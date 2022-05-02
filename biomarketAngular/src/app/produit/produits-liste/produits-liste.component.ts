@@ -108,6 +108,8 @@ export class ProduitsListeComponent implements OnInit {
     this.page = event;
     this.retrieveProduits();
   }
+
+  
   handlePageSizeChange(event: any): void {
     this.pageSize = event.target.value;
     this.page = 1;
@@ -118,6 +120,7 @@ export class ProduitsListeComponent implements OnInit {
   addProduit(): void{
     this.router.navigate(['/addProduit']);
   }
+
 
   confirm2() {
     this.confirmationService.confirm({

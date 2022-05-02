@@ -105,8 +105,7 @@ export class PaginationClientsListeComponent implements OnInit {
     this.page = 1;
     this.retrieveClients();
   }
-
-
+  
   addClient(): void{
     this.router.navigate(['/addClient']);
   }

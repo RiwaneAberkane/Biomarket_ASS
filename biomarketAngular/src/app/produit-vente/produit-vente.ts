@@ -5,7 +5,8 @@ export class ProduitVente {
     vente?: any;
     venteDate?: any;
     quantitekg: any;
-    // numero?: any
+    statut?: any
+    numero?: any
 
     constructor(
         id:any,

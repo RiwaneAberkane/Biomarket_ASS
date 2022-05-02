@@ -12,8 +12,6 @@ export class PaginationUtilisateursListeComponent implements OnInit {
 
   @Input() utilisateurs?: Utilisateur;
   @Input() tabUtilisateur : Utilisateur[] = [];
- 
-
   @Input() currentUtilisateur: Utilisateur = {
     utilisateur_id: '',
     login : '',
@@ -34,8 +32,7 @@ export class PaginationUtilisateursListeComponent implements OnInit {
   constructor(private utilisateurService: UtilisateurService, private router: Router) { }
 
   ngOnInit(): void {  
-    this.retrieveUtilisateurs();
-    // console.log("TAILLE:" + this.tabUtilisateur.length);   
+    this.retrieveUtilisateurs();  
   }
 
 
@@ -126,7 +123,6 @@ export class PaginationUtilisateursListeComponent implements OnInit {
     this.page = 1;
     this.retrieveUtilisateurs();
   }
-
 
   addUtilisateur(): void{
     this.router.navigate(['/addUtilisateurs']);

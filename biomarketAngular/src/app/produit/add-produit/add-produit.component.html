@@ -1,4 +1,5 @@
-<div>
+<div class="list row">
+  <div class="col-md-12">
     <h4 class="text-center">Ajouter un produit</h4>
     <hr>
     <div class="submit-form">
@@ -88,26 +89,20 @@
 
         <button (click)="saveProduit()" class="btn btn-success">Ajouter</button>
       </div>
+      <p-toast position="top-right"></p-toast>
 
 
       <div *ngIf="submitted === true">
         <div class="alert alert-success" role="alert">
           Le produit a été crée avec succès !
         </div>
-        <button class="btn btn-success" (click)="newProduit()">Ok</button>
-      </div> 
-
-      <div *ngIf="produitSubmitted === true">
-        <div class="alert alert-danger mt-3" role="alert">
-          Veuillez renseigner tout les champs !
-        </div>
-      </div> 
-
-   
+        <button class="btn btn-success position center" (click)="newProduit()">Ok</button>
+      </div>    
     </div>
   </div>
+</div>
 
-  <!-- <footer></footer> -->
+  <footer></footer>
 
 
 

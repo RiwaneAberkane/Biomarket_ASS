@@ -50,7 +50,7 @@ public @ResponseBody ResponseEntity <Produit> getByNom(@PathVariable String nom)
 
 /*------------------------------GET BY NOM--------------------------------------------*/
 
-@GetMapping("/api/v1/produitByNom/{statut}")
+@GetMapping("/api/v1/produitByNomStatut/{statut}")
 public @ResponseBody ResponseEntity<Iterable<Produit>> getByStatus(@PathVariable String statut){
     Iterable<Produit> produitResult = produitRepository.findByStatut(statut);
     return ResponseEntity.ok().body(produitResult);
@@ -71,6 +71,16 @@ public @ResponseBody ResponseEntity<Produit> postProduit(@RequestBody ProduitReq
     produitRepository.save(produit);
     return ResponseEntity.ok().body(produit);
 }
+
+/*------------------------------POST JUSTE LA QUANTITÉ-------------------------------------------*/
+
+// @PostMapping("/api/v1/produitQuantité")
+// public @ResponseBody ResponseEntity<Produit> postProduitJustQuantity(@RequestBody ProduitRequest produitRequest){
+//     Produit produit = new Produit();
+//     produit.setStatut(produitRequest.getStatut());
+//     produitRepository.save(produit);
+//     return ResponseEntity.ok().body(produit);
+// }
 
 
 /*------------------------------GET(ID)----------------------------------------*/

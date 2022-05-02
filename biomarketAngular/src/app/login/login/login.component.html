@@ -1,33 +1,3 @@
-<!-- <div *ngIf="!getLogged()" class="submit-form">
-      <div class="form-group">
-        <label for="title">Login</label>
-        <input
-          type="text"
-          class="form-control"
-          id="login"
-          required
-          [(ngModel)]="login"
-          name="login"
-        />
-      </div>
-
-        <div class="form-group">
-          <label for="title">Mot de passe</label>
-          <input
-            type="password"
-            class="form-control"
-            id="motDePasse"
-            required
-            [(ngModel)]="motDePasse"
-            name="motDePasse"
-          />
-        </div>
-
-        <button (click)="logIn()" class="btn btn-success">Se connecter</button>
-</div> -->
-
-
-
 <div  *ngIf="!getLogged()" class="sidenav">
     <div class="login-main-text">
        <h2>BioMarket<br></h2>
@@ -59,27 +29,13 @@
              <button  pButton pRipple  (click)="logIn()" type="submit" class="btn btn-black">Login</button>
              <!-- <button type="button" pButton pRipple (click)="logIn() " label="Success" class="p-button-success mb-2"></button> -->
              <p-toast position="bottom-center"></p-toast>
-
-
-             <!-- <div *ngIf="loginBoolean === true">
-               <div class="alert alert-danger mt-3" role="alert">
-                Le login ou mot de passe est incorrect !  &nbsp;&nbsp;&nbsp;&nbsp; <a href="#">x</a> 
-              </div>  
-           </div> -->
           </form>
        </div>
     </div>
  </div>
 
-
- <!-- <div *ngif="loginBoolean === false">
-    impossible
- </div> -->
-
-
-
  <div *ngIf = "getLogged()">
     <app-navbar></app-navbar>
     <app-sidebar1></app-sidebar1>
-    <footer></footer>
+    <!-- <footer></footer> -->
 </div>

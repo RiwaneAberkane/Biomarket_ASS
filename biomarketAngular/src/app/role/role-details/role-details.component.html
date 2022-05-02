@@ -4,10 +4,8 @@
       <div>
         <label><strong>Nom:</strong></label> {{ currentRole.nom }}
         <br>
-        <label><strong>Statut:</strong></label> {{ currentRole.statut }}
+        <label><strong>Statut:</strong></label> <span [ngStyle]="{'color' : currentRole.statut === 'Actif' ? 'green' : 'red'}" > {{ currentRole.statut }} </span>
       </div>
-       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentRole.role_id }}">Edit</a> -->
-
 
       <button  *ngIf=" currentRole.statut === 'Actif'" type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentRole.role_id }}">Mettre à jour</button>
       <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
@@ -18,14 +16,13 @@
 
 
       
-      <hr>
+  <hr>
   </div>
   <div *ngIf="!currentRole.role_id">
     <br />
     <div class="alert alert-warning" role="alert">
       Cliquez sur un rôle...
     </div>
-    <!-- <p>Cliquez sur un rôle...</p> -->
   </div>
 </div>
 
@@ -34,6 +31,8 @@
 
 <ng-template #editable>
   <div *ngIf="currentRole.role_id" class="edit-form">
+    <div class="list row">
+      <div class="col-md-12">
     <h4 class="text-center">Rôle</h4>
     <hr>
     <form>
@@ -47,21 +46,7 @@
           name="nom"
         />
       </div>
-
-      <div class="form-group">
-        <label for="title">Statut</label>
-        <input
-          type="text"
-          class="form-control"
-          id="statut"
-          [(ngModel)]="currentRole.statut"
-          name="statut"
-        />
-      </div>
     </form>
-    <!-- <button class="btn btn-danger btn-sm mr-2" (click)="deleteRole()">
-      Supprimer
-    </button> -->
     <button
       type="submit"
       class="btn btn-success btn-sm mr-2"
@@ -69,27 +54,10 @@
     >
       Mettre à jour
     </button>
-
-
-    <div *ngIf="update">
-      <div class="alert alert-success mt-3" role="alert">
-        Le rôle a été mis à jour avec succès !
-      </div>
-    </div>
-    <!-- <p>{{ message }}</p> -->
-  </div>
-  <div *ngIf="!currentRole.role_id">
-    <br />
-    <div class="alert alert-danger" role="alert">
-      Vous ne pouvez pas supprimer ce rôle car il est attribué à un utilisateur !
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+    <p-toast position="top-right"></p-toast>
     </div>
   </div>
-  <footer></footer>
+</div>
+<footer></footer>
 </ng-template>
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { CommandeService } from 'src/app/commande/commande.service';
 import { CommandeProduit } from '../commande-produit';
 import { CommandeProduitService } from '../commande-produit.service';
@@ -15,11 +16,7 @@ export class CommandesProduitsListeComponent implements OnInit {
   tabCommandeProduit : CommandeProduit[] = [];
   tabAny: any
   detailsTab = false
-
-
-
   currentCommandeProduit: CommandeProduit = {id: '',  produit: '', commande: '', quantitekg :''};
-  
   currentIndex = -1;
   date = '';
   page = 1;
@@ -27,7 +24,7 @@ export class CommandesProduitsListeComponent implements OnInit {
   pageSize = 5;
   pageSizes = [5, 10, 15];
 
-  constructor(private commandeProduitService: CommandeProduitService, private router: Router, private commandeService: CommandeService) { }
+  constructor(private commandeProduitService: CommandeProduitService, private router: Router, private commandeService: CommandeService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.retrieveCommandesProduits();
@@ -80,7 +77,6 @@ export class CommandesProduitsListeComponent implements OnInit {
           console.log(this.tabAny);
           console.log(data);
           this.detailsTab = true
-          // this.currentCommandeProduit = this.commandesProduits;
         },
         
         error: (e) => console.error(e)
@@ -119,5 +115,14 @@ export class CommandesProduitsListeComponent implements OnInit {
     this.router.navigate(['/addCommandeProduit']);
   }
 
+  reload(){
+    this.detailsTab = false
+    this.showInfo();
+  }
+
+  showInfo() {
+    this.messageService.add({severity:'info', summary: 'Info', detail: 'Liste rechargée.'});
+  }
+  
 
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationService, Message, MessageService } from 'primeng/api';
 import { Vente } from 'src/app/vente/vente';
 import { VenteService } from 'src/app/vente/vente.service';
 import { ProduitVente } from '../produit-vente';
@@ -13,21 +14,19 @@ import { ProduitVenteService } from '../produit-vente.service';
 export class ProduitVenteDetailsComponent implements OnInit {
 
   @Input() viewMode = false;
-
   @Input() currentProduitVente: ProduitVente = {id: '', quantitekg :''};
-
   vente = new Vente(0,"")
-
   updateVente = false
-
   message = '';
-
   id : any;
+  msgs: Message[] = [];
 
   constructor(
     private produitVenteService: ProduitVenteService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService) { }
     
   ngOnInit(): void {
     if (!this.viewMode) {
@@ -37,6 +36,12 @@ export class ProduitVenteDetailsComponent implements OnInit {
       this.message = '';
       this.getProduitVente(this.route.snapshot.params["numero"]);
     }
+  }
+
+  rejeter(){
+    this.currentProduitVente.statut = 'Retourné'
+    this.update();
+    this.showInfo1()
   }
   
   getProduitVente(id: number): void {
@@ -50,48 +55,20 @@ export class ProduitVenteDetailsComponent implements OnInit {
       });
   }
 
-// ------------------------------------------------------------
-
-  // updatePublished(status: boolean): void {
-  //   const data = {
-  //     login: this.currentUtilisateur.login,
-  //     mdp: this.currentUtilisateur.mdp,
-  //     nom: this.currentUtilisateur.nom,
-  //     prenom: this.currentUtilisateur.prenom,
-  //     telephone: this.currentUtilisateur.telephone,
-  //   };
-  //   this.message = '';
-  //   this.utilisateurService.update(this.currentUtilisateur.utilisateur_id, data)
-  //     .subscribe({
-  //       next: (res) => {
-  //         console.log(res);
-  //         this.currentUtilisateur.utilisateur_id = status;
-  //         this.message = res.message ? res.message : 'The status was updated successfully!';
-  //       },
-  //       error: (e) => console.error(e)
-  //     });
-  // }
-
-// ------------------------------------------------------------
-
 
 // UPDATE ---------------------------
 
-
-
   update(): void {
     this.message = '';
-    this.produitVenteService.update(this.currentProduitVente.id, this.currentProduitVente)
+    this.produitVenteService.update(this.currentProduitVente.numero, this.currentProduitVente)
       .subscribe({
         next: (res) => {
           console.log(res);
           this.updateVente = true 
-          // this.message = res.message ? res.message : 'This ProduitVente was updated successfully!';  
         },
         error: (e) => console.error(e)
       });
   }
-
 
 
 // DELETE ----------------------------
@@ -105,5 +82,27 @@ export class ProduitVenteDetailsComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
+  }
+
+  confirm1() {
+    this.confirmationService.confirm({
+        message: 'Voulez vous vraiment annuler cette vente ?',
+        header: "Confirmer le l'annulation",
+        icon: 'pi pi-info-circle',
+        accept: () => {
+          this.msgs = [{severity:'info', summary:'Confirmed', detail:'Record deleted'}];
+          this.rejeter();
+        },
+        reject: () => {
+            this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
+        }   
+    });
+  }
+
+  //Message SERVICE
+
+
+  showInfo1() {
+    this.messageService.add({severity:'info', summary: 'info', detail: 'Produit de la vente retourné.'});
   }
 }

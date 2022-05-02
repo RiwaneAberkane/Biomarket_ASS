@@ -7,12 +7,16 @@ import { Client } from './client';
   providedIn: 'root'
 })
 export class ClientService {
+
   private url = 'http://localhost:8080/api/v1/client/';
+  private urlStatut = 'http://localhost:8080/api/v1/clientStatut/';
   private URLsearch = 'http://localhost:8080/api/v1/clientByMail/';
-  private urlDeleteAllRole = 'http://localhost:8080/api/v1/allClient/'
+  private urlDeleteAllClient = 'http://localhost:8080/api/v1/allClient/'
   
 
   tabClients : any[] = [];
+
+  
   //CONSTRUCTOR -----------------------
 
   constructor( private http : HttpClient) {
@@ -22,7 +26,7 @@ export class ClientService {
   //CRUD ------------------------------
 
   getAllActive(): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.url}/Actif`);
+    return this.http.get<Client[]>(`${this.urlStatut}/Actif`);
   }
   
   getAll(): Observable<Client[]> {
@@ -41,7 +45,7 @@ export class ClientService {
     return this.http.delete(`${this.url}${id}`);
   }
   deleteAll(): Observable<any> {
-    return this.http.delete(this.urlDeleteAllRole);
+    return this.http.delete(this.urlDeleteAllClient);
   }
   search(mail: String): Observable<Client> {
     return this.http.get<Client>(`${this.URLsearch}${mail}`);

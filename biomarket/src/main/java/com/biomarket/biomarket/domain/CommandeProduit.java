@@ -30,6 +30,8 @@ public class CommandeProduit {
     Commande commande;
     
     float quantitekg;
+
+    String statut;
     
 /*------------------------------GETTER/SETTER--------------------------------------*/
 
@@ -72,6 +74,14 @@ public class CommandeProduit {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public String getStatut() {
+        return this.statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 
 }

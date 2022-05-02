@@ -13,18 +13,19 @@
         <br>
         <label><strong>Téléphone:</strong></label> {{ currentUtilisateur.telephone }}
         <br>
-        <label><strong>Statut:</strong></label> {{ currentUtilisateur.statut }}
+        <label><strong>Statut:</strong></label> <span [ngStyle]="{'color' : currentUtilisateur.statut === 'Actif' ? 'green' : 'red'}" > {{ currentUtilisateur.statut }} </span>
         <br>
-        <label><strong>Rôle:</strong></label> {{currentUtilisateur.role.nom}} |  {{currentUtilisateur.role.statut}}
+        <label><strong>Rôle:</strong></label> {{currentUtilisateur.role.nom}} <span [ngStyle]="{'color' : currentUtilisateur.role.statut === 'Actif' ? 'green' : 'red'}" > ({{ currentUtilisateur.role.statut }}) </span>
       </div>
-       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentUtilisateur.utilisateur_id }}">Edit</a> -->
+
+
        <button  *ngIf=" currentUtilisateur.statut === 'Actif'" type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentUtilisateur.utilisateur_id }}">Mettre à jour</button>
        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
       <button *ngIf=" currentUtilisateur.statut === 'Actif'" type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm2()" >Supprimer</button>
       <button *ngIf=" currentUtilisateur.statut === 'Actif'" type="button" class="btn btn-primary btn-sm mr-2" (click)="disabled()">Désactiver</button>
       <button  *ngIf=" currentUtilisateur.statut === 'Inactif'" type="button" class="btn btn-primary btn-sm mr-2" (click)="enable()">Activer</button>
       <p-toast position="top-right"></p-toast>
-       <!-- <button type="button" class="btn btn-danger btn-sm mr-2" (click)="deleteUtilisateur()" routerLink="utilisateurs" >Supprimer</button> -->
+
        <hr>
   </div>
   <div *ngIf="!currentUtilisateur.utilisateur_id">
@@ -32,14 +33,16 @@
     <div class="alert alert-warning" role="alert">
       Cliquez sur un utilisateur...
     </div>
-    <!-- <p>Cliquez sur un utilisateur...</p> -->
   </div>
 </div>
 
 <!----------------------------- Edit ------------------------------------->
 
+
 <ng-template #editable>
   <div *ngIf="currentUtilisateur.utilisateur_id" class="edit-form">
+    <div class="list row">
+      <div class="col-md-12">
     <h4 class="text-center">Utilisateur</h4>
     <hr>
     <form>
@@ -108,13 +111,12 @@
         </app-roles-liste>
        </datalist> 
       </div>
-
-<!----------------------------- Bouton update et delete  --------------------------->
-
     </form>
-    <!-- <button class="btn btn-danger btn-sm mr-2" (click)="deleteUtilisateur()">
-      Supprimer
-    </button> -->
+  
+
+<!----------------------------- Bouton update  --------------------------->
+
+
     <button
       type="submit"
       class="btn btn-success btn-sm mr-2"
@@ -122,16 +124,12 @@
     >
       Mettre à jour
     </button>
+    <p-toast position="top-right"></p-toast>
 
+   </div>
+  </div>
+</div>
 
-    <div *ngIf="update">
-      <div class="alert alert-success mt-3" role="alert">
-        L'utilisateur a été mis à jour avec succès !
-    </div>
-    <!-- <p>{{ message }}</p> -->
-  </div>
-  <div *ngIf="!currentUtilisateur.utilisateur_id">
-    <br />
-    <p>Cannot access this Tutorial...</p>
-  </div>
+<footer></footer>
+</ng-template>
 

@@ -58,7 +58,7 @@
           (click)="setActiveUtilisateur(produitVente, i)"
           [value]="produitVente.vente.date"   
         >
-         <strong>Numéro de vente:</strong>{{produitVente.vente.vente_id}} | <strong>Faite le:</strong> {{ produitVente.vente.date}}
+        <strong>N°Vente: </strong>{{produitVente.vente.vente_id}} | <strong>Faite le:</strong> {{ produitVente.vente.date}} |  <span [ngStyle]="{'color' : produitVente.statut === 'Vendu' ? 'green' : 'red'}">{{ produitVente.statut }}</span> 
         </li>
       </ul>
     </div>
@@ -81,7 +81,7 @@
           (click)="setActiveUtilisateur(tab, i)"
           [value]="tab.vente.date"   
         >
-         <strong>Numéro de vente:</strong>{{tab.vente.vente_id}} | <strong>Faite le:</strong> {{ tab.vente.date}}
+         <strong>N°Vente: </strong>{{tab.vente.vente_id}} | <strong>Faite le:</strong> {{ tab.vente.date}} |  <span [ngStyle]="{'color' : tab.statut === 'Vendu' ? 'green' : 'red'}">{{ tab.statut }}</span> 
         </li>
       </ul>
     </div>
@@ -93,10 +93,6 @@
         [currentProduitVente]="currentProduitVente"
       ></app-produit-vente-details>
     </div>
-
-    <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAll()">
-      Remove All
-    </button> -->
 
     <button  routerLink="addProduitVente" class="m-3 btn btn-sm btn-success" (click)="addProduitVente()">
       Ajouter
@@ -125,6 +121,7 @@
           <th>N° vente</th>
           <th>Fait par</th>
           <th>Client</th>
+          <th>Statut produit vente</th>
         </tr>
       </thead>
       <tbody>
@@ -135,9 +132,14 @@
           <td>{{tab.vente.vente_id}}</td>
           <td>{{tab.vente.utilisateur.login}}</td>
           <td>{{tab.vente.client.mail}}</td>
+          <td> <span [ngStyle]="{'color' : tab.statut === 'Vendu' ? 'green' : 'red'}">{{ tab.statut }}</span> </td>
         </tr>
       </tbody>
     </table>
   </div>
 
 
+  <button  *ngIf= "detailsTab === true" type="button" class="m-3 btn btn-sm btn-primary" (click)="reload()">Actualiser</button>
+  <p-toast position="top-right"></p-toast>
+
+<footer></footer>

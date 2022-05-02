@@ -1,4 +1,5 @@
-<div>
+<div class="list row">
+  <div class="col-md-12">
     <h4 class="text-center">Ajouter un fournisseur</h4>
     <hr>
     <div class="submit-form">
@@ -32,14 +33,21 @@
           <div class="form-group">
             <label for="title">Mail:</label>
             <input
-              type="text"
+              type="email"
               class="form-control"
               id="mail"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
               required
               [(ngModel)]="fournisseur.mail"
+              #emailref="ngModel"
               name="mail"
               placeholder="Renseigner le mail du fournisseur"
+              [class.success]="!emailref.invalid"
             />
+
+            <div id="invalid" *ngIf="emailref.errors &&(emailref.touched || emailref.dirty)" class ="text-error">
+              Invalid email ...
+           </div>
           </div>
 
           <div class="form-group">
@@ -95,26 +103,20 @@
           
         <button (click)="saveFournisseur()" class="btn btn-success">Ajouter</button>
       </div>
+      <p-toast position="top-right"></p-toast>
 
       <div *ngIf="submitted === true">
         <div class="alert alert-success" role="alert">
-          Le fournisseur a été crée avec succès !
+          Le fournisseur a été crée avec succès.
         </div>
         <button class="btn btn-success" (click)="newFournisseur()">Ok</button>
       </div> 
-    
-      <div *ngIf="fournisseurSubmitted === true">
-        <div class="alert alert-danger mt-3" role="alert">
-          Veuillez renseigner tout les champs !
-        </div>
-      </div> 
-
     </div>
   </div>
+</div>
 
 
-
-  <!-- <footer></footer> -->
+  <footer></footer>
 
 
 

@@ -3,21 +3,30 @@
     margin: auto;
   }
 
-  footer{
-    margin-top: 380px;
+  // footer{
+  //   margin-top: 380px;
+  // }
+
+  .success{
+    border: 1px solid greenyellow;
+    }
+    .text-error{
+        color: red;
+    }
+  
+  #invalid{
+    margin-top: 6px;
   }
 
-
-@media (max-width: 500px) {
-  .submit-form{
-    max-width: 320px;
-    // margin-right: 50px;
-  }
+footer{
+  display: flex;
+  background: url('../../images/banniere2.png') no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  justify-content: space-between;
+  margin-top: 30px;
+  height: 250px;
+  bottom: 100%;
 }
 
-@media (max-width: 414px ){
-  .submit-form{
-    max-width: 220px;
-    margin-right: 70px;
-  }
-}
+

@@ -43,7 +43,7 @@ public class UtilisateurController {
 
     /*------------------------------GET BY STATUS--------------------------------------------*/
 
-    @GetMapping("/api/v1/utilisateur/{statut}")
+    @GetMapping("/api/v1/utilisateurStatut/{statut}")
     public @ResponseBody ResponseEntity<Iterable<Utilisateur>> getUtilisateurByStatus(@PathVariable String statut){
         Iterable<Utilisateur> utilisateur = utilisateurRepository.findByStatut(statut);
         return ResponseEntity.ok().body(utilisateur);

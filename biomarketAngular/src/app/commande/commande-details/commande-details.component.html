@@ -12,7 +12,6 @@
         <br>
         <label><strong>A:</strong></label> {{ currentCommande.fournisseur.nom }} | <strong>Tel:</strong> {{currentCommande.fournisseur.telephone}}
       </div>
-       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentCommande.commande_id }}">Edit</a> -->
        <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentCommande.commande_id }}">Edit</button>
        <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="commandes" >Delete</button>
   </div>

@@ -10,6 +10,7 @@ export class UtilisateurService {
 
 
   private url = 'http://localhost:8080/api/v1/utilisateur/';
+  private urlStatut = 'http://localhost:8080/api/v1/utilisateurStatut/';
   private urlByNameRole =  'http://localhost:8080/api/v1/utilisateurByNameRole/';
   private urlUserByRoleNom = 'http://localhost:8080/api/v1/utilisateurByNom/';
   private urlDeleteAll = 'http://localhost:8080/api/v1/allUtilisateur/'
@@ -20,6 +21,7 @@ export class UtilisateurService {
   
   //CONSTRUCTOR -----------------------
 
+  
   constructor( private http : HttpClient) {
     this.getAll().subscribe(data => this.tabUtilisateur = data)
    }
@@ -28,7 +30,7 @@ export class UtilisateurService {
   //CRUD ------------------------------
 
   getAllActive(): Observable<Utilisateur[]>{
-    return this.http.get<Utilisateur[]>(`${this.url}/Actif`)
+    return this.http.get<Utilisateur[]>(`${this.urlStatut}/Actif`)
   }
   
   getAll(): Observable<Utilisateur[]> {

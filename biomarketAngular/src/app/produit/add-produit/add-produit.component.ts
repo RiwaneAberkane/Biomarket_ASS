@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { Produit } from '../produit';
 import { ProduitService } from '../produit.service';
 
@@ -13,7 +14,7 @@ export class AddProduitComponent implements OnInit {
   produitSubmitted = false;
   statut = 'Actif'
 
-  constructor(private produitService: ProduitService) { }
+  constructor(private produitService: ProduitService, private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -32,6 +33,11 @@ export class AddProduitComponent implements OnInit {
     if (this.produit.nom === '' || this.produit.type === '' || this.produit.quantitekg === '' || this.produit.pachatkg === '' || this.produit.pventekg === '' ){
       console.log("Impossible");
       this.produitSubmitted = true;
+      this.showError();
+      return;
+    }
+    if (this.produit.type != 'Légume' && this.produit.type != 'Fruit'){
+      this.showErrorType();
       return;
     }
     const data = {
@@ -48,8 +54,30 @@ export class AddProduitComponent implements OnInit {
           console.log(res);
           this.submitted = true;
           this.produitSubmitted = false
+          this.showSuccess();
         },
-        error: (e) => console.error(e)
+        error: (e) => console.error(e,
+          this.showError1)
       });
   }
+
+// MESSAGE SERVICE -----------------------------------
+
+  showError() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Veuillez renseigner tout les champs !'});
+  } 
+
+  showError1() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Impossible de créer ce produit !'});
+  } 
+
+
+  showSuccess() {
+    this.messageService.add({severity:'success', summary: 'Success', detail: 'Le produit a été crée avec succès !'});
+  }
+
+  showErrorType() {
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Problème type (Fruit ou Légume) !'});
+  } 
+  
 }

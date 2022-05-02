@@ -24,10 +24,7 @@ export class CommandeProduitService {
   getAll(): Observable<CommandeProduit[]> {
     return this.http.get<CommandeProduit[]>(`${this.url}`);
   }
-  // get(id: any): Observable<CommandeProduit> {
-  //   return this.http.get<CommandeProduit>(`${this.url}${id}`);
-  // }
-
+  
     get(numero: any): Observable<CommandeProduit> {
     return this.http.get<CommandeProduit>(`${this.urlBynumero}${numero}`);
   }

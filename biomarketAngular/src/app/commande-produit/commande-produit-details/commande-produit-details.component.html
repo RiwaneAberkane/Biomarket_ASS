@@ -4,7 +4,7 @@
     <div *ngIf="currentCommandeProduit.id">
       <h4>Détail de la commande</h4>
       <div>
-        <label><strong>Produit:</strong></label> {{ currentCommandeProduit.produit.nom }}
+        <label><strong>Produit:</strong></label> {{ currentCommandeProduit.produit.nom }}  <span [ngStyle]="{'color' : currentCommandeProduit.produit.statut === 'Actif' ? 'green' : 'red'}">({{  currentCommandeProduit.produit.statut }})</span> 
         <br>
         <label><strong>Quantité (Kg):</strong></label> {{ currentCommandeProduit.quantitekg }} Kg
         <br>
@@ -12,30 +12,32 @@
         <br>
         <label><strong>Numéro de Commande:</strong></label> {{ currentCommandeProduit.commande.commande_id }}
         <br>
-        <label><strong>Fait par:</strong></label> {{ currentCommandeProduit.commande.utilisateur.login }}
+        <label><strong>Fait par:</strong></label> {{ currentCommandeProduit.commande.utilisateur.login }}  <span [ngStyle]="{'color' : currentCommandeProduit.commande.utilisateur.statut === 'Actif' ? 'green' : 'red'}">({{ currentCommandeProduit.commande.utilisateur.statut }})</span> 
         <br>
-        <label><strong>A:</strong></label> {{ currentCommandeProduit.commande.fournisseur.nom}} | <strong>Tel:</strong> {{currentCommandeProduit.commande.fournisseur.telephone}}
+        <label><strong>A:</strong></label> {{ currentCommandeProduit.commande.fournisseur.mail}} <span [ngStyle]="{'color' : currentCommandeProduit.commande.fournisseur.statut === 'Actif' ? 'green' : 'red'}">({{ currentCommandeProduit.commande.fournisseur.statut }})</span> 
+        <br>
+        <label><strong>Statut:</strong></label>  <span [ngStyle]="{'color' : currentCommandeProduit.statut === 'En attente de confirmation ...' ? 'orange' : currentCommandeProduit.statut === 'Confirmé' ? 'green' :'red'}" > {{ currentCommandeProduit.statut }} </span>
       </div>
       <hr>
 
+      <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+      <button *ngIf="currentCommandeProduit.statut === 'En attente de confirmation ...'" type="button" class="btn btn-primary btn-sm mr-2" (click)="confirm2()">Valider</button>
+      <button *ngIf="currentCommandeProduit.statut === 'En attente de confirmation ...'" type="button" class="btn btn-danger btn-sm mr-2" (click)="confirm1()">Annuler</button>
+      <p-toast position="top-right"></p-toast>
 
-       <!-- <a class="badge badge-warning mr-2" routerLink="{{ currentCommandeProduit.id }}">Edit</a> -->
-       <!-- <button type="button" class="btn btn-warning btn-sm mr-2" routerLink="{{ currentCommandeProduit.numero}}">Edit</button>
-       <button type="button" class="btn btn-danger btn-sm mr-2" (click)="delete()" routerLink="commandesProduits" >Supprimer</button> -->
   </div>
   <div *ngIf="!currentCommandeProduit.id">
     <br />
     <div class="alert alert-warning" role="alert">
       Cliquez sur une commande...
     </div>
-    <!-- <p>Cliquez sur une commande...</p> -->
   </div>
 </div>
 
 <!----------------------------- Edit ------------------------------------->
 
 <ng-template #editable>
-  <div *ngIf="currentCommandeProduit.numero" class="edit-form">
+  <div *ngIf="currentCommandeProduit.id" class="edit-form">
     <h4>Commande</h4>
     <form>
         <div class="form-group">
@@ -79,23 +81,19 @@
     <button
       type="submit"
       class="btn btn-success btn-sm mr-2"
-      (click)="uodate()"
+      (click)="update()"
     >
       Update
     </button>
 
     <div *ngIf="updateCommande">
       <div class="alert alert-success mt-3" role="alert">
-        La commande a été mis à jour avec succès !
+        La commande a été mis à jour avec succès.
     </div>
-
-    <!-- <p>{{ message }}</p> -->
   </div>
-  <div *ngIf="!currentCommandeProduit.numero">
-    <br />
-    <p>Cannot access this Commande...</p>
-  </div>
-
+</div>
+<footer></footer>
+</ng-template>
 
 
 

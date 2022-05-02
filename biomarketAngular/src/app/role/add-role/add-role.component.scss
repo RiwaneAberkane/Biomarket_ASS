@@ -3,20 +3,20 @@
   margin: auto;
 }
 
+// footer{
+//   margin-top: 360px;
+// }
+
 footer{
-  margin-top: 360px;
+  display: flex;
+  background: url('../../images/banniere2.png') no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  margin-top: 30px;
+  justify-content: space-between;
+  height: 250px;
+  bottom: 100%;
 }
 
-@media (max-width: 500px) {
-.submit-form{
-  max-width: 320px;
-  // margin-right: 50px;
-}
-}
 
-@media (max-width: 414px ){
-.submit-form{
-  max-width: 220px;
-  margin-right: 70px;
-}
-}
+

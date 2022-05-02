@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ProduitVente } from '../produit-vente';
 import { ProduitVenteService } from '../produit-vente.service';
 
@@ -24,7 +25,7 @@ export class ProduitsVentesListeComponent implements OnInit {
   pageSize = 5;
   pageSizes = [5, 10, 15];
 
-  constructor(private produitVenteService: ProduitVenteService, private router: Router) { }
+  constructor(private produitVenteService: ProduitVenteService, private router: Router,  private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.retrieveProduitsVentes();
@@ -76,7 +77,6 @@ export class ProduitsVentesListeComponent implements OnInit {
           this.tabAny = data;
           console.log(data);
           this.detailsTab = true
-          // this.currentProduitVente = this.produitsVentes;
         },
         
         error: (e) => console.error(e)
@@ -114,5 +114,14 @@ export class ProduitsVentesListeComponent implements OnInit {
     this.router.navigate(['/addProduitVente']);
   }
 
+  reload(){
+    this.detailsTab = false
+    this.showInfo();
+  }
+
+  showInfo() {
+    this.messageService.add({severity:'info', summary: 'Info', detail: 'Liste rechargée.'});
+  }
+  
 
 }

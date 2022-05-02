@@ -1,4 +1,5 @@
-<div>
+<div class="list row">
+  <div class="col-md-12">
     <h4 class="text-center">Ajouter un produit</h4>
     <hr>
     <div class="submit-form">
@@ -54,20 +55,6 @@
           />
         </div>
 
-        <!-- <div class="form-group">
-          <label for="title">Statut:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="statut"
-            required
-            [(ngModel)]="vente.statut"
-            name="statut"
-            placeholder="Renseigner le statut de la vente"
-          />
-        </div> -->
-
-
         <div class="form-group">
           <label for="title">Fait par:</label>
           <input
@@ -82,7 +69,7 @@
           />
 
 
-          <datalist id="utilisateurliste">
+          <datalist id="utilisateurListe">
             <ng-container  *ngFor="let utilisateur of tabUtilisateur">
               <option *ngIf="utilisateur.statut === 'Actif'" [value]="utilisateur.login">{{utilisateur.login}}</option>
             </ng-container>
@@ -108,11 +95,24 @@
               <option *ngIf="client.statut === 'Actif'" [value]="client.mail">{{client.mail}}</option>
             </ng-container>
          </datalist>  
+        </div>
 
+
+        <div class="form-group">
+          <input
+            type="hidden"
+            class="form-control"
+            id="statut"
+            required
+            [ngModel]="statut" 
+            name="statut"
+            placeholder=""
+          />
         </div>
 
         <button (click)="save()" class="btn btn-success">Ajouter</button>
       </div>
+      <p-toast position="top-right"></p-toast>
  
       <div *ngIf="submitted === true && alert === false">
         <div class="alert alert-success" role="alert">
@@ -127,21 +127,10 @@
         </div>
         <button class="btn btn-success" (click)="newProduitVente()">Ok</button>
       </div> 
-
-
-
-      <div *ngIf="venteSubmitted === true">
-        <div class="alert alert-danger mt-3" role="alert">
-          Veuillez renseigner tout les champs !
-        </div>
-      </div> 
-
-
-
     </div>
   </div>
 
-  <div  class="col-md-12 mt-5" >
+  <div *ngIf="tabbo === true"  class="col-md-12 mt-5" >
     <h4 class="mb-3">Vue général de la vente</h4>    
     <table class="table">
       <thead class="thead-light">
@@ -152,6 +141,7 @@
           <th>N° vente</th>
           <th>Fait par</th>
           <th>Client</th>
+          <th>Statut produit vente</th>
         </tr>
       </thead>
       <tbody>
@@ -162,12 +152,10 @@
           <td>{{tab.vente.vente_id}}</td>
           <td>{{tab.vente.utilisateur.login}}</td>
           <td>{{tab.vente.client.mail}}</td>
+          <td> <span [ngStyle]="{'color' : tab.statut === 'Vendu' ? 'green' : 'red'}">{{ tab.statut }}</span> </td>
         </tr>
       </tbody>
     </table>
   </div>
-
-
-
-
+</div>
 <footer></footer>

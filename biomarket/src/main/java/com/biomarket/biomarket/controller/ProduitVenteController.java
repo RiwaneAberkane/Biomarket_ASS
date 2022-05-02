@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -122,6 +122,7 @@ public @ResponseBody ResponseEntity<ProduitVente> postProduitVenteByName(@Reques
     produitVente.setProduit(produit);
     produitVente.setVente(resultvente.get());
     produitVente.setQuantitekg(produitVenteRequestByName.getQuantitekg());
+    produitVente.setStatut(produitVenteRequestByName.getStatut());
     produitVenteRepository.save(produitVente);
     return ResponseEntity.ok().body(produitVente);
 }
@@ -155,33 +156,19 @@ public @ResponseBody ResponseEntity<ProduitVente> postProduitVenteByName(@Reques
 
 /*------------------------------PUT(NUMERO)-----------------------------------------*/
 
-// @PutMapping("/api/v1/produitVenteByNumero/{numero}")
-// public @ResponseBody ResponseEntity<ProduitVente> modifyProduitVente(@PathVariable int numero, @RequestBody ProduitVenteRequest produitVenteRequest) {
-//     Optional<ProduitVente> result = produitVenteRepository.findByNumero(numero);
-//     Optional<Produit> result1 = produitRepository.findByNom(produitVenteRequest.getProduit().getNom());
-//     Optional<Vente> result2 = venteRepository.findByDate(produitVenteRequest.getVente().getDate());
-//     if (result.isEmpty()) {
-//         return ResponseEntity.notFound().build();
-//     }
-//     if (result1.isEmpty()) {
-//         return ResponseEntity.notFound().build();
-//     }
-//     if (result2.isEmpty()) {
-//         return ResponseEntity.notFound().build();
-//     }
-//     ProduitVente produitVente = result.get();
-//     produitVente.getId().setProduit_id(result1.get().getProduit_id());
-//     produitVente.setProduit(result1.get());
-//     produitVente.setVente(result2.get());
-//     produitVente.setQuantitekg(produitVenteRequest.getQuantitekg());
-//     // ProduitVenteKey pvk = new ProduitVenteKey();
-//     // pvk.setProduit_id(result1.get().getProduit_id());
-//     // pvk.setVente_id(result2.get().getVente_id());
-//     // produitVente.setId(pvk);
-//     produitVenteRepository.save(produitVente);
-//     return ResponseEntity.ok().body((produitVente));
-//     }
+@PutMapping("/api/v1/produitVenteByNumero/{numero}")
+public @ResponseBody ResponseEntity<ProduitVente> modifyProduitVente(@PathVariable int numero, @RequestBody ProduitVenteRequest produitVenteRequest) {
+    Optional<ProduitVente> result = produitVenteRepository.findByNumero(numero);
 
+    if (result.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+    ProduitVente produitVente = result.get();
+    produitVente.setStatut(produitVenteRequest.getStatut());
+    produitVenteRepository.save(produitVente);
+    return ResponseEntity.ok().body((produitVente));
+    }
+ 
 /*------------------------------DELETE ALL-------------------------------------*/
 
 @DeleteMapping("/api/v1/allProduitVente/")

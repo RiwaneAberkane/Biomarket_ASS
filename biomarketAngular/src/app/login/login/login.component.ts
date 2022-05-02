@@ -22,30 +22,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // logIn(){
-  //   this.utilisateurService.findByLoginAndMdp (this.login , this.motDePasse).subscribe(data => {
-  //     this.utilisateur = data
-  //     this.logged = true
-  //     localStorage.setItem("isLogged", "" + this.logged) 
-  //   })
-  //   this.loginBoolean = true;
-  //   console.log('lala');
-    
-  // }
-
-
   logIn(){
     this.utilisateurService.findByLoginAndMdp(this.login , this.motDePasse)
     .subscribe({
       next: (data) => {
         this.utilisateur = data;
         console.log(data);
-        console.log("XXXXXXXXXXXX");
         this.logged = true
         localStorage.setItem("isLogged", "" + this.logged) 
       },
       error: (e) => console.error(
-        console.log("$$$$$$$$$$$$$$$$$$$"),
         this.loginBoolean = true,
         this.showError()
        
@@ -60,6 +46,8 @@ export class LoginComponent implements OnInit {
     else(value = false)
     return value;
   }
+
+
 
   showError() {
     if(this.loginBoolean === true)
